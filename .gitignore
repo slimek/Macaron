@@ -2,3 +2,6 @@ obj/
 lib/
 *.sdf
 *.suo
+bin/
+*.user
+ipch/
