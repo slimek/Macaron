@@ -12,15 +12,36 @@
     <Filter Include="1. Public Packages\RapidJson">
       <UniqueIdentifier>{0ca14c6d-456e-4349-a5e3-bb1fb9ead140}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\TinyXml2">
+      <UniqueIdentifier>{b19f25bb-e1ee-4b68-b146-8766a0582d87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\TinyXml2">
+      <UniqueIdentifier>{bad5755a-cd21-4ad9-9bae-9a990370c5c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Macaron\RapidJson.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Macaron\TinyXml2.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Macaron\RapidJson\JsonValue.h">
       <Filter>1. Public Packages\RapidJson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Macaron\TinyXml2\XmlDocument.h">
+      <Filter>1. Public Packages\TinyXml2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Macaron\Macaron.h">
+      <Filter>1. Public Packages</Filter>
+    </ClInclude>
+    <ClInclude Include="Macaron\TinyXml2\XmlDocumentImpl.h">
+      <Filter>2. Sources\TinyXml2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Macaron\TinyXml2\XmlElement.h">
+      <Filter>1. Public Packages\TinyXml2</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@
 #ifndef __MACARON_RAPID_JSON_JSON_VALUE_H
 #define __MACARON_RAPID_JSON_JSON_VALUE_H
 
-#include <Caramel/Caramel.h>
+#include <Macaron/Macaron.h>
 
 #if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
 #pragma once
@@ -16,7 +16,7 @@
 #include <memory>
 
 
-namespace Caramel
+namespace Macaron
 {
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -126,6 +126,6 @@ inline JsonValue::ParseResult JsonValue::TryParse( const Utf8String& input )
 
 ///////////////////////////////////////////////////////////////////////////////
 
-} // namespace Caramel
+} // namespace Macaron
 
 #endif // __MACARON_RAPID_JSON_JSON_VALUE_H
