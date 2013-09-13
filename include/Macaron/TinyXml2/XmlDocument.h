@@ -35,9 +35,8 @@ public:
     void LoadFromFile( const std::string& fileName ); 
     void LoadFromFile( const Utf8String&  fileName );
 
-
-    std::vector< XmlElement > FindElements( const std::string& name ) const;
-
+    XmlElement GetRootElement() const;
+    
 
 private:
 

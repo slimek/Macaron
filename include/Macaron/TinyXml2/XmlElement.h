@@ -9,6 +9,8 @@
 #pragma once
 #endif
 
+#include <vector>
+
 
 namespace Macaron
 {
@@ -22,8 +24,28 @@ class XmlElementImpl;
 
 class XmlElement
 {
+    friend class XmlDocument;
+    friend class XmlElementImpl;
+
+public:
+
+    XmlElement();
+
+    /// Accessors ///
+
+    std::string GetName() const;
+    
+    // Throws if the attribute not found.
+    std::string GetAttribute( const std::string& name ) const;
+
+
+    // Recursively search all descendants
+    std::vector< XmlElement > FindAllElements( const std::string& name ) const;
+
 
 private:
+
+    explicit XmlElement( std::shared_ptr< XmlElementImpl > impl );
 
     std::shared_ptr< XmlElementImpl > m_impl;
 };

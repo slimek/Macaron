@@ -18,6 +18,9 @@
     <Filter Include="2. Sources\TinyXml2">
       <UniqueIdentifier>{bad5755a-cd21-4ad9-9bae-9a990370c5c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3. Precompiled Header">
+      <UniqueIdentifier>{408b60bc-60c1-4008-b9fa-d01a86296d13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Macaron\RapidJson.cpp">
@@ -25,6 +28,9 @@
     </ClCompile>
     <ClCompile Include="Macaron\TinyXml2.cpp">
       <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Macaron\MacaronPchCreator.cpp">
+      <Filter>3. Precompiled Header</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +48,12 @@
     </ClInclude>
     <ClInclude Include="..\include\Macaron\TinyXml2\XmlElement.h">
       <Filter>1. Public Packages\TinyXml2</Filter>
+    </ClInclude>
+    <ClInclude Include="Macaron\TinyXml2\XmlElementImpl.h">
+      <Filter>2. Sources\TinyXml2</Filter>
+    </ClInclude>
+    <ClInclude Include="Macaron\MacaronPch.h">
+      <Filter>3. Precompiled Header</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
