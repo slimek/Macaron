@@ -12,6 +12,9 @@
 namespace Macaron
 {
 
+namespace TinyXml2
+{
+
 //
 // Contents
 //
@@ -150,5 +153,7 @@ XmlElementImpl::XmlElementImpl( tinyxml2::XMLElement* element )
 
 
 ///////////////////////////////////////////////////////////////////////////////
+
+} // namespace TinyXml2
 
 } // namespace Macaron

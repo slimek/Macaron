@@ -21,6 +21,9 @@
     <Filter Include="3. Precompiled Header">
       <UniqueIdentifier>{408b60bc-60c1-4008-b9fa-d01a86296d13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\LibJson">
+      <UniqueIdentifier>{38e147e0-3152-41c2-a01c-107b54a1c1df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Macaron\RapidJson.cpp">
@@ -54,6 +57,9 @@
     </ClInclude>
     <ClInclude Include="Macaron\MacaronPch.h">
       <Filter>3. Precompiled Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Macaron\LibJson\JsonValue.h">
+      <Filter>1. Public Packages\LibJson</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

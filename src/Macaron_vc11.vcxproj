@@ -19,6 +19,7 @@
     <ClCompile Include="Macaron\TinyXml2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Macaron\LibJson\JsonValue.h" />
     <ClInclude Include="..\include\Macaron\Macaron.h" />
     <ClInclude Include="..\include\Macaron\RapidJson\JsonValue.h" />
     <ClInclude Include="..\include\Macaron\TinyXml2\XmlDocument.h" />
@@ -73,7 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\include;..\..\Caramel\include;..\..\Libraries\include;..\..\Boost</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\include;..\..\Caramel\include;..\..\CandyJar\include;..\..\Boost</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
       <PrecompiledHeaderFile>Macaron/MacaronPch.h</PrecompiledHeaderFile>
@@ -91,7 +92,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\include;..\..\Caramel\include;..\..\Libraries\include;..\..\Boost</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\include;..\..\Caramel\include;..\..\CandyJar\include;..\..\Boost</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeaderFile>Macaron/MacaronPch.h</PrecompiledHeaderFile>
     </ClCompile>
