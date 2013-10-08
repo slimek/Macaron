@@ -21,6 +21,9 @@
     <Filter Include="1. Public Packages\LibJson">
       <UniqueIdentifier>{38e147e0-3152-41c2-a01c-107b54a1c1df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Sources\LibJson">
+      <UniqueIdentifier>{c822c767-cdf1-46fb-acc6-b0589e64d455}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Macaron\TinyXml2.cpp">
@@ -54,6 +57,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Macaron\LibJson\JsonValue.h">
       <Filter>1. Public Packages\LibJson</Filter>
+    </ClInclude>
+    <ClInclude Include="Macaron\LibJson\JsonValueImpl.h">
+      <Filter>2. Sources\LibJson</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

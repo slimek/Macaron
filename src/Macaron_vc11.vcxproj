@@ -23,6 +23,7 @@
     <ClInclude Include="..\include\Macaron\Macaron.h" />
     <ClInclude Include="..\include\Macaron\TinyXml2\XmlDocument.h" />
     <ClInclude Include="..\include\Macaron\TinyXml2\XmlElement.h" />
+    <ClInclude Include="Macaron\LibJson\JsonValueImpl.h" />
     <ClInclude Include="Macaron\MacaronPch.h" />
     <ClInclude Include="Macaron\TinyXml2\XmlDocumentImpl.h" />
     <ClInclude Include="Macaron\TinyXml2\XmlElementImpl.h" />

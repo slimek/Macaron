@@ -9,6 +9,8 @@
 #pragma once
 #endif
 
+#include <Caramel/String/Utf8String.h>
+
 
 namespace Macaron
 {
@@ -28,7 +30,34 @@ class JsonValue
 public:
 
     JsonValue();
-    explicit JsonValue( const std::string& fileName );
+    virtual ~JsonValue();
+
+    static JsonValue LoadFromFile( const std::string& fileName );
+    static JsonValue LoadFromFile( const Utf8String&  fileName );
+
+    static JsonValue LoadFromString( const std::string& text );
+
+
+    //
+    // Accessors
+    //
+
+    Int   AsInt()   const;
+    Float AsFloat() const;
+
+
+    //
+    // Children Accessors
+    //
+
+    JsonValue operator[]( const std::string& name ) const;
+
+
+private:
+
+    explicit JsonValue( JsonValueImpl* impl );
+
+    std::shared_ptr< JsonValueImpl > m_impl;
 };
 
 
