@@ -21,6 +21,17 @@ namespace LibJson
 // JSON Value
 //
 
+class JsonValueImpl;
+
+class JsonValue
+{
+public:
+
+    JsonValue();
+    explicit JsonValue( const std::string& fileName );
+};
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace LibJson

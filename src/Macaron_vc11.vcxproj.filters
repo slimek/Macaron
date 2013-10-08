@@ -9,9 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="1. Public Packages\RapidJson">
-      <UniqueIdentifier>{0ca14c6d-456e-4349-a5e3-bb1fb9ead140}</UniqueIdentifier>
-    </Filter>
     <Filter Include="1. Public Packages\TinyXml2">
       <UniqueIdentifier>{b19f25bb-e1ee-4b68-b146-8766a0582d87}</UniqueIdentifier>
     </Filter>
@@ -26,20 +23,17 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Macaron\RapidJson.cpp">
-      <Filter>2. Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Macaron\TinyXml2.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
     <ClCompile Include="Macaron\MacaronPchCreator.cpp">
       <Filter>3. Precompiled Header</Filter>
     </ClCompile>
+    <ClCompile Include="Macaron\LibJson.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\Macaron\RapidJson\JsonValue.h">
-      <Filter>1. Public Packages\RapidJson</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Macaron\TinyXml2\XmlDocument.h">
       <Filter>1. Public Packages\TinyXml2</Filter>
     </ClInclude>

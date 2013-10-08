@@ -1,0 +1,29 @@
+// Macaron C++ Library - LibJson Implementation
+
+#include <Macaron/MacaronPch.h>
+
+#include <libjson/libjson.h>
+
+
+namespace Macaron
+{
+
+namespace LibJson
+{
+
+//
+// Contents
+//
+//   JsonValue
+//
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// JSON Value
+//
+
+///////////////////////////////////////////////////////////////////////////////
+
+} // namespace LibJson
+
+} // namespace Macaron
