@@ -11,7 +11,7 @@
 
 using namespace std;
 using namespace Caramel;
-using namespace Macaron;
+using namespace Macaron::TinyXml2;
 
 //
 // Program Options
