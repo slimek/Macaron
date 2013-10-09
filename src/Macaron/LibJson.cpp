@@ -89,6 +89,12 @@ Float JsonValue::AsFloat() const
 }
 
 
+std::string JsonValue::AsString() const
+{
+    return m_impl->m_node.as_string();
+}
+
+
 //
 // Children Accessors
 //

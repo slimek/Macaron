@@ -45,6 +45,8 @@ public:
     Int   AsInt()   const;
     Float AsFloat() const;
 
+    std::string AsString() const;
+
 
     //
     // Children Accessors
