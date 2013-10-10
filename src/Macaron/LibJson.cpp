@@ -2,7 +2,8 @@
 
 #include <Macaron/MacaronPch.h>
 
-#include <Macaron/LibJson/JsonValueImpl.h>
+#include <Macaron/LibJson/JsonNode.h>
+#include <Macaron/LibJson/JsonValue.h>
 #include <Caramel/FileSystem/FileInfo.h>
 #include <Caramel/Io/InputFileStream.h>
 #include <Caramel/Io/TextStreamReader.h>
@@ -18,8 +19,25 @@ namespace LibJson
 //
 // Contents
 //
+//   JsonNode
 //   JsonValue
 //
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// JSON Node
+//
+
+JsonNode::JsonNode()
+{
+}
+
+
+JsonNode::JsonNode( const JSONNode& node )
+    : JSONNode( node )
+{
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -27,71 +45,96 @@ namespace LibJson
 //
 
 JsonValue::JsonValue()
-    : m_impl( new JsonValueImpl )
+    : m_node( new JsonNode )
 {
 }
 
 
-JsonValue::JsonValue( JsonValueImpl* impl )
-    : m_impl( impl )
+JsonValue::JsonValue( JsonNodePtr node )
+    : m_node( node )
 {
 }
 
 
-JsonValue::~JsonValue()
+//
+// Create Functions
+//
+
+JsonValue JsonValue::FromFile( const std::string& fileName )
 {
+    CARAMEL_CHECK_UTF8_ARGUMENT( u8FileName, fileName );
+
+    return FromFile( u8FileName );
 }
 
 
-JsonValue JsonValue::LoadFromFile( const std::string& fileName )
+JsonValue JsonValue::FromFile( const Utf8String& fileName )
 {
-    return LoadFromFile( Utf8String( fileName ));
-}
-
-
-JsonValue JsonValue::LoadFromFile( const Utf8String& fileName )
-{
-    Path path( fileName );
-
-    if ( ! path.HasExtension() )
+    if ( ! FileInfo( fileName ).Exists() )
     {
-        path.AppendExtension( "json" );
+        CARAMEL_THROW( "File not found: %s", fileName );
     }
 
-    InputFileStream file( path );
+    InputFileStream file( fileName );
     TextStreamReader reader( file );
 
-    return LoadFromString( reader.ReadAll() );
+    return FromString( reader.ReadAll() );
 }
 
-
-JsonValue JsonValue::LoadFromString( const std::string& text )
+JsonValue JsonValue::FromString( const std::string& text )
 {
     const JSONNode node = libjson::parse( text );
-    return JsonValue( new JsonValueImpl( node ));
+    return JsonValue( std::make_shared< JsonNode >( node ));
 }
 
 
 //
-// Accessors
+// Properties
 //
+
+JsonValueType JsonValue::Type() const
+{
+    return static_cast< JsonValueType >( m_node->type() );
+}
+
+
+Bool JsonValue::IsEmpty() const
+{
+    return m_node->empty();
+}
+
+
+Uint JsonValue::Size() const
+{
+    return m_node->size();
+}
+
+
+//
+// Converters
+//
+
+Bool JsonValue::AsBool() const
+{
+    return m_node->as_bool();
+}
+
 
 Int JsonValue::AsInt() const
 {
-    return m_impl->m_node.as_int();
+    return m_node->as_int();
 }
 
 
 Float JsonValue::AsFloat() const
 {
-    // REMARKS: JSONNode::as_float() returns in double.
-    return static_cast< Float >( m_impl->m_node.as_float() );
+    return static_cast< Float >( m_node->as_float() );
 }
 
 
 std::string JsonValue::AsString() const
 {
-    return m_impl->m_node.as_string();
+    return m_node->as_string();
 }
 
 
@@ -99,25 +142,86 @@ std::string JsonValue::AsString() const
 // Children Accessors
 //
 
+Bool JsonValue::HasValue( const std::string& name ) const
+{
+    return m_node->find( name ) != m_node->end();
+}
+
+
+Bool JsonValue::GetBoolValue( const std::string& name ) const
+{
+    return m_node->at( name ).as_bool();
+}
+
+
+Int JsonValue::GetIntValue( const std::string& name ) const
+{
+    return m_node->at( name ).as_int();
+}
+
+
+Float JsonValue::GetFloatValue( const std::string& name ) const
+{
+    return static_cast< Float >( m_node->at( name ).as_float() );
+}
+
+
+std::string JsonValue::GetStringValue( const std::string& name ) const
+{
+    return m_node->at( name ).as_string();
+}
+
+
+JsonValue JsonValue::GetValue( const std::string& name ) const
+{
+    CARAMEL_ASSERT( JSON_VALUE_OBJECT == this->Type() );
+
+    return JsonValue( std::make_shared< JsonNode >( m_node->at( name ) ));
+}
+
+
 JsonValue JsonValue::operator[]( const std::string& name ) const
 {
-    return JsonValue( new JsonValueImpl( m_impl->m_node.at( name )));
+    return this->GetValue( name );
+}
+
+
+JsonValue JsonValue::operator[]( const Char* name ) const
+{
+    return this->GetValue( name );
 }
 
 
 //
-// Implementation
+// Array Element Accessors
 //
 
-JsonValueImpl::JsonValueImpl()
+JsonValue JsonValue::GetValueAt( Uint index ) const
 {
+    CARAMEL_ASSERT( JSON_VALUE_ARRAY == this->Type() );
+
+    return JsonValue( std::make_shared< JsonNode >( m_node->at( index )));
 }
 
 
-JsonValueImpl::JsonValueImpl( const JSONNode& node )
-    : m_node( node )
+JsonValue JsonValue::operator[]( Uint index ) const
 {
+    return this->GetValueAt( index );
 }
+
+
+JsonValue JsonValue::operator[]( Int index ) const
+{
+    return this->GetValueAt( index );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Constants Validation
+//
+
+static_assert( JSON_NULL == JSON_VALUE_NULL, "0" );
 
 
 ///////////////////////////////////////////////////////////////////////////////

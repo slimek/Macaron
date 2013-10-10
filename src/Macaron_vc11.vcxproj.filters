@@ -55,11 +55,11 @@
     <ClInclude Include="Macaron\MacaronPch.h">
       <Filter>3. Precompiled Header</Filter>
     </ClInclude>
+    <ClInclude Include="Macaron\LibJson\JsonNode.h">
+      <Filter>2. Sources\LibJson</Filter>
+    </ClInclude>
     <ClInclude Include="..\include\Macaron\LibJson\JsonValue.h">
       <Filter>1. Public Packages\LibJson</Filter>
-    </ClInclude>
-    <ClInclude Include="Macaron\LibJson\JsonValueImpl.h">
-      <Filter>2. Sources\LibJson</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

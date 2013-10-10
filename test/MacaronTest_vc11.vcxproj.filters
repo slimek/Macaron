@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="1. Main Entry">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="2. Tests">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="3. Precompiled Header">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="2. Tests\LibJson">
+      <UniqueIdentifier>{0b501dc3-b2ef-41fa-9f14-dd7a1d63a681}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RunTest.cpp">
+      <Filter>1. Main Entry</Filter>
+    </ClCompile>
+    <ClCompile Include="MacaronTestPchCreator.cpp">
+      <Filter>3. Precompiled Header</Filter>
+    </ClCompile>
+    <ClCompile Include="LibJson\LibJsonTest.cpp">
+      <Filter>2. Tests\LibJson</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MacaronTestPch.h">
+      <Filter>3. Precompiled Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LibJson\test1.json">
+      <Filter>2. Tests\LibJson</Filter>
+    </None>
+    <None Include="LibJson\test2.json">
+      <Filter>2. Tests\LibJson</Filter>
+    </None>
+    <None Include="LibJson\test3.json">
+      <Filter>2. Tests\LibJson</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,7 +1,7 @@
-// Macaron C++ Library - LibJson - JSON Value Private Header
+// Macaron C++ Library - LibJson - JSON Node Header
 
-#ifndef __MACARON_LIB_JSON_JSON_VALUE_IMPL_H
-#define __MACARON_LIB_JSON_JSON_VALUE_IMPL_H
+#ifndef __MACARON_LIB_JSON_JSON_NODE_H
+#define __MACARON_LIB_JSON_JSON_NODE_H
 
 #include <Macaron/Macaron.h>
 
@@ -9,7 +9,6 @@
 #pragma once
 #endif
 
-#include <Macaron/LibJson/JsonValue.h>
 #include <libjson/libjson.h>
 
 
@@ -21,22 +20,18 @@ namespace LibJson
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// JSON Value
+// JSON Node
 //
 
-class JsonValueImpl
+class JsonNode : public JSONNode
 {
-    friend class JsonValue;
-
 public:
 
-    JsonValueImpl();
-    explicit JsonValueImpl( const JSONNode& node );
-
-private:
-
-    JSONNode m_node;
+    JsonNode();
+    explicit JsonNode( const JSONNode& node );
 };
+
+typedef std::shared_ptr< JsonNode > JsonNodePtr;
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -45,4 +40,4 @@ private:
 
 } // namespace Macaron
 
-#endif // __MACARON_LIB_JSON_JSON_VALUE_IMPL_H
+#endif // __MACARON_LIB_JSON_JSON_NODE_H
