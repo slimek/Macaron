@@ -221,7 +221,12 @@ JsonValue JsonValue::operator[]( Int index ) const
 // Constants Validation
 //
 
-static_assert( JSON_NULL == JSON_VALUE_NULL, "0" );
+static_assert( JSON_NULL   == JSON_VALUE_NULL,    "0" );
+static_assert( JSON_STRING == JSON_VALUE_STRING,  "1" );
+static_assert( JSON_NUMBER == JSON_VALUE_NUMBER,  "2" );
+static_assert( JSON_BOOL   == JSON_VALUE_BOOLEAN, "3" );
+static_assert( JSON_ARRAY  == JSON_VALUE_ARRAY,   "4" );
+static_assert( JSON_NODE   == JSON_VALUE_OBJECT,  "5" );
 
 
 ///////////////////////////////////////////////////////////////////////////////
