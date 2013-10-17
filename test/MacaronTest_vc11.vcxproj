@@ -62,7 +62,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>..\..\CandyJar\lib\$(Platform).$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>UnitTest++.lib;libjson.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>UnitTest++.lib;libjson.lib;JsonCpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -82,10 +82,11 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>..\..\CandyJar\lib\$(Platform).$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>UnitTest++.lib;libjson.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>UnitTest++.lib;libjson.lib;JsonCpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="JsonCpp\JsonCppTest.cpp" />
     <ClCompile Include="LibJson\LibJsonTest.cpp" />
     <ClCompile Include="MacaronTestPchCreator.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -105,6 +106,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="JsonCpp\test1.json" />
+    <None Include="JsonCpp\test2.json" />
+    <None Include="JsonCpp\test3.json" />
     <None Include="LibJson\test1.json" />
     <None Include="LibJson\test2.json" />
     <None Include="LibJson\test3.json" />

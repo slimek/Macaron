@@ -24,6 +24,12 @@
     <Filter Include="2. Sources\LibJson">
       <UniqueIdentifier>{c822c767-cdf1-46fb-acc6-b0589e64d455}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\JsonCpp">
+      <UniqueIdentifier>{5df3c0f8-4a52-4155-8223-f451dfc02867}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\JsonCpp">
+      <UniqueIdentifier>{af6152da-07f9-4b65-835c-01e31e95034d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Macaron\TinyXml2.cpp">
@@ -33,6 +39,9 @@
       <Filter>3. Precompiled Header</Filter>
     </ClCompile>
     <ClCompile Include="Macaron\LibJson.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Macaron\JsonCpp.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -60,6 +69,12 @@
     </ClInclude>
     <ClInclude Include="..\include\Macaron\LibJson\JsonValue.h">
       <Filter>1. Public Packages\LibJson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Macaron\JsonCpp\JsonValue.h">
+      <Filter>1. Public Packages\JsonCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="Macaron\JsonCpp\JsonValueImpl.h">
+      <Filter>2. Sources\JsonCpp</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

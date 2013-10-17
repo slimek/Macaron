@@ -16,6 +16,9 @@
     <Filter Include="2. Tests\LibJson">
       <UniqueIdentifier>{0b501dc3-b2ef-41fa-9f14-dd7a1d63a681}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\JsonCpp">
+      <UniqueIdentifier>{eaf9b76e-ebb1-4cc1-a9f3-9bf4a2b89731}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -26,6 +29,9 @@
     </ClCompile>
     <ClCompile Include="LibJson\LibJsonTest.cpp">
       <Filter>2. Tests\LibJson</Filter>
+    </ClCompile>
+    <ClCompile Include="JsonCpp\JsonCppTest.cpp">
+      <Filter>2. Tests\JsonCpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +48,15 @@
     </None>
     <None Include="LibJson\test3.json">
       <Filter>2. Tests\LibJson</Filter>
+    </None>
+    <None Include="JsonCpp\test1.json">
+      <Filter>2. Tests\JsonCpp</Filter>
+    </None>
+    <None Include="JsonCpp\test2.json">
+      <Filter>2. Tests\JsonCpp</Filter>
+    </None>
+    <None Include="JsonCpp\test3.json">
+      <Filter>2. Tests\JsonCpp</Filter>
     </None>
   </ItemGroup>
 </Project>
