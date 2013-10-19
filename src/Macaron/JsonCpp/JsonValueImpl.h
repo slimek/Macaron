@@ -31,6 +31,16 @@ public:
     JsonValueImpl() {}
     JsonValueImpl( const Json::Value& value );
 
+
+    /// Children Accessors ///
+
+    const Json::Value& At( const std::string& name ) const;
+
+
+    /// Array Accessors ///
+
+    const Json::Value& At( Uint index ) const;
+
 };
 
 typedef std::shared_ptr< JsonValueImpl > JsonValuePtr;

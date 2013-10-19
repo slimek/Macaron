@@ -1,10 +1,22 @@
 {
-    "Guests" : [],
+    "Miko" :
+	{
+	    "Name"  : "Reimu",
+		"Color" : 1,
+		"Spell" :
+		{
+		     "Name" : "Musou",
+			 "Damage" : 100
+		}
+	},
 
-	"Users" :
-	[
-	    "Alice",
-		"Marisa",
-		"Reimu"
-	]
+	"Magician" :
+	{
+		"Name"   : "Marisa",
+		"CanFly" : false,
+		"Weapon" :
+		{
+		    "Damage" : 50
+		}
+	}
 }

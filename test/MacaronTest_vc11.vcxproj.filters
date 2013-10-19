@@ -55,6 +55,9 @@
     <None Include="JsonCpp\test2.json">
       <Filter>2. Tests\JsonCpp</Filter>
     </None>
+    <None Include="JsonCpp\test4.json">
+      <Filter>2. Tests\JsonCpp</Filter>
+    </None>
     <None Include="JsonCpp\test3.json">
       <Filter>2. Tests\JsonCpp</Filter>
     </None>
