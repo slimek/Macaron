@@ -44,7 +44,7 @@ public:
 
     Bool IsEmpty() const;
 
-    // Number of children, or array elements.
+    // Number of children nodes or array elements.
     Uint Size() const;
 
 
@@ -75,7 +75,6 @@ public:
 
     JsonValue operator[]( const std::string& name ) const;
     JsonValue operator[]( const Char* name ) const;
-
 
     //
     // Query Functions
@@ -116,13 +115,13 @@ private:
 //
 // JSON Value Type
 // - Values are equivalent to JsonCpp's value types.
-
+//
 enum JsonValueType : Int8
 {
     JSON_VALUE_NULL     = 0,
     JSON_VALUE_INT      = 1,
     JSON_VALUE_UINT     = 2,
-    JSON_VALUE_DOUBLE   = 3,  // Exchangable to Float
+    JSON_VALUE_DOUBLE   = 3,  // Exchangeable to Float
     JSON_VALUE_STRING   = 4,
     JSON_VALUE_BOOL     = 5,
     JSON_VALUE_ARRAY    = 6,
