@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="2. Tests\LibJson">
-      <UniqueIdentifier>{0b501dc3-b2ef-41fa-9f14-dd7a1d63a681}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2. Tests\JsonCpp">
       <UniqueIdentifier>{eaf9b76e-ebb1-4cc1-a9f3-9bf4a2b89731}</UniqueIdentifier>
     </Filter>
@@ -27,9 +24,6 @@
     <ClCompile Include="MacaronTestPchCreator.cpp">
       <Filter>3. Precompiled Header</Filter>
     </ClCompile>
-    <ClCompile Include="LibJson\LibJsonTest.cpp">
-      <Filter>2. Tests\LibJson</Filter>
-    </ClCompile>
     <ClCompile Include="JsonCpp\JsonCppTest.cpp">
       <Filter>2. Tests\JsonCpp</Filter>
     </ClCompile>
@@ -40,15 +34,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="LibJson\test1.json">
-      <Filter>2. Tests\LibJson</Filter>
-    </None>
-    <None Include="LibJson\test2.json">
-      <Filter>2. Tests\LibJson</Filter>
-    </None>
-    <None Include="LibJson\test3.json">
-      <Filter>2. Tests\LibJson</Filter>
-    </None>
     <None Include="JsonCpp\test1.json">
       <Filter>2. Tests\JsonCpp</Filter>
     </None>

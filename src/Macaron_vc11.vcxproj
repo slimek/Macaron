@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Macaron\JsonCpp.cpp" />
-    <ClCompile Include="Macaron\LibJson.cpp" />
     <ClCompile Include="Macaron\MacaronPchCreator.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -21,12 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Macaron\JsonCpp\JsonValue.h" />
-    <ClInclude Include="..\include\Macaron\LibJson\JsonValue.h" />
     <ClInclude Include="..\include\Macaron\Macaron.h" />
     <ClInclude Include="..\include\Macaron\TinyXml2\XmlDocument.h" />
     <ClInclude Include="..\include\Macaron\TinyXml2\XmlElement.h" />
     <ClInclude Include="Macaron\JsonCpp\JsonValueImpl.h" />
-    <ClInclude Include="Macaron\LibJson\JsonNode.h" />
     <ClInclude Include="Macaron\MacaronPch.h" />
     <ClInclude Include="Macaron\TinyXml2\XmlDocumentImpl.h" />
     <ClInclude Include="Macaron\TinyXml2\XmlElementImpl.h" />

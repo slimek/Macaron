@@ -14,6 +14,7 @@
     <ProjectGuid>{6D935171-546D-43FE-B65E-E0C3B4ABA567}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>MacaronTest_vc11</RootNamespace>
+    <ProjectName>MacaronTest</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -62,7 +63,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>..\..\CandyJar\lib\$(Platform).$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>UnitTest++.lib;libjson.lib;JsonCpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>UnitTest++.lib;JsonCpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -82,12 +83,11 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>..\..\CandyJar\lib\$(Platform).$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>UnitTest++.lib;libjson.lib;JsonCpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>UnitTest++.lib;JsonCpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="JsonCpp\JsonCppTest.cpp" />
-    <ClCompile Include="LibJson\LibJsonTest.cpp" />
     <ClCompile Include="MacaronTestPchCreator.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -98,7 +98,7 @@
     <ClInclude Include="MacaronTestPch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Caramel\src\Caramel_vc11.vcxproj">
+    <ProjectReference Include="..\..\Caramel\Caramel.vsproj\Caramel_vc11.vcxproj">
       <Project>{ed63d1e4-3de9-4273-a22a-8b558e1bd6c0}</Project>
     </ProjectReference>
     <ProjectReference Include="..\src\Macaron_vc11.vcxproj">
@@ -110,9 +110,6 @@
     <None Include="JsonCpp\test2.json" />
     <None Include="JsonCpp\test3.json" />
     <None Include="JsonCpp\test4.json" />
-    <None Include="LibJson\test1.json" />
-    <None Include="LibJson\test2.json" />
-    <None Include="LibJson\test3.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
