@@ -26,14 +26,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\MacaronPchCreator.cpp">
-      <Filter>3. Precompiled Header</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\JsonCpp.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\src\TinyXml2.cpp">
       <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MacaronPch.cpp">
+      <Filter>3. Precompiled Header</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
