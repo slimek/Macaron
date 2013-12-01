@@ -11,22 +11,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Macaron\JsonCpp.cpp" />
-    <ClCompile Include="Macaron\MacaronPchCreator.cpp">
+    <ClCompile Include="..\src\JsonCpp.cpp" />
+    <ClCompile Include="..\src\MacaronPchCreator.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Macaron\TinyXml2.cpp" />
+    <ClCompile Include="..\src\TinyXml2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Macaron\JsonCpp\JsonValue.h" />
     <ClInclude Include="..\include\Macaron\Macaron.h" />
     <ClInclude Include="..\include\Macaron\TinyXml2\XmlDocument.h" />
     <ClInclude Include="..\include\Macaron\TinyXml2\XmlElement.h" />
-    <ClInclude Include="Macaron\JsonCpp\JsonValueImpl.h" />
-    <ClInclude Include="Macaron\MacaronPch.h" />
-    <ClInclude Include="Macaron\TinyXml2\XmlDocumentImpl.h" />
-    <ClInclude Include="Macaron\TinyXml2\XmlElementImpl.h" />
+    <ClInclude Include="..\src\JsonCpp\JsonValueImpl.h" />
+    <ClInclude Include="..\src\MacaronPch.h" />
+    <ClInclude Include="..\src\TinyXml2\XmlDocumentImpl.h" />
+    <ClInclude Include="..\src\TinyXml2\XmlElementImpl.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{44FB086B-DEBB-4312-BA57-64052A3FC8D8}</ProjectGuid>
@@ -74,10 +74,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\include;..\..\Caramel\include;..\..\CandyJar\include;..\..\Boost</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src;..\include;..\..\Caramel\include;..\..\CandyJar\include</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <PrecompiledHeaderFile>Macaron/MacaronPch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>MacaronPch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -92,9 +92,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\include;..\..\Caramel\include;..\..\CandyJar\include;..\..\Boost</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src;..\include;..\..\Caramel\include;..\..\CandyJar\include</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <PrecompiledHeaderFile>Macaron/MacaronPch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>MacaronPch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

@@ -26,13 +26,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Macaron\TinyXml2.cpp">
-      <Filter>2. Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Macaron\MacaronPchCreator.cpp">
+    <ClCompile Include="..\src\MacaronPchCreator.cpp">
       <Filter>3. Precompiled Header</Filter>
     </ClCompile>
-    <ClCompile Include="Macaron\JsonCpp.cpp">
+    <ClCompile Include="..\src\JsonCpp.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TinyXml2.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -43,22 +43,22 @@
     <ClInclude Include="..\include\Macaron\Macaron.h">
       <Filter>1. Public Packages</Filter>
     </ClInclude>
-    <ClInclude Include="Macaron\TinyXml2\XmlDocumentImpl.h">
-      <Filter>2. Sources\TinyXml2</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Macaron\TinyXml2\XmlElement.h">
       <Filter>1. Public Packages\TinyXml2</Filter>
-    </ClInclude>
-    <ClInclude Include="Macaron\TinyXml2\XmlElementImpl.h">
-      <Filter>2. Sources\TinyXml2</Filter>
-    </ClInclude>
-    <ClInclude Include="Macaron\MacaronPch.h">
-      <Filter>3. Precompiled Header</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Macaron\JsonCpp\JsonValue.h">
       <Filter>1. Public Packages\JsonCpp</Filter>
     </ClInclude>
-    <ClInclude Include="Macaron\JsonCpp\JsonValueImpl.h">
+    <ClInclude Include="..\src\MacaronPch.h">
+      <Filter>3. Precompiled Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TinyXml2\XmlDocumentImpl.h">
+      <Filter>2. Sources\TinyXml2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TinyXml2\XmlElementImpl.h">
+      <Filter>2. Sources\TinyXml2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\JsonCpp\JsonValueImpl.h">
       <Filter>2. Sources\JsonCpp</Filter>
     </ClInclude>
   </ItemGroup>

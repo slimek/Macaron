@@ -1,8 +1,8 @@
 // Macaron C++ Library - JsonCpp Implementation
 
-#include <Macaron/MacaronPch.h>
+#include "MacaronPch.h"
 
-#include <Macaron/JsonCpp/JsonValueImpl.h>
+#include "JsonCpp/JsonValueImpl.h"
 #include <Caramel/FileSystem/FileInfo.h>
 #include <Caramel/Io/InputFileStream.h>
 #include <Caramel/Io/TextStreamReader.h>

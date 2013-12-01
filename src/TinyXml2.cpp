@@ -1,9 +1,9 @@
 // Macaron C++ Library - TinyXML-2 Implementation
 
-#include <Macaron/MacaronPch.h>
+#include "MacaronPch.h"
 
-#include <Macaron/TinyXml2/XmlDocumentImpl.h>
-#include <Macaron/TinyXml2/XmlElementImpl.h>
+#include "TinyXml2/XmlDocumentImpl.h"
+#include "TinyXml2/XmlElementImpl.h"
 #include <Caramel/Io/InputFileStream.h>
 #include <tinyxml2/tinyxml2.h>
 #include <stack>

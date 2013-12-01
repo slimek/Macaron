@@ -1,5 +1,5 @@
 // Macaron C++ Library - Precompiled Header Creator
 
-#include <Macaron/MacaronPch.h>
+#include "MacaronPch.h"
 
 void MacaronPchDummy() {}
