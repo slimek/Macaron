@@ -89,7 +89,7 @@
     <ProjectReference Include="..\..\..\Caramel\proj.win32\Caramel_vc11.vcxproj">
       <Project>{ed63d1e4-3de9-4273-a22a-8b558e1bd6c0}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Macaron_vc11.vcxproj">
+    <ProjectReference Include="..\..\proj.win32\Macaron_vc11.vcxproj">
       <Project>{44fb086b-debb-4312-ba57-64052a3fc8d8}</Project>
     </ProjectReference>
   </ItemGroup>
