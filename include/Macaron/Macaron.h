@@ -3,7 +3,7 @@
 #ifndef __MACARON_MACARON_H
 #define __MACARON_MACARON_H
 
-#include <Caramel/Caramel.h>
+#include <Caramel/Setup/CaramelDefs.h>
 
 #if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
 #pragma once
