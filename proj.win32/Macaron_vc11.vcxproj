@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Macaron\JsonCpp\JsonValue.h" />
-    <ClInclude Include="..\include\Macaron\Macaron.h" />
+    <ClInclude Include="..\include\Macaron\Setup\MacaronDefs.h" />
     <ClInclude Include="..\include\Macaron\TinyXml2\XmlDocument.h" />
     <ClInclude Include="..\include\Macaron\TinyXml2\XmlElement.h" />
     <ClInclude Include="..\src\JsonCpp\JsonValueImpl.h" />

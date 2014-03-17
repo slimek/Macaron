@@ -2,13 +2,9 @@
 
 #ifndef __MACARON_JSON_CPP_JSON_VALUE_H
 #define __MACARON_JSON_CPP_JSON_VALUE_H
-
-#include <Macaron/Macaron.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
 #pragma once
-#endif
 
+#include <Macaron/Setup/MacaronDefs.h>
 #include <Caramel/String/Utf8String.h>
 
 

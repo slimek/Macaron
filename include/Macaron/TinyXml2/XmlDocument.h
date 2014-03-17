@@ -2,13 +2,9 @@
 
 #ifndef __MACARON_TINY_XML_2_XML_DOCUMENT_H
 #define __MACARON_TINY_XML_2_XML_DOCUMENT_H
-
-#include <Macaron/Macaron.h>
-
-#if defined( CARAMEL_COMPILER_HAS_PRAGMA_ONCE )
 #pragma once
-#endif
 
+#include <Macaron/Setup/MacaronDefs.h>
 #include <Macaron/TinyXml2/XmlElement.h>
 #include <Caramel/String/Utf8String.h>
 #include <vector>

@@ -24,6 +24,9 @@
     <Filter Include="2. Sources\JsonCpp">
       <UniqueIdentifier>{af6152da-07f9-4b65-835c-01e31e95034d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\Setup">
+      <UniqueIdentifier>{9f9fd4a1-db28-4f0e-9420-96f932f96a57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\JsonCpp.cpp">
@@ -39,9 +42,6 @@
   <ItemGroup>
     <ClInclude Include="..\include\Macaron\TinyXml2\XmlDocument.h">
       <Filter>1. Public Packages\TinyXml2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Macaron\Macaron.h">
-      <Filter>1. Public Packages</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Macaron\TinyXml2\XmlElement.h">
       <Filter>1. Public Packages\TinyXml2</Filter>
@@ -60,6 +60,9 @@
     </ClInclude>
     <ClInclude Include="..\src\JsonCpp\JsonValueImpl.h">
       <Filter>2. Sources\JsonCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Macaron\Setup\MacaronDefs.h">
+      <Filter>1. Public Packages\Setup</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
