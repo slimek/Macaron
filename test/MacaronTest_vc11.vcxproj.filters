@@ -16,6 +16,9 @@
     <Filter Include="2. Tests\JsonCpp">
       <UniqueIdentifier>{eaf9b76e-ebb1-4cc1-a9f3-9bf4a2b89731}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Icu">
+      <UniqueIdentifier>{4e2ad2ae-f44d-426b-8383-13b59d64bfcd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -26,6 +29,9 @@
     </ClCompile>
     <ClCompile Include="JsonCpp\JsonCppTest.cpp">
       <Filter>2. Tests\JsonCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Icu\IcuBreakIteratorTest.cpp">
+      <Filter>2. Tests\Icu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

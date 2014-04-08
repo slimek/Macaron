@@ -87,6 +87,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Icu\IcuBreakIteratorTest.cpp" />
     <ClCompile Include="JsonCpp\JsonCppTest.cpp" />
     <ClCompile Include="MacaronTestPchCreator.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
