@@ -27,6 +27,12 @@
     <Filter Include="1. Public Packages\Setup">
       <UniqueIdentifier>{9f9fd4a1-db28-4f0e-9420-96f932f96a57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\LibCurl">
+      <UniqueIdentifier>{ff0e9b06-551e-43d8-b16b-ab5c1837b13c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\LibCurl">
+      <UniqueIdentifier>{a27e7d46-fa9e-44f8-b0e6-071918af5112}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\JsonCpp.cpp">
@@ -37,6 +43,9 @@
     </ClCompile>
     <ClCompile Include="..\src\MacaronPch.cpp">
       <Filter>3. Precompiled Header</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LibCurl.cpp">
+      <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -63,6 +72,18 @@
     </ClInclude>
     <ClInclude Include="..\include\Macaron\Setup\MacaronDefs.h">
       <Filter>1. Public Packages\Setup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Macaron\LibCurl\HttpClient.h">
+      <Filter>1. Public Packages\LibCurl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Macaron\LibCurl\HttpResponse.h">
+      <Filter>1. Public Packages\LibCurl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LibCurl\HttpClientImpl.h">
+      <Filter>2. Sources\LibCurl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LibCurl\HttpResponseImpl.h">
+      <Filter>2. Sources\LibCurl</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

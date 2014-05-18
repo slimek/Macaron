@@ -16,6 +16,9 @@
     <Filter Include="2. Tests\JsonCpp">
       <UniqueIdentifier>{eaf9b76e-ebb1-4cc1-a9f3-9bf4a2b89731}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\LibCurl">
+      <UniqueIdentifier>{f566d997-240d-4f32-be70-44e589cbb0cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -26,6 +29,9 @@
     </ClCompile>
     <ClCompile Include="JsonCpp\JsonCppTest.cpp">
       <Filter>2. Tests\JsonCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="LibCurl\LibCurlTest.cpp">
+      <Filter>2. Tests\LibCurl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
