@@ -27,10 +27,10 @@
     <ClCompile Include="MacaronTestPchCreator.cpp">
       <Filter>3. Precompiled Header</Filter>
     </ClCompile>
-    <ClCompile Include="JsonCpp\JsonCppTest.cpp">
+    <ClCompile Include="JsonCpp\JsonCppSuite.cpp">
       <Filter>2. Tests\JsonCpp</Filter>
     </ClCompile>
-    <ClCompile Include="LibCurl\LibCurlTest.cpp">
+    <ClCompile Include="LibCurl\LibCurlSuite.cpp">
       <Filter>2. Tests\LibCurl</Filter>
     </ClCompile>
   </ItemGroup>

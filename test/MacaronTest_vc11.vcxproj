@@ -87,8 +87,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="JsonCpp\JsonCppTest.cpp" />
-    <ClCompile Include="LibCurl\LibCurlTest.cpp" />
+    <ClCompile Include="JsonCpp\JsonCppSuite.cpp" />
+    <ClCompile Include="LibCurl\LibCurlSuite.cpp" />
     <ClCompile Include="MacaronTestPchCreator.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
