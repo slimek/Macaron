@@ -1,0 +1,8 @@
+{
+    "Id"     : 1,
+	"Alias"  : -1,
+	"Limit"  : 4294967295,
+	"Name"   : "Alice",
+	"CanFly" : true,
+	"Weight" : 40.5
+}

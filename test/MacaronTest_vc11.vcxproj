@@ -93,6 +93,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="RapidJson\RapidJsonSuite.cpp" />
     <ClCompile Include="RunTest.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +112,8 @@
     <None Include="JsonCpp\test2.json" />
     <None Include="JsonCpp\test3.json" />
     <None Include="JsonCpp\test4.json" />
+    <None Include="RapidJson\empty-object.json" />
+    <None Include="RapidJson\normal-object.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

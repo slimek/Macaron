@@ -19,6 +19,9 @@
     <Filter Include="2. Tests\LibCurl">
       <UniqueIdentifier>{f566d997-240d-4f32-be70-44e589cbb0cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\RapidJson">
+      <UniqueIdentifier>{332143e5-9c09-4020-a5a0-900c2289360b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -32,6 +35,9 @@
     </ClCompile>
     <ClCompile Include="LibCurl\LibCurlSuite.cpp">
       <Filter>2. Tests\LibCurl</Filter>
+    </ClCompile>
+    <ClCompile Include="RapidJson\RapidJsonSuite.cpp">
+      <Filter>2. Tests\RapidJson</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +57,12 @@
     </None>
     <None Include="JsonCpp\test3.json">
       <Filter>2. Tests\JsonCpp</Filter>
+    </None>
+    <None Include="RapidJson\empty-object.json">
+      <Filter>2. Tests\RapidJson</Filter>
+    </None>
+    <None Include="RapidJson\normal-object.json">
+      <Filter>2. Tests\RapidJson</Filter>
     </None>
   </ItemGroup>
 </Project>
