@@ -72,6 +72,20 @@ JsonValue JsonValue::FromFile( const Utf8String& fileName )
 }
 
 
+JsonValue JsonValue::FromString( const std::string& text )
+{
+    rapidjson::StringStream stream( text.c_str() );
+
+    rapidjson::Document doc;
+    doc.ParseStream( stream );
+
+    auto value = std::make_shared< JsonValueImpl >();
+    value->Swap( doc );
+
+    return JsonValue( value );
+}
+
+
 //
 // Implementation
 //

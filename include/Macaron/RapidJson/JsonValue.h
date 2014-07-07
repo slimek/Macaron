@@ -30,6 +30,8 @@ public:
     static JsonValue FromFile( const std::string& fileName );
     static JsonValue FromFile( const Utf8String&  fileName );
 
+    static JsonValue FromString( const std::string& text );
+
 
 private:
 
