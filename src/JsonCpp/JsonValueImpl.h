@@ -1,4 +1,4 @@
-// Macaron C++ Library - LibJson - JSON Value Private Header
+// Macaron C++ Library - JsonCpp - JSON Value Private Header
 
 #ifndef __MACARON_JSON_CPP_JSON_VALUE_IMPL_H
 #define __MACARON_JSON_CPP_JSON_VALUE_IMPL_H
