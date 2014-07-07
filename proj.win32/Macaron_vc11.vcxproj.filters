@@ -33,6 +33,12 @@
     <Filter Include="2. Sources\LibCurl">
       <UniqueIdentifier>{a27e7d46-fa9e-44f8-b0e6-071918af5112}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1. Public Packages\RapidJson">
+      <UniqueIdentifier>{9b7257fd-087d-4a59-b1ea-2d0adfdafc59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\RapidJson">
+      <UniqueIdentifier>{b83b6f83-33e9-4899-bae6-2094534cf0d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\JsonCpp.cpp">
@@ -45,6 +51,9 @@
       <Filter>3. Precompiled Header</Filter>
     </ClCompile>
     <ClCompile Include="..\src\LibCurl.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\RapidJson.cpp">
       <Filter>2. Sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -84,6 +93,12 @@
     </ClInclude>
     <ClInclude Include="..\src\LibCurl\HttpResponseImpl.h">
       <Filter>2. Sources\LibCurl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Macaron\RapidJson\JsonValue.h">
+      <Filter>1. Public Packages\RapidJson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\RapidJson\JsonValueImpl.h">
+      <Filter>2. Sources\RapidJson</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

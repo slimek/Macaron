@@ -2,8 +2,8 @@
 
 #include "MacaronTestPch.h"
 
-#include <rapidjson/document.h>
-#include <rapidjson/filereadstream.h>
+#include <Macaron/RapidJson/JsonValue.h>
+#include <Caramel/Chrono/TickClock.h>
 
 
 using namespace std;
@@ -11,43 +11,26 @@ using namespace std;
 namespace Macaron
 {
 
+namespace RapidJson
+{
+
 SUITE( RapidJsonSuite )
 {
 
-TEST( RapidJsonApiTest )
+TEST( RapidJsonFromFileTest )
 {
-    using namespace rapidjson;
+    auto emptyObject = JsonValue::FromFile( "RapidJson\\empty-object.json" );
 
-    Char buffer[1024] = { 0 };
+    //CHECK( true == emptyObject.IsObject() );
 
-    // Read JSON from file
+    auto normalObject = JsonValue::FromFile( "RapidJson\\normal-object.json" );
 
-    // Empty Object
-    {
-        Document d;
-    
-        FILE* file = fopen( "RapidJson\\empty-object.json", "rb" );
-        FileReadStream emptyObject( file, buffer, 1024 );
-        d.ParseStream( emptyObject );
-        fclose( file );
-
-        CHECK( true == d.IsObject() );
-    }
-
-    // Normal Object - with comments
-    {
-        Document d;
-
-        FILE* file = fopen( "RapidJson\\normal-object.json", "rb" );
-        FileReadStream normalObject( file, buffer, 1024 );
-        d.ParseStream( normalObject );
-        fclose( file );
-
-        CHECK( true == d.IsObject() );
-    }
+    //CHECK( true == normalObject.IsObject() );
 }
 
 
 } // SUITE RapidJsonSuite
+
+} // namespace RapidJson
 
 } // namespace Macaron
