@@ -32,6 +32,29 @@ public:
 
     static JsonValue FromString( const std::string& text );
 
+    
+    /// Converters ///
+
+    std::string AsString() const;
+
+
+    /// Children Accessors ///
+
+    Bool HasValue( const std::string& name ) const;
+    Bool HasValue( const Char* name ) const;
+
+    JsonValue operator[] ( const std::string& name ) const;
+
+
+    // Get Functions
+    // - Returns false if the value doesn't exist.
+    //   Throws if the value can't be converted to the type.
+
+    Bool GetBoolValue ( const std::string& name, Bool&  value ) const;
+    Bool GetFloatValue( const std::string& name, Float& value ) const;
+
+    Bool GetStringValue( const std::string& name, std::string& value ) const;
+
 
 private:
 

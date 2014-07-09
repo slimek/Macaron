@@ -64,5 +64,8 @@
     <None Include="RapidJson\normal-object.json">
       <Filter>2. Tests\RapidJson</Filter>
     </None>
+    <None Include="RapidJson\enemy-models.json">
+      <Filter>2. Tests\RapidJson</Filter>
+    </None>
   </ItemGroup>
 </Project>

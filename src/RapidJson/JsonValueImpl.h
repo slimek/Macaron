@@ -20,15 +20,44 @@ namespace RapidJson
 // JSON Value
 //
 
-class JsonValueImpl : public rapidjson::Value
+typedef rapidjson::Type ValueType;
+
+class JsonValueImpl
 {
 public:
 
-    JsonValueImpl();
+    JsonValueImpl();    
+    explicit JsonValueImpl( std::shared_ptr< rapidjson::Document >&& doc );
+    JsonValueImpl( std::shared_ptr< rapidjson::Document > doc, rapidjson::Value& value );
+
+
+    /// Predicates ///
+
+    Bool IsConvertibleToBool()   const;
+    Bool IsConvertibleToFloat()  const;
+    Bool IsConvertibleToString() const;
+
+
+    /// Converters ///
+
+    std::string GetString() const;
+
+
+    /// Children Accessors ///
+
+    Bool HasMember( const Char* name ) const;
+
+    std::shared_ptr< JsonValueImpl > GetValue( const Char* name );
+
+    const rapidjson::Value& At( const Char* name ) const;
+
 
 private:
 
-    
+    std::shared_ptr< rapidjson::Document > m_document;
+    rapidjson::Value& m_value;
+
+    // REMARKS: m_value depends on m_document.
 };
 
 
