@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MacaronTest", "MacaronTest_vc12.vcxproj", "{6D935171-546D-43FE-B65E-E0C3B4ABA567}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MacaronTest", "MacaronTest.vcxproj", "{6D935171-546D-43FE-B65E-E0C3B4ABA567}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Caramel", "..\..\Caramel\proj.win32\Caramel_vc12.vcxproj", "{ED63D1E4-3DE9-4273-A22A-8B558E1BD6C0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Caramel", "..\..\Caramel\proj.win32\Caramel.vcxproj", "{ED63D1E4-3DE9-4273-A22A-8B558E1BD6C0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Macaron", "..\proj.win32\Macaron_vc12.vcxproj", "{44FB086B-DEBB-4312-BA57-64052A3FC8D8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Macaron", "..\proj.win32\Macaron.vcxproj", "{44FB086B-DEBB-4312-BA57-64052A3FC8D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -87,7 +87,7 @@
     <ClCompile Include="Validator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Caramel\proj.win32\Caramel_vc11.vcxproj">
+    <ProjectReference Include="..\..\..\Caramel\proj.win32\Caramel.vcxproj">
       <Project>{ed63d1e4-3de9-4273-a22a-8b558e1bd6c0}</Project>
     </ProjectReference>
   </ItemGroup>

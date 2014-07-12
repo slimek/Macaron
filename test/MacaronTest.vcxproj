@@ -20,13 +20,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -100,14 +100,6 @@
     <ClInclude Include="MacaronTestPch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Caramel\proj.win32\Caramel_vc11.vcxproj">
-      <Project>{ed63d1e4-3de9-4273-a22a-8b558e1bd6c0}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\proj.win32\Macaron_vc11.vcxproj">
-      <Project>{44fb086b-debb-4312-ba57-64052a3fc8d8}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="JsonCpp\test1.json" />
     <None Include="JsonCpp\test2.json" />
     <None Include="JsonCpp\test3.json" />
@@ -115,6 +107,14 @@
     <None Include="RapidJson\empty-object.json" />
     <None Include="RapidJson\enemy-models.json" />
     <None Include="RapidJson\normal-object.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Caramel\proj.win32\Caramel.vcxproj">
+      <Project>{ed63d1e4-3de9-4273-a22a-8b558e1bd6c0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\proj.win32\Macaron.vcxproj">
+      <Project>{44fb086b-debb-4312-ba57-64052a3fc8d8}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
