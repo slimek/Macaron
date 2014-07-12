@@ -24,6 +24,8 @@ typedef rapidjson::Type ValueType;
 
 class JsonValueImpl
 {
+    friend class JsonValue;
+
 public:
 
     JsonValueImpl();    
@@ -31,9 +33,15 @@ public:
     JsonValueImpl( std::shared_ptr< rapidjson::Document > doc, rapidjson::Value& value );
 
 
+    /// Properties ///
+
+    rapidjson::Type GetType() const;
+
+
     /// Predicates ///
 
     Bool IsConvertibleToBool()   const;
+    Bool IsConvertibleToInt()    const;
     Bool IsConvertibleToFloat()  const;
     Bool IsConvertibleToString() const;
 

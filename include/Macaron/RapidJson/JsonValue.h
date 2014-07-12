@@ -32,9 +32,20 @@ public:
 
     static JsonValue FromString( const std::string& text );
 
+
+    /// Properties ///
+
+    Bool IsNull()   const;
+    Bool IsString() const;
+    Bool IsNumber() const;
+    Bool IsBool()   const;
+    Bool IsObject() const;
+    Bool IsArray()  const;
+
     
     /// Converters ///
 
+    Int AsInt() const;
     std::string AsString() const;
 
 
@@ -51,6 +62,8 @@ public:
     //   Throws if the value can't be converted to the type.
 
     Bool GetBoolValue ( const std::string& name, Bool&  value ) const;
+    Bool GetIntValue  ( const std::string& name, Int&   value ) const;
+    Bool GetUintValue ( const std::string& name, Uint&  value ) const;
     Bool GetFloatValue( const std::string& name, Float& value ) const;
 
     Bool GetStringValue( const std::string& name, std::string& value ) const;

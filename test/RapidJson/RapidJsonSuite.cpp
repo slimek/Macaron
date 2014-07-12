@@ -24,11 +24,51 @@ TEST( RapidJsonFromFileTest )
 {
     auto emptyObject = JsonValue::FromFile( "RapidJson\\empty-object.json" );
 
-    //CHECK( true == emptyObject.IsObject() );
+    CHECK( true == emptyObject.IsObject() );
 
     auto normalObject = JsonValue::FromFile( "RapidJson\\normal-object.json" );
 
-    //CHECK( true == normalObject.IsObject() );
+    CHECK( true == normalObject.IsObject() );
+}
+
+
+TEST( RapidJsonFromStringTest )
+{
+    auto jnull = JsonValue::FromString( "null" );
+
+    CHECK( true  == jnull.IsNull() );
+    CHECK( false == jnull.IsObject() );
+    CHECK( false == jnull.IsArray() );
+
+    auto jobj = JsonValue::FromString( "{}" );
+
+    CHECK( false == jobj.IsNull() );
+    CHECK( true  == jobj.IsObject() );
+    CHECK( false == jobj.IsArray() );
+
+    auto jary = JsonValue::FromString( "[]" );
+
+    CHECK( false == jary.IsNull() );
+    CHECK( false == jary.IsObject() );
+    CHECK( true  == jary.IsArray() );
+}
+
+
+TEST( RapidJsonGetValueTest )
+{
+    auto obj = JsonValue::FromFile( "RapidJson\\normal-object.json" );
+
+    auto id = obj[ "Id" ];
+
+    CHECK( 1 == id.AsInt() );
+
+    Int ivalue = 0;
+    CHECK( true == obj.GetIntValue( "Id", ivalue ));
+    CHECK( 1 == ivalue );
+
+    Uint uvalue = 0;
+    CHECK( true == obj.GetUintValue( "Id", uvalue ));
+    CHECK( 1 == uvalue );
 }
 
 

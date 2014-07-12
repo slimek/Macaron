@@ -76,13 +76,52 @@ JsonValue JsonValue::FromString( const std::string& text )
     auto doc = std::make_shared< rapidjson::Document >();
     doc->ParseStream( stream );
 
+    if ( doc->HasParseError() )
+    {
+        const auto error = doc->GetParseError();
+        CARAMEL_THROW( "Parse JSON string failed: %d", error );
+    }
+
     return JsonValue( std::make_shared< JsonValueImpl >( std::move( doc )));
+}
+
+
+//
+// Properties
+//
+
+Bool JsonValue::IsNull() const
+{
+    return m_impl->m_value.IsNull();
+}
+
+Bool JsonValue::IsBool() const
+{
+    return m_impl->m_value.IsBool();
+}
+
+Bool JsonValue::IsObject() const
+{
+    return m_impl->m_value.IsObject();
+}
+
+Bool JsonValue::IsArray() const
+{
+    return m_impl->m_value.IsArray();
 }
 
 
 //
 // Converters
 //
+
+Int JsonValue::AsInt() const
+{
+    CARAMEL_CHECK_MSG(
+        m_impl->IsConvertibleToInt(), "Can't convert this value to int" );
+
+    return m_impl->m_value.GetInt();
+}
 
 std::string JsonValue::AsString() const
 {
@@ -126,6 +165,28 @@ Bool JsonValue::GetBoolValue( const std::string& name, Bool& value ) const
 }
 
 
+Bool JsonValue::GetIntValue( const std::string& name, Int& value ) const
+{
+    if ( ! m_impl->HasMember( name.c_str() )) { return false; }
+
+    const auto& jvalue = m_impl->At( name.c_str() );
+
+    value = jvalue.GetInt();
+    return true;
+}
+
+
+Bool JsonValue::GetUintValue( const std::string& name, Uint& value ) const
+{
+    if ( ! m_impl->HasMember( name.c_str() )) { return false; }
+
+    const auto& jvalue = m_impl->At( name.c_str() );
+
+    value = jvalue.GetUint();
+    return true;
+}
+
+
 Bool JsonValue::GetFloatValue( const std::string& name, Float& value ) const
 {
     if ( ! m_impl->HasMember( name.c_str() )) { return false; }
@@ -149,7 +210,7 @@ Bool JsonValue::GetStringValue( const std::string& name, std::string& value ) co
 
 
 //
-// Implementation
+// JSON Value Implementation
 //
 
 JsonValueImpl::JsonValueImpl()
@@ -176,6 +237,12 @@ JsonValueImpl::JsonValueImpl( std::shared_ptr< rapidjson::Document > doc, rapidj
 //
 // Predicates
 //
+
+Bool JsonValueImpl::IsConvertibleToInt() const
+{
+    return m_value.IsInt();
+}
+
 
 Bool JsonValueImpl::IsConvertibleToString() const
 {
