@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="1. Public Packages">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="2. Sources">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="1. Public Packages\TinyXml2">
+      <UniqueIdentifier>{b19f25bb-e1ee-4b68-b146-8766a0582d87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\TinyXml2">
+      <UniqueIdentifier>{bad5755a-cd21-4ad9-9bae-9a990370c5c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Precompiled Header">
+      <UniqueIdentifier>{408b60bc-60c1-4008-b9fa-d01a86296d13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\JsonCpp">
+      <UniqueIdentifier>{5df3c0f8-4a52-4155-8223-f451dfc02867}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\JsonCpp">
+      <UniqueIdentifier>{af6152da-07f9-4b65-835c-01e31e95034d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\Setup">
+      <UniqueIdentifier>{9f9fd4a1-db28-4f0e-9420-96f932f96a57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\LibCurl">
+      <UniqueIdentifier>{ff0e9b06-551e-43d8-b16b-ab5c1837b13c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\LibCurl">
+      <UniqueIdentifier>{a27e7d46-fa9e-44f8-b0e6-071918af5112}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Public Packages\RapidJson">
+      <UniqueIdentifier>{9b7257fd-087d-4a59-b1ea-2d0adfdafc59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Sources\RapidJson">
+      <UniqueIdentifier>{b83b6f83-33e9-4899-bae6-2094534cf0d8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\JsonCpp.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TinyXml2.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MacaronPch.cpp">
+      <Filter>3. Precompiled Header</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LibCurl.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\RapidJson.cpp">
+      <Filter>2. Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Macaron\TinyXml2\XmlDocument.h">
+      <Filter>1. Public Packages\TinyXml2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Macaron\TinyXml2\XmlElement.h">
+      <Filter>1. Public Packages\TinyXml2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Macaron\JsonCpp\JsonValue.h">
+      <Filter>1. Public Packages\JsonCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MacaronPch.h">
+      <Filter>3. Precompiled Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TinyXml2\XmlDocumentImpl.h">
+      <Filter>2. Sources\TinyXml2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TinyXml2\XmlElementImpl.h">
+      <Filter>2. Sources\TinyXml2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\JsonCpp\JsonValueImpl.h">
+      <Filter>2. Sources\JsonCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Macaron\Setup\MacaronDefs.h">
+      <Filter>1. Public Packages\Setup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Macaron\LibCurl\HttpClient.h">
+      <Filter>1. Public Packages\LibCurl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Macaron\LibCurl\HttpResponse.h">
+      <Filter>1. Public Packages\LibCurl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LibCurl\HttpClientImpl.h">
+      <Filter>2. Sources\LibCurl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LibCurl\HttpResponseImpl.h">
+      <Filter>2. Sources\LibCurl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Macaron\RapidJson\JsonValue.h">
+      <Filter>1. Public Packages\RapidJson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\RapidJson\JsonValueImpl.h">
+      <Filter>2. Sources\RapidJson</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

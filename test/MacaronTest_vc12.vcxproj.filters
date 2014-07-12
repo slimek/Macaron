@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="1. Main Entry">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="2. Tests">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="3. Precompiled Header">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="2. Tests\JsonCpp">
+      <UniqueIdentifier>{eaf9b76e-ebb1-4cc1-a9f3-9bf4a2b89731}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Tests\LibCurl">
+      <UniqueIdentifier>{f566d997-240d-4f32-be70-44e589cbb0cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Tests\RapidJson">
+      <UniqueIdentifier>{332143e5-9c09-4020-a5a0-900c2289360b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RunTest.cpp">
+      <Filter>1. Main Entry</Filter>
+    </ClCompile>
+    <ClCompile Include="MacaronTestPchCreator.cpp">
+      <Filter>3. Precompiled Header</Filter>
+    </ClCompile>
+    <ClCompile Include="JsonCpp\JsonCppSuite.cpp">
+      <Filter>2. Tests\JsonCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="LibCurl\LibCurlSuite.cpp">
+      <Filter>2. Tests\LibCurl</Filter>
+    </ClCompile>
+    <ClCompile Include="RapidJson\RapidJsonSuite.cpp">
+      <Filter>2. Tests\RapidJson</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MacaronTestPch.h">
+      <Filter>3. Precompiled Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="JsonCpp\test1.json">
+      <Filter>2. Tests\JsonCpp</Filter>
+    </None>
+    <None Include="JsonCpp\test2.json">
+      <Filter>2. Tests\JsonCpp</Filter>
+    </None>
+    <None Include="JsonCpp\test4.json">
+      <Filter>2. Tests\JsonCpp</Filter>
+    </None>
+    <None Include="JsonCpp\test3.json">
+      <Filter>2. Tests\JsonCpp</Filter>
+    </None>
+    <None Include="RapidJson\empty-object.json">
+      <Filter>2. Tests\RapidJson</Filter>
+    </None>
+    <None Include="RapidJson\normal-object.json">
+      <Filter>2. Tests\RapidJson</Filter>
+    </None>
+    <None Include="RapidJson\enemy-models.json">
+      <Filter>2. Tests\RapidJson</Filter>
+    </None>
+  </ItemGroup>
+</Project>
