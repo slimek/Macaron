@@ -5,7 +5,10 @@
 #include "RapidJson/JsonValueImpl.h"
 #include <Caramel/FileSystem/FileInfo.h>
 #include <Caramel/Io/InputFileStream.h>
+#include <Caramel/String/ToString.h>
 #include <rapidjson/filereadstream.h>
+#include <rapidjson/stringbuffer.h>
+#include <rapidjson/writer.h>
 
 
 namespace Macaron
@@ -65,6 +68,12 @@ JsonValue JsonValue::FromFile( const Utf8String& fileName )
     auto doc = std::make_shared< rapidjson::Document >();
     doc->ParseStream( stream );
 
+    if ( doc->HasParseError() )
+    {
+        const auto error = doc->GetParseError();
+        CARAMEL_THROW( "Parse JSON file %s failed: %d", fileName, error );
+    }
+
     return JsonValue( std::make_shared< JsonValueImpl >( std::move( doc )));
 }
 
@@ -100,6 +109,16 @@ Bool JsonValue::IsBool() const
     return m_impl->m_value.IsBool();
 }
 
+Bool JsonValue::IsNumber() const
+{
+    return m_impl->m_value.IsNumber();
+}
+
+Bool JsonValue::IsString() const
+{
+    return m_impl->m_value.IsString();
+}
+
 Bool JsonValue::IsObject() const
 {
     return m_impl->m_value.IsObject();
@@ -110,6 +129,16 @@ Bool JsonValue::IsArray() const
     return m_impl->m_value.IsArray();
 }
 
+Bool JsonValue::IsInt() const
+{
+    return m_impl->m_value.IsInt();
+}
+
+Bool JsonValue::IsUint() const
+{
+    return m_impl->m_value.IsUint();
+}
+
 
 //
 // Converters
@@ -117,18 +146,90 @@ Bool JsonValue::IsArray() const
 
 Int JsonValue::AsInt() const
 {
-    CARAMEL_CHECK_MSG(
-        m_impl->IsConvertibleToInt(), "Can't convert this value to int" );
+    CARAMEL_CHECK_MSG( this->IsInt(),
+        "JsonValue %s can't convert to Int", m_impl->m_tag );
 
     return m_impl->m_value.GetInt();
 }
 
+Uint JsonValue::AsUint() const
+{
+    CARAMEL_CHECK_MSG( this->IsUint(),
+        "JsonValue %s can't convert to Uint", m_impl->m_tag );
+
+    return m_impl->m_value.GetUint();
+}
+
+Float JsonValue::AsFloat() const
+{
+    CARAMEL_CHECK_MSG( this->IsNumber(),
+        "JsonValue %s can't convert to Float", m_impl->m_tag );
+    
+    return static_cast< Float >( this->AsDouble() );
+}
+
+Double JsonValue::AsDouble() const
+{
+    CARAMEL_CHECK_MSG( this->IsNumber(),
+        "JsonValue %s can't convert to Double", m_impl->m_tag );
+    
+    return m_impl->m_value.GetDouble();
+}
+
 std::string JsonValue::AsString() const
 {
-    CARAMEL_CHECK_MSG(
-        m_impl->IsConvertibleToString(), "Can't convert this value to string" );
+    CARAMEL_CHECK_MSG( this->IsString(),
+        "JsonValue %s can't convert to String", m_impl->m_tag );
 
-    return m_impl->GetString();
+    return m_impl->m_value.GetString();
+}
+
+
+//
+// Serialization
+//
+
+std::string JsonValue::ToString() const
+{
+    using namespace rapidjson;
+
+    const rapidjson::Value& jvalue = m_impl->m_value;
+
+    switch ( jvalue.GetType() )
+    {
+    case kStringType: return jvalue.GetString();
+    case kNumberType:
+    {
+        if ( jvalue.IsInt() )
+        {
+            return Caramel::ToString( jvalue.GetInt() );
+        }
+        else if ( jvalue.IsUint() )
+        {
+            return Caramel::ToString( jvalue.GetUint() );
+        }
+        else
+        {
+            return Caramel::ToString( jvalue.GetDouble() );
+        }
+    }
+
+    case kNullType:  return "null";
+    case kFalseType: return "false";
+    case kTrueType:  return "true";
+
+    case kObjectType:
+    case kArrayType:
+    {
+        StringBuffer sbuf;
+        Writer< rapidjson::StringBuffer > writer( sbuf );
+        jvalue.Accept( writer );
+        return sbuf.GetString();
+    }
+
+    default:
+        CARAMEL_NOT_REACHED();
+    }
 }
 
 
@@ -198,6 +299,17 @@ Bool JsonValue::GetFloatValue( const std::string& name, Float& value ) const
 }
 
 
+Bool JsonValue::GetDoubleValue( const std::string& name, Double& value ) const
+{
+    if ( ! m_impl->HasMember( name.c_str() )) { return false; }
+
+    const auto& jvalue = m_impl->At( name.c_str() );
+
+    value = jvalue.GetDouble();
+    return true;
+}
+
+
 Bool JsonValue::GetStringValue( const std::string& name, std::string& value ) const
 {
     if ( ! m_impl->HasMember( name.c_str() )) { return false; }
@@ -231,32 +343,6 @@ JsonValueImpl::JsonValueImpl( std::shared_ptr< rapidjson::Document > doc, rapidj
     : m_document( doc )
     , m_value( value )
 {
-}
-
-
-//
-// Predicates
-//
-
-Bool JsonValueImpl::IsConvertibleToInt() const
-{
-    return m_value.IsInt();
-}
-
-
-Bool JsonValueImpl::IsConvertibleToString() const
-{
-    return m_value.IsString();
-}
-
-
-//
-// Converters
-//
-
-std::string JsonValueImpl::GetString() const
-{
-    return m_value.GetString();
 }
 
 

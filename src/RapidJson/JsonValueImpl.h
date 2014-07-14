@@ -38,19 +38,6 @@ public:
     rapidjson::Type GetType() const;
 
 
-    /// Predicates ///
-
-    Bool IsConvertibleToBool()   const;
-    Bool IsConvertibleToInt()    const;
-    Bool IsConvertibleToFloat()  const;
-    Bool IsConvertibleToString() const;
-
-
-    /// Converters ///
-
-    std::string GetString() const;
-
-
     /// Children Accessors ///
 
     Bool HasMember( const Char* name ) const;
@@ -66,6 +53,9 @@ private:
     rapidjson::Value& m_value;
 
     // REMARKS: m_value depends on m_document.
+
+    std::string m_tag;  // For debugging information,
+                        // usually is the path of this value.
 };
 
 

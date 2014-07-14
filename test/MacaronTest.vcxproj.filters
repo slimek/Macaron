@@ -22,6 +22,9 @@
     <Filter Include="2. Tests\RapidJson">
       <UniqueIdentifier>{332143e5-9c09-4020-a5a0-900c2289360b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Data">
+      <UniqueIdentifier>{7eca29be-763d-4856-812f-7546237b95d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -58,14 +61,17 @@
     <None Include="JsonCpp\test3.json">
       <Filter>2. Tests\JsonCpp</Filter>
     </None>
-    <None Include="RapidJson\empty-object.json">
-      <Filter>2. Tests\RapidJson</Filter>
-    </None>
     <None Include="RapidJson\normal-object.json">
       <Filter>2. Tests\RapidJson</Filter>
     </None>
     <None Include="RapidJson\enemy-models.json">
       <Filter>2. Tests\RapidJson</Filter>
+    </None>
+    <None Include="Data\empty-object.json">
+      <Filter>2. Tests\Data</Filter>
+    </None>
+    <None Include="Data\numbers.json">
+      <Filter>2. Tests\Data</Filter>
     </None>
   </ItemGroup>
 </Project>
