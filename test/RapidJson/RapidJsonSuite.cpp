@@ -97,6 +97,15 @@ TEST( RapidJsonNumberTest )
     CHECK( INT32_MAX == int32Max.AsDouble() );
     CHECK( "2147483647" == int32Max.ToString() );
 
+    CHECK( true == json.GetIntValue( "int32Max", ivalue ));
+    CHECK( 2147483647 == ivalue );
+    CHECK( true == json.GetUintValue( "int32Max", uvalue ));
+    CHECK( 2147483647 == uvalue );
+    CHECK( true == json.GetFloatValue( "int32Max", fvalue ));
+    CHECK( 2147483647 == fvalue );
+    CHECK( true == json.GetDoubleValue( "int32Max", dvalue ));
+    CHECK( 2147483647 == dvalue );
+
 
     /// Int32 Min ///
 
