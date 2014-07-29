@@ -25,6 +25,9 @@
     <Filter Include="2. Tests\Data">
       <UniqueIdentifier>{7eca29be-763d-4856-812f-7546237b95d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\CppRest">
+      <UniqueIdentifier>{c1b62d4d-7985-4efd-8bee-4c692b120418}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -41,6 +44,9 @@
     </ClCompile>
     <ClCompile Include="RapidJson\RapidJsonSuite.cpp">
       <Filter>2. Tests\RapidJson</Filter>
+    </ClCompile>
+    <ClCompile Include="CppRest\CppRestHttpClientSuite.cpp">
+      <Filter>2. Tests\CppRest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
