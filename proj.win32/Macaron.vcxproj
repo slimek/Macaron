@@ -24,6 +24,7 @@
     <ClInclude Include="..\include\Macaron\JsonCpp\JsonValue.h" />
     <ClInclude Include="..\include\Macaron\LibCurl\HttpClient.h" />
     <ClInclude Include="..\include\Macaron\LibCurl\HttpResponse.h" />
+    <ClInclude Include="..\include\Macaron\RapidJson\JsonReader.h" />
     <ClInclude Include="..\include\Macaron\RapidJson\JsonValue.h" />
     <ClInclude Include="..\include\Macaron\Setup\MacaronDefs.h" />
     <ClInclude Include="..\include\Macaron\TinyXml2\XmlDocument.h" />
@@ -32,6 +33,7 @@
     <ClInclude Include="..\src\LibCurl\HttpClientImpl.h" />
     <ClInclude Include="..\src\LibCurl\HttpResponseImpl.h" />
     <ClInclude Include="..\src\MacaronPch.h" />
+    <ClInclude Include="..\src\RapidJson\JsonTraversal.h" />
     <ClInclude Include="..\src\RapidJson\JsonValueImpl.h" />
     <ClInclude Include="..\src\TinyXml2\XmlDocumentImpl.h" />
     <ClInclude Include="..\src\TinyXml2\XmlElementImpl.h" />

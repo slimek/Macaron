@@ -14,12 +14,14 @@ namespace Macaron
 namespace RapidJson
 {
 
+// Forwards Declaration
+class JsonArray;
+class JsonValueImpl;
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // JSON Value
 //
-
-class JsonValueImpl;
 
 class JsonValue
 {
@@ -87,6 +89,16 @@ private:
     explicit JsonValue( std::shared_ptr< JsonValueImpl > impl );
 
     std::shared_ptr< JsonValueImpl > m_impl;
+};
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// JSON Array
+//
+
+class JsonArray : public JsonValue
+{
 };
 
 

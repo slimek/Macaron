@@ -48,6 +48,9 @@
     <ClCompile Include="CppRest\CppRestHttpClientSuite.cpp">
       <Filter>2. Tests\CppRest</Filter>
     </ClCompile>
+    <ClCompile Include="RapidJson\RapidJsonReaderSuite.cpp">
+      <Filter>2. Tests\RapidJson</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MacaronTestPch.h">
@@ -77,6 +80,9 @@
       <Filter>2. Tests\Data</Filter>
     </None>
     <None Include="Data\numbers.json">
+      <Filter>2. Tests\Data</Filter>
+    </None>
+    <None Include="Data\empty-array.json">
       <Filter>2. Tests\Data</Filter>
     </None>
   </ItemGroup>

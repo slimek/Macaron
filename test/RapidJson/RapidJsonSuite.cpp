@@ -1,4 +1,4 @@
-// Macaron C++ Library Test - RapidJson Test
+// Macaron C++ Library Test - RapidJson Suite
 
 #include "MacaronTestPch.h"
 
@@ -8,8 +8,6 @@
 #include <Caramel/Io/InputFileStream.h>
 #include <Caramel/Io/TextStreamReader.h>
 
-
-using namespace std;
 
 namespace Macaron
 {
@@ -29,6 +27,8 @@ TEST( RapidJsonFromFileTest )
     auto normalObject = JsonValue::FromFile( "RapidJson\\normal-object.json" );
 
     CHECK( true == normalObject.IsObject() );
+
+    auto emptyArray = JsonValue::FromFile( "Data\\empty-array.json" );
 }
 
 

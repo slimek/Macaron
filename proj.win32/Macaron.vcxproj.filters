@@ -100,5 +100,11 @@
     <ClInclude Include="..\src\RapidJson\JsonValueImpl.h">
       <Filter>2. Sources\RapidJson</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Macaron\RapidJson\JsonReader.h">
+      <Filter>1. Public Packages\RapidJson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\RapidJson\JsonTraversal.h">
+      <Filter>2. Sources\RapidJson</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

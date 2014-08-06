@@ -2,9 +2,12 @@
 
 #include "MacaronPch.h"
 
+#include "RapidJson/JsonTraversal.h"
 #include "RapidJson/JsonValueImpl.h"
+#include <Macaron/RapidJson/JsonReader.h>
 #include <Caramel/FileSystem/FileInfo.h>
 #include <Caramel/Io/InputFileStream.h>
+#include <Caramel/String/Format.h>
 #include <Caramel/String/ToString.h>
 #include <rapidjson/filereadstream.h>
 #include <rapidjson/stringbuffer.h>
@@ -21,6 +24,8 @@ namespace RapidJson
 // Contents
 //
 //   JsonValue
+//   JsonReader
+//   JsonTraversal
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -365,6 +370,82 @@ std::shared_ptr< JsonValueImpl > JsonValueImpl::GetValue( const Char* name )
 const rapidjson::Value& JsonValueImpl::At( const Char* name ) const
 {
     return m_value[ name ];
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// JSON Reader
+//
+
+static std::string TranslateParseErrorCode( rapidjson::ParseErrorCode code );
+
+Bool JsonReader::Parse( const std::string& text, JsonValue& value )
+{
+    rapidjson::StringStream stream( text.c_str() );
+
+    rapidjson::Document doc;
+    doc.ParseStream( stream );
+
+    if ( doc.HasParseError() )
+    {
+        auto errorCode = doc.GetParseError();
+        m_errorMessage = TranslateParseErrorCode( errorCode );
+        return false;
+    }
+
+    return true;
+}
+
+
+std::string TranslateParseErrorCode( rapidjson::ParseErrorCode code )
+{
+    using namespace rapidjson;
+
+    switch ( code )
+    {
+    case kParseErrorNone: return "";
+
+    case kParseErrorDocumentEmpty:
+        return "document empty";
+
+    case kParseErrorDocumentRootNotObjectOrArray:
+        return "document root not object or array";
+
+    case kParseErrorDocumentRootNotSingular:
+        return "document root not singular";
+
+    case kParseErrorValueInvalid:
+        return "value invalid";
+
+    case kParseErrorObjectMissName:
+        return "object miss name";
+
+    case kParseErrorObjectMissColon:
+        return "object miss colon";
+
+    case kParseErrorObjectMissCommaOrCurlyBracket:
+        return "object miss comma or curly bracket";
+
+    case kParseErrorArrayMissCommaOrSquareBracket:
+        return "array miss comma or square bracket";
+
+    default: return Format( "error code: {0}", code );
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// JSON Traversal
+//
+
+JsonTraversal::JsonTraversal( const std::string& text )
+{
+    rapidjson::StringStream stream( text.c_str() );
+    
+    // 0 : use default flags.
+    const Caramel::Bool ok = m_reader.Parse( stream, *this );
 }
 
 
