@@ -96,6 +96,7 @@
     </ClCompile>
     <ClCompile Include="RapidJson\RapidJsonReaderSuite.cpp" />
     <ClCompile Include="RapidJson\RapidJsonSuite.cpp" />
+    <ClCompile Include="RapidJson\RapidJsonTraversalSuite.cpp" />
     <ClCompile Include="RunTest.cpp" />
   </ItemGroup>
   <ItemGroup>

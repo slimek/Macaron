@@ -2,11 +2,12 @@
 
 #include "MacaronPch.h"
 
-#include "RapidJson/JsonTraversal.h"
 #include "RapidJson/JsonValueImpl.h"
 #include <Macaron/RapidJson/JsonReader.h>
+#include <Macaron/RapidJson/JsonTraversal.h>
 #include <Caramel/FileSystem/FileInfo.h>
 #include <Caramel/Io/InputFileStream.h>
+#include <Caramel/String/Algorithm.h>
 #include <Caramel/String/Format.h>
 #include <Caramel/String/ToString.h>
 #include <rapidjson/filereadstream.h>
@@ -440,12 +441,148 @@ std::string TranslateParseErrorCode( rapidjson::ParseErrorCode code )
 // JSON Traversal
 //
 
-JsonTraversal::JsonTraversal( const std::string& text )
+enum JsonTraversalState
 {
+    JTS_ROOT,
+    JTS_OBJECT,
+    JTS_ARRAY,
+    JTS_VALUE,
+};
+
+
+enum JsonTraversalEvent
+{
+    JTE_START_OBJECT,
+    JTE_START_ARRAY,
+    JTE_NAME,
+    JTE_SCALAR_VALUE,
+    JTE_END_OBJECT,
+    JTE_END_ARRAY,
+};
+
+
+JsonTraversal::JsonTraversal( const std::string& text )
+    : m_machine( "JsonTraversal" )
+{
+    m_machine.AddState( JTS_ROOT )
+             .Transition( JTE_START_OBJECT, JTS_OBJECT )
+             .Transition( JTE_START_ARRAY, JTS_ARRAY );
+
+    m_machine.AddState( JTS_OBJECT )
+             .Transition( JTE_NAME, JTS_VALUE, [=] { this->AddName(); } )
+             .Reaction( JTE_END_OBJECT, [=] { this->PopStack(); } );
+
+    m_machine.AddState( JTS_VALUE )
+             .Transition( JTE_SCALAR_VALUE, JTS_OBJECT )
+             .Transition( JTE_START_OBJECT, JTS_OBJECT )
+             .Transition( JTE_START_ARRAY, JTS_ARRAY );
+
+    m_machine.AddState( JTS_ARRAY )
+             .Reaction( JTE_END_ARRAY, [=] { this->PopStack(); } );
+
+    m_machine.Initiate( JTS_ROOT );
+
+
+
     rapidjson::StringStream stream( text.c_str() );
-    
-    // 0 : use default flags.
-    const Caramel::Bool ok = m_reader.Parse( stream, *this );
+
+    // This function will return when it meets an error.    
+    m_reader.Parse( stream, *this );
+}
+
+
+void JsonTraversal::Default()
+{
+}
+
+
+void JsonTraversal::String( const Char* chs, Size len, Caramel::Bool )
+{
+}
+
+
+void JsonTraversal::StartObject()
+{
+    Node node;
+    node.isArrayNotObject = false;
+    node.name = m_currentName;
+
+    m_nodeStack.push_back( node );
+
+    m_machine.ProcessEvent( JTE_START_OBJECT );
+}
+
+
+void JsonTraversal::EndObject( Size )
+{
+    m_machine.ProcessEvent( JTE_END_OBJECT );
+}
+
+
+void JsonTraversal::StartArray()
+{
+}
+
+
+void JsonTraversal::EndArray( Size )
+{
+}
+
+
+void JsonTraversal::AddName()
+{
+}
+
+
+void JsonTraversal::PopStack()
+{
+    CARAMEL_ASSERT( ! m_nodeStack.empty() );
+
+    Node node = m_nodeStack.back();
+    m_nodeStack.pop_back();
+
+    if ( m_nodeStack.empty() )
+    {
+        m_machine.PlanToTransit( JTS_ROOT );
+    }
+    else
+    {
+        if ( m_nodeStack.back().isArrayNotObject )
+        {
+            m_machine.PlanToTransit( JTS_ARRAY );
+        }
+        else
+        {
+            m_machine.PlanToTransit( JTS_OBJECT );
+        }
+    }
+}
+
+
+std::string JsonTraversal::GetPath() const
+{
+    std::string path;
+
+    for ( const Node& node : m_nodeStack )
+    {
+        if ( node.isArrayNotObject )
+        {
+            path += Format( "[{0}]", node.arrayIndex );
+        }
+        else
+        {
+            if ( Contains( node.name, ' ' ))
+            {
+                path += Format( ".\"{0}\"", node.name );
+            }
+            else
+            {
+                path += "." + node.name;
+            }
+        }
+    }
+
+    return path;
 }
 
 

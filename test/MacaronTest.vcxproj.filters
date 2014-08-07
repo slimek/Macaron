@@ -51,6 +51,9 @@
     <ClCompile Include="RapidJson\RapidJsonReaderSuite.cpp">
       <Filter>2. Tests\RapidJson</Filter>
     </ClCompile>
+    <ClCompile Include="RapidJson\RapidJsonTraversalSuite.cpp">
+      <Filter>2. Tests\RapidJson</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MacaronTestPch.h">
