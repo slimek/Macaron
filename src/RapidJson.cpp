@@ -469,7 +469,7 @@ JsonErrorLocator::JsonErrorLocator( const std::string& text )
              .Transition( JEL_EVENT_START_ARRAY, JEL_STATE_ARRAY );
 
     m_machine.AddState( JEL_STATE_OBJECT )
-             .Transition( JEL_EVENT_NAME, JEL_STATE_VALUE, [=] { this->AddName(); } )
+             .Transition( JEL_EVENT_NAME, JEL_STATE_VALUE )
              .Reaction( JEL_EVENT_END_OBJECT, [=] { this->PopStack(); } );
 
     m_machine.AddState( JEL_STATE_VALUE )
@@ -478,6 +478,9 @@ JsonErrorLocator::JsonErrorLocator( const std::string& text )
              .Transition( JEL_EVENT_START_ARRAY, JEL_STATE_ARRAY );
 
     m_machine.AddState( JEL_STATE_ARRAY )
+             .Transition( JEL_EVENT_SCALAR_VALUE, JEL_STATE_ARRAY )
+             .Transition( JEL_EVENT_START_OBJECT, JEL_STATE_OBJECT )
+             .Transition( JEL_EVENT_START_ARRAY, JEL_STATE_ARRAY )
              .Reaction( JEL_EVENT_END_ARRAY, [=] { this->PopStack(); } );
 
     m_machine.Initiate( JEL_STATE_ROOT );
@@ -485,19 +488,39 @@ JsonErrorLocator::JsonErrorLocator( const std::string& text )
 
 
     rapidjson::StringStream stream( text.c_str() );
+    rapidjson::Reader reader;
 
     // This function will return when it meets an error.    
-    m_reader.Parse( stream, *this );
-}
+    reader.Parse( stream, *this );
 
-
-void JsonErrorLocator::Default()
-{
+    m_errorCode = reader.GetParseErrorCode();
 }
 
 
 void JsonErrorLocator::String( const Char* chs, Size len, Caramel::Bool )
 {
+    switch ( m_machine.GetCurrentStateId() )
+    {
+    case JEL_STATE_OBJECT:
+        m_nodeStack.back().name = std::string( chs, len );
+        m_machine.ProcessEvent( JEL_EVENT_NAME );
+        break;
+
+    case JEL_STATE_ARRAY:
+        m_nodeStack.back().arrayIndex ++;
+        m_machine.ProcessEvent( JEL_EVENT_SCALAR_VALUE );
+        break;
+
+    case JEL_STATE_VALUE:
+        m_machine.ProcessEvent( JEL_EVENT_SCALAR_VALUE );
+        break;
+
+    case JEL_STATE_ROOT:
+        break;  // This is an error condition?
+
+    default:
+        CARAMEL_NOT_REACHED();
+    }
 }
 
 
@@ -505,7 +528,6 @@ void JsonErrorLocator::StartObject()
 {
     Node node;
     node.isArrayNotObject = false;
-    node.name = m_currentName;
 
     m_nodeStack.push_back( node );
 
@@ -521,16 +543,31 @@ void JsonErrorLocator::EndObject( Size )
 
 void JsonErrorLocator::StartArray()
 {
+    Node node;
+    node.isArrayNotObject = true;
+
+    m_nodeStack.push_back( node );
+
+    m_machine.ProcessEvent( JEL_EVENT_START_ARRAY );
 }
 
 
 void JsonErrorLocator::EndArray( Size )
 {
+    m_machine.ProcessEvent( JEL_EVENT_END_ARRAY );
 }
 
 
-void JsonErrorLocator::AddName()
+void JsonErrorLocator::ScalarValue()
 {
+    // Non-string scalar value.
+
+    if ( m_machine.GetCurrentStateId() == JEL_STATE_ARRAY )
+    {
+        m_nodeStack.back().arrayIndex ++;
+    }
+
+    m_machine.ProcessEvent( JEL_EVENT_SCALAR_VALUE );    
 }
 
 
@@ -538,7 +575,6 @@ void JsonErrorLocator::PopStack()
 {
     CARAMEL_ASSERT( ! m_nodeStack.empty() );
 
-    Node node = m_nodeStack.back();
     m_nodeStack.pop_back();
 
     if ( m_nodeStack.empty() )

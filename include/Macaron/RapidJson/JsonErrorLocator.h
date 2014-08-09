@@ -22,21 +22,21 @@ namespace RapidJson
 // - Stop when parse failed. We can get the read path at the moment.
 //
 
-class JsonErrorLocator : public rapidjson::BaseReaderHandler< rapidjson::UTF8<> >
+class JsonErrorLocator
 {
 public:
 
     explicit JsonErrorLocator( const std::string& text );
 
+    // Returns the path where the error occured.
     std::string GetPath() const;
+
+    rapidjson::ParseErrorCode GetErrorCode() const { return m_errorCode; }
 
 
     /// Handlers ///
 
     typedef rapidjson::SizeType Size;
-
-    // Process a value
-    void Default();
 
     // The third parameter is ignored.
     void String( const Char* chs, Size len, Caramel::Bool );
@@ -47,24 +47,31 @@ public:
     void StartArray();
     void EndArray( Size );
 
+    // Scalar value handlers
+    void Null() { this->ScalarValue(); }
+    void Bool( bool ) { this->ScalarValue(); }
+    void Int( int ) { this->ScalarValue(); }
+    void Uint( unsigned ) { this->ScalarValue(); }
+    void Int64( int64_t ) { this->ScalarValue(); }
+    void Uint64( uint64_t ) { this->ScalarValue(); }
+    void Double( double ) { this->ScalarValue(); }
+
+
 private:
 
-    rapidjson::Reader m_reader;
+    rapidjson::ParseErrorCode m_errorCode { rapidjson::kParseErrorNone };
 
     /// State Machine ///
 
-    void AddName();
+    void ScalarValue();
     void PopStack();
     
     PromptStateMachine m_machine;
 
-    Caramel::Int m_currentIndex { 0 };
-    std::string m_currentName;
-
     struct Node
     {
         Caramel::Bool isArrayNotObject { false };
-        Caramel::Int arrayIndex { -1 };
+        Caramel::Int arrayIndex { 0 };
         std::string name;
     };
 
