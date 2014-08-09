@@ -1,7 +1,7 @@
-// Macaron C++ Library - RapidJson - JSON Traversal Header
+// Macaron C++ Library - RapidJson - JSON Error Locator Header
 
-#ifndef __MACARON_RAPID_JSON_JSON_TRAVERSAL_H
-#define __MACARON_RAPID_JSON_JSON_TRAVERSAL_H
+#ifndef __MACARON_RAPID_JSON_JSON_ERROR_LOCATOR_H
+#define __MACARON_RAPID_JSON_JSON_ERROR_LOCATOR_H
 #pragma once
 
 #include <Macaron/Setup/MacaronDefs.h>
@@ -18,15 +18,15 @@ namespace RapidJson
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// JSON Traversal
+// JSON Error Locator
 // - Stop when parse failed. We can get the read path at the moment.
 //
 
-class JsonTraversal : public rapidjson::BaseReaderHandler< rapidjson::UTF8<> >
+class JsonErrorLocator : public rapidjson::BaseReaderHandler< rapidjson::UTF8<> >
 {
 public:
 
-    explicit JsonTraversal( const std::string& text );
+    explicit JsonErrorLocator( const std::string& text );
 
     std::string GetPath() const;
 
@@ -78,4 +78,4 @@ private:
 
 } // namespace Macaron
 
-#endif // __MACARON_RAPID_JSON_JSON_TRAVERSAL_H
+#endif // __MACARON_RAPID_JSON_JSON_ERROR_LOCATOR_H

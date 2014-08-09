@@ -4,7 +4,7 @@
 
 #include "RapidJson/JsonValueImpl.h"
 #include <Macaron/RapidJson/JsonReader.h>
-#include <Macaron/RapidJson/JsonTraversal.h>
+#include <Macaron/RapidJson/JsonErrorLocator.h>
 #include <Caramel/FileSystem/FileInfo.h>
 #include <Caramel/Io/InputFileStream.h>
 #include <Caramel/String/Algorithm.h>
@@ -26,7 +26,7 @@ namespace RapidJson
 //
 //   JsonValue
 //   JsonReader
-//   JsonTraversal
+//   JsonErrorLocator
 //
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -438,49 +438,49 @@ std::string TranslateParseErrorCode( rapidjson::ParseErrorCode code )
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// JSON Traversal
+// JSON Error Locator
 //
 
-enum JsonTraversalState
+enum JsonErrorLocatorState
 {
-    JTS_ROOT,
-    JTS_OBJECT,
-    JTS_ARRAY,
-    JTS_VALUE,
+    JEL_STATE_ROOT,
+    JEL_STATE_OBJECT,
+    JEL_STATE_ARRAY,
+    JEL_STATE_VALUE,
 };
 
 
-enum JsonTraversalEvent
+enum JsonErrorLocatorEvent
 {
-    JTE_START_OBJECT,
-    JTE_START_ARRAY,
-    JTE_NAME,
-    JTE_SCALAR_VALUE,
-    JTE_END_OBJECT,
-    JTE_END_ARRAY,
+    JEL_EVENT_START_OBJECT,
+    JEL_EVENT_START_ARRAY,
+    JEL_EVENT_NAME,
+    JEL_EVENT_SCALAR_VALUE,
+    JEL_EVENT_END_OBJECT,
+    JEL_EVENT_END_ARRAY,
 };
 
 
-JsonTraversal::JsonTraversal( const std::string& text )
-    : m_machine( "JsonTraversal" )
+JsonErrorLocator::JsonErrorLocator( const std::string& text )
+    : m_machine( "JsonErrorLocator" )
 {
-    m_machine.AddState( JTS_ROOT )
-             .Transition( JTE_START_OBJECT, JTS_OBJECT )
-             .Transition( JTE_START_ARRAY, JTS_ARRAY );
+    m_machine.AddState( JEL_STATE_ROOT )
+             .Transition( JEL_EVENT_START_OBJECT, JEL_STATE_OBJECT )
+             .Transition( JEL_EVENT_START_ARRAY, JEL_STATE_ARRAY );
 
-    m_machine.AddState( JTS_OBJECT )
-             .Transition( JTE_NAME, JTS_VALUE, [=] { this->AddName(); } )
-             .Reaction( JTE_END_OBJECT, [=] { this->PopStack(); } );
+    m_machine.AddState( JEL_STATE_OBJECT )
+             .Transition( JEL_EVENT_NAME, JEL_STATE_VALUE, [=] { this->AddName(); } )
+             .Reaction( JEL_EVENT_END_OBJECT, [=] { this->PopStack(); } );
 
-    m_machine.AddState( JTS_VALUE )
-             .Transition( JTE_SCALAR_VALUE, JTS_OBJECT )
-             .Transition( JTE_START_OBJECT, JTS_OBJECT )
-             .Transition( JTE_START_ARRAY, JTS_ARRAY );
+    m_machine.AddState( JEL_STATE_VALUE )
+             .Transition( JEL_EVENT_SCALAR_VALUE, JEL_STATE_OBJECT )
+             .Transition( JEL_EVENT_START_OBJECT, JEL_STATE_OBJECT )
+             .Transition( JEL_EVENT_START_ARRAY, JEL_STATE_ARRAY );
 
-    m_machine.AddState( JTS_ARRAY )
-             .Reaction( JTE_END_ARRAY, [=] { this->PopStack(); } );
+    m_machine.AddState( JEL_STATE_ARRAY )
+             .Reaction( JEL_EVENT_END_ARRAY, [=] { this->PopStack(); } );
 
-    m_machine.Initiate( JTS_ROOT );
+    m_machine.Initiate( JEL_STATE_ROOT );
 
 
 
@@ -491,17 +491,17 @@ JsonTraversal::JsonTraversal( const std::string& text )
 }
 
 
-void JsonTraversal::Default()
+void JsonErrorLocator::Default()
 {
 }
 
 
-void JsonTraversal::String( const Char* chs, Size len, Caramel::Bool )
+void JsonErrorLocator::String( const Char* chs, Size len, Caramel::Bool )
 {
 }
 
 
-void JsonTraversal::StartObject()
+void JsonErrorLocator::StartObject()
 {
     Node node;
     node.isArrayNotObject = false;
@@ -509,32 +509,32 @@ void JsonTraversal::StartObject()
 
     m_nodeStack.push_back( node );
 
-    m_machine.ProcessEvent( JTE_START_OBJECT );
+    m_machine.ProcessEvent( JEL_EVENT_START_OBJECT );
 }
 
 
-void JsonTraversal::EndObject( Size )
+void JsonErrorLocator::EndObject( Size )
 {
-    m_machine.ProcessEvent( JTE_END_OBJECT );
+    m_machine.ProcessEvent( JEL_EVENT_END_OBJECT );
 }
 
 
-void JsonTraversal::StartArray()
-{
-}
-
-
-void JsonTraversal::EndArray( Size )
+void JsonErrorLocator::StartArray()
 {
 }
 
 
-void JsonTraversal::AddName()
+void JsonErrorLocator::EndArray( Size )
 {
 }
 
 
-void JsonTraversal::PopStack()
+void JsonErrorLocator::AddName()
+{
+}
+
+
+void JsonErrorLocator::PopStack()
 {
     CARAMEL_ASSERT( ! m_nodeStack.empty() );
 
@@ -543,23 +543,23 @@ void JsonTraversal::PopStack()
 
     if ( m_nodeStack.empty() )
     {
-        m_machine.PlanToTransit( JTS_ROOT );
+        m_machine.PlanToTransit( JEL_STATE_ROOT );
     }
     else
     {
         if ( m_nodeStack.back().isArrayNotObject )
         {
-            m_machine.PlanToTransit( JTS_ARRAY );
+            m_machine.PlanToTransit( JEL_STATE_ARRAY );
         }
         else
         {
-            m_machine.PlanToTransit( JTS_OBJECT );
+            m_machine.PlanToTransit( JEL_STATE_OBJECT );
         }
     }
 }
 
 
-std::string JsonTraversal::GetPath() const
+std::string JsonErrorLocator::GetPath() const
 {
     std::string path;
 

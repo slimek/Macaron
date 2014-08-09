@@ -103,7 +103,7 @@
     <ClInclude Include="..\include\Macaron\RapidJson\JsonReader.h">
       <Filter>1. Public Packages\RapidJson</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Macaron\RapidJson\JsonTraversal.h">
+    <ClInclude Include="..\include\Macaron\RapidJson\JsonErrorLocator.h">
       <Filter>1. Public Packages\RapidJson</Filter>
     </ClInclude>
   </ItemGroup>
