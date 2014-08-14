@@ -5,7 +5,6 @@
 #pragma once
 
 #include <Macaron/Setup/MacaronDefs.h>
-#include <Caramel/Statechart/PromptStateMachine.h>
 #include <rapidjson/reader.h>
 #include <deque>
 
@@ -59,23 +58,25 @@ public:
 
 private:
 
-    rapidjson::ParseErrorCode m_errorCode { rapidjson::kParseErrorNone };
-
-    /// State Machine ///
-
     void ScalarValue();
-    void PopStack();
-    
-    PromptStateMachine m_machine;
 
+    enum NodeState
+    {
+        NODE_OBJECT,
+        NODE_VALUE,
+        NODE_ARRAY,
+    };    
+    
     struct Node
     {
-        Caramel::Bool isArrayNotObject { false };
+        NodeState state { NODE_OBJECT };
         Caramel::Int arrayIndex { 0 };
         std::string name;
     };
 
     std::deque< Node > m_nodeStack;
+
+    rapidjson::ParseErrorCode m_errorCode { rapidjson::kParseErrorNone };
 };
 
 

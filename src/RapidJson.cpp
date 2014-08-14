@@ -441,52 +441,8 @@ std::string TranslateParseErrorCode( rapidjson::ParseErrorCode code )
 // JSON Error Locator
 //
 
-enum JsonErrorLocatorState
-{
-    JEL_STATE_ROOT,
-    JEL_STATE_OBJECT,
-    JEL_STATE_ARRAY,
-    JEL_STATE_VALUE,
-};
-
-
-enum JsonErrorLocatorEvent
-{
-    JEL_EVENT_START_OBJECT,
-    JEL_EVENT_START_ARRAY,
-    JEL_EVENT_NAME,
-    JEL_EVENT_SCALAR_VALUE,
-    JEL_EVENT_END_OBJECT,
-    JEL_EVENT_END_ARRAY,
-};
-
-
 JsonErrorLocator::JsonErrorLocator( const std::string& text )
-    : m_machine( "JsonErrorLocator" )
 {
-    m_machine.AddState( JEL_STATE_ROOT )
-             .Transition( JEL_EVENT_START_OBJECT, JEL_STATE_OBJECT )
-             .Transition( JEL_EVENT_START_ARRAY, JEL_STATE_ARRAY );
-
-    m_machine.AddState( JEL_STATE_OBJECT )
-             .Transition( JEL_EVENT_NAME, JEL_STATE_VALUE )
-             .Reaction( JEL_EVENT_END_OBJECT, [=] { this->PopStack(); } );
-
-    m_machine.AddState( JEL_STATE_VALUE )
-             .Transition( JEL_EVENT_SCALAR_VALUE, JEL_STATE_OBJECT )
-             .Transition( JEL_EVENT_START_OBJECT, JEL_STATE_OBJECT )
-             .Transition( JEL_EVENT_START_ARRAY, JEL_STATE_ARRAY );
-
-    m_machine.AddState( JEL_STATE_ARRAY )
-             .Transition( JEL_EVENT_SCALAR_VALUE, JEL_STATE_ARRAY )
-             .Transition( JEL_EVENT_START_OBJECT, JEL_STATE_OBJECT )
-             .Transition( JEL_EVENT_START_ARRAY, JEL_STATE_ARRAY )
-             .Reaction( JEL_EVENT_END_ARRAY, [=] { this->PopStack(); } );
-
-    m_machine.Initiate( JEL_STATE_ROOT );
-
-
-
     rapidjson::StringStream stream( text.c_str() );
     rapidjson::Reader reader;
 
@@ -499,24 +455,22 @@ JsonErrorLocator::JsonErrorLocator( const std::string& text )
 
 void JsonErrorLocator::String( const Char* chs, Size len, Caramel::Bool )
 {
-    switch ( m_machine.GetCurrentStateId() )
+    auto& node = m_nodeStack.back();
+
+    switch ( node.state )
     {
-    case JEL_STATE_OBJECT:
-        m_nodeStack.back().name = std::string( chs, len );
-        m_machine.ProcessEvent( JEL_EVENT_NAME );
+    case NODE_OBJECT:
+        node.name = std::string( chs, len );
+        node.state = NODE_VALUE;
         break;
 
-    case JEL_STATE_ARRAY:
-        m_nodeStack.back().arrayIndex ++;
-        m_machine.ProcessEvent( JEL_EVENT_SCALAR_VALUE );
+    case NODE_VALUE:
+        node.state = NODE_OBJECT;
         break;
 
-    case JEL_STATE_VALUE:
-        m_machine.ProcessEvent( JEL_EVENT_SCALAR_VALUE );
+    case NODE_ARRAY:
+        node.arrayIndex ++;
         break;
-
-    case JEL_STATE_ROOT:
-        break;  // This is an error condition?
 
     default:
         CARAMEL_NOT_REACHED();
@@ -527,34 +481,28 @@ void JsonErrorLocator::String( const Char* chs, Size len, Caramel::Bool )
 void JsonErrorLocator::StartObject()
 {
     Node node;
-    node.isArrayNotObject = false;
-
+    node.state = NODE_OBJECT;
     m_nodeStack.push_back( node );
-
-    m_machine.ProcessEvent( JEL_EVENT_START_OBJECT );
 }
 
 
 void JsonErrorLocator::EndObject( Size )
 {
-    m_machine.ProcessEvent( JEL_EVENT_END_OBJECT );
+    m_nodeStack.pop_back();
 }
 
 
 void JsonErrorLocator::StartArray()
 {
     Node node;
-    node.isArrayNotObject = true;
-
+    node.state = NODE_ARRAY;
     m_nodeStack.push_back( node );
-
-    m_machine.ProcessEvent( JEL_EVENT_START_ARRAY );
 }
 
 
 void JsonErrorLocator::EndArray( Size )
 {
-    m_machine.ProcessEvent( JEL_EVENT_END_ARRAY );
+    m_nodeStack.pop_back();
 }
 
 
@@ -562,35 +510,20 @@ void JsonErrorLocator::ScalarValue()
 {
     // Non-string scalar value.
 
-    if ( m_machine.GetCurrentStateId() == JEL_STATE_ARRAY )
+    auto& node = m_nodeStack.back();
+
+    switch ( node.state )
     {
-        m_nodeStack.back().arrayIndex ++;
-    }
+    case NODE_VALUE:
+        node.state = NODE_OBJECT;
+        break;
 
-    m_machine.ProcessEvent( JEL_EVENT_SCALAR_VALUE );    
-}
+    case NODE_ARRAY:
+        node.arrayIndex ++;
+        break;
 
-
-void JsonErrorLocator::PopStack()
-{
-    CARAMEL_ASSERT( ! m_nodeStack.empty() );
-
-    m_nodeStack.pop_back();
-
-    if ( m_nodeStack.empty() )
-    {
-        m_machine.PlanToTransit( JEL_STATE_ROOT );
-    }
-    else
-    {
-        if ( m_nodeStack.back().isArrayNotObject )
-        {
-            m_machine.PlanToTransit( JEL_STATE_ARRAY );
-        }
-        else
-        {
-            m_machine.PlanToTransit( JEL_STATE_OBJECT );
-        }
+    default:
+        CARAMEL_NOT_REACHED();
     }
 }
 
@@ -601,7 +534,7 @@ std::string JsonErrorLocator::GetPath() const
 
     for ( const Node& node : m_nodeStack )
     {
-        if ( node.isArrayNotObject )
+        if ( node.state == NODE_ARRAY )
         {
             path += Format( "[{0}]", node.arrayIndex );
         }
