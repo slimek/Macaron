@@ -110,9 +110,93 @@ TEST( JsonErrorLocatorValueInvalidTest )
         R"( [ "Cirno", { "type": not-valid-value } ] )",
         "[1].type"
     );
+
+    // Redundant Common in Array would cause "Value Invalid" error.
+    CHECK_VALUE_INVALID(
+        R"( [ "Alice", "Marisa", ] )",
+        "[2]"
+    );
 }
 
 
+TEST( JsonErrorLocatorObjectMissNameTest )
+{
+    #define CHECK_OBJECT_MISS_NAME( text, path ) \
+        CHECK_JSON_EL( kParseErrorObjectMissName, text, path )
+
+    CHECK_OBJECT_MISS_NAME(
+        R"( { 42 })",
+        "."
+    );
+
+    CHECK_OBJECT_MISS_NAME(
+        R"( { "id": 42, true )",
+        ".id"
+    );
+
+    CHECK_OBJECT_MISS_NAME(
+        R"( { "id": 42, { "name": "Marisa" }} )",
+        ".id"
+    );
+
+    // Redundant Comma in Object would cause "Object Miss Name" error.
+    CHECK_OBJECT_MISS_NAME(
+        R"( { "id": 42, } )",
+        ".id"
+    );
+}
+
+
+TEST( JsonErrorLocatorObjectMissColonTest )
+{
+    #define CHECK_OBJECT_MISS_COLON( text, path ) \
+        CHECK_JSON_EL( kParseErrorObjectMissColon, text, path )
+
+    CHECK_OBJECT_MISS_COLON(
+        R"( { "id" 42 } )",
+        ".id"
+    );
+
+    CHECK_OBJECT_MISS_COLON(
+        R"( { "id": 42, "player": { "name" "Marisa" }} )",
+        ".player.name"
+    );
+}
+
+
+TEST( JsonErrorLocatorObjectMissCommaOrBraceTest )
+{
+    #define CHECK_OBJECT_MISS_COMMA_OR_BRACE( text, path ) \
+        CHECK_JSON_EL( kParseErrorObjectMissCommaOrCurlyBracket, text, path )
+
+    CHECK_OBJECT_MISS_COMMA_OR_BRACE(
+        R"( { "id": 42 )",
+        ".id"
+    );
+
+    CHECK_OBJECT_MISS_COMMA_OR_BRACE(
+        R"( { "id": 42 "name": "Marisa" } )",
+        ".id"
+    );
+}
+
+
+TEST( JsonErrorLocatorObjectMissCommaOrBracketTest )
+{
+    #define CHECK_ARRAY_MISS_COMMA_OR_BRACKET( text, path ) \
+        CHECK_JSON_EL( kParseErrorArrayMissCommaOrSquareBracket, text, path )
+
+    CHECK_ARRAY_MISS_COMMA_OR_BRACKET(
+        R"( [ "Alice" )",
+        "[1]"
+    );
+
+    CHECK_ARRAY_MISS_COMMA_OR_BRACKET(
+        R"( [ "Alice" "Marisa" ] )",
+        "[1]"
+    );
+}
+    
 } // SUITE RapidJsonErrorLocatorSuite
 
 } // namespace RapidJson
