@@ -1,4 +1,4 @@
-// Macaron C++ Library Test - RapidJson Suite
+// Macaron C++ Library Test - RapidJson Value Suite
 
 #include "MacaronTestPch.h"
 
@@ -15,7 +15,7 @@ namespace Macaron
 namespace RapidJson
 {
 
-SUITE( RapidJsonSuite )
+SUITE( RapidJsonValueSuite )
 {
 
 TEST( RapidJsonFromFileTest )
@@ -201,7 +201,7 @@ TEST( RapidJsonPerformanceTest )
 
 }
 
-} // SUITE RapidJsonSuite
+} // SUITE RapidJsonValueSuite
 
 } // namespace RapidJson
 

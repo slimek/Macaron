@@ -95,7 +95,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="RapidJson\RapidJsonReaderSuite.cpp" />
-    <ClCompile Include="RapidJson\RapidJsonSuite.cpp" />
+    <ClCompile Include="RapidJson\RapidJsonValueSuite.cpp" />
     <ClCompile Include="RapidJson\RapidJsonErrorLocatorSuite.cpp" />
     <ClCompile Include="RunTest.cpp" />
   </ItemGroup>

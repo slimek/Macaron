@@ -42,9 +42,6 @@
     <ClCompile Include="LibCurl\LibCurlSuite.cpp">
       <Filter>2. Tests\LibCurl</Filter>
     </ClCompile>
-    <ClCompile Include="RapidJson\RapidJsonSuite.cpp">
-      <Filter>2. Tests\RapidJson</Filter>
-    </ClCompile>
     <ClCompile Include="CppRest\CppRestHttpClientSuite.cpp">
       <Filter>2. Tests\CppRest</Filter>
     </ClCompile>
@@ -52,6 +49,9 @@
       <Filter>2. Tests\RapidJson</Filter>
     </ClCompile>
     <ClCompile Include="RapidJson\RapidJsonErrorLocatorSuite.cpp">
+      <Filter>2. Tests\RapidJson</Filter>
+    </ClCompile>
+    <ClCompile Include="RapidJson\RapidJsonValueSuite.cpp">
       <Filter>2. Tests\RapidJson</Filter>
     </ClCompile>
   </ItemGroup>
