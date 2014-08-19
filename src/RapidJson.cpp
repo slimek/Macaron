@@ -334,7 +334,7 @@ Bool JsonValue::GetArray( const std::string& name, JsonArray& value ) const
 
     auto& jvalue = m_impl->At( name.c_str() );
 
-    value = JsonArray( std::make_shared< JsonValueImpl >( m_impl->m_document, jvalue ));
+    value = JsonArray( std::make_shared< JsonValueImpl >( m_impl->m_root, jvalue ));
     return true;
 }
 
@@ -374,21 +374,21 @@ std::string JsonValue::GetTag() const
 //
 
 JsonValueImpl::JsonValueImpl()
-    : m_document( std::make_shared< rapidjson::Document >() )
-    , m_value( *m_document )
+    : m_root( std::make_shared< rapidjson::Value >() )
+    , m_value( *m_root )
 {
 }
 
 
-JsonValueImpl::JsonValueImpl( std::shared_ptr< rapidjson::Document >&& doc )
-    : m_document( std::move( doc ))
-    , m_value( *m_document )
+JsonValueImpl::JsonValueImpl( std::shared_ptr< rapidjson::Value >&& root )
+    : m_root( std::move( root ))
+    , m_value( *m_root )
 {
 }
 
 
-JsonValueImpl::JsonValueImpl( std::shared_ptr< rapidjson::Document > doc, rapidjson::Value& value )
-    : m_document( doc )
+JsonValueImpl::JsonValueImpl( std::shared_ptr< rapidjson::Value > root, rapidjson::Value& value )
+    : m_root( root )
     , m_value( value )
 {
 }
@@ -412,7 +412,7 @@ Bool JsonValueImpl::HasMember( const Char* name ) const
 
 std::shared_ptr< JsonValueImpl > JsonValueImpl::GetValue( const Char* name )
 {
-    return std::make_shared< JsonValueImpl >( m_document, m_value[ name ] );
+    return std::make_shared< JsonValueImpl >( m_root, m_value[ name ] );
 }
 
 

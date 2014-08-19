@@ -29,8 +29,8 @@ class JsonValueImpl
 public:
 
     JsonValueImpl();    
-    explicit JsonValueImpl( std::shared_ptr< rapidjson::Document >&& doc );
-    JsonValueImpl( std::shared_ptr< rapidjson::Document > doc, rapidjson::Value& value );
+    explicit JsonValueImpl( std::shared_ptr< rapidjson::Value >&& root );
+    JsonValueImpl( std::shared_ptr< rapidjson::Value > root, rapidjson::Value& value );
 
 
     /// Properties ///
@@ -52,10 +52,10 @@ public:
 
 private:
 
-    std::shared_ptr< rapidjson::Document > m_document;
+    std::shared_ptr< rapidjson::Value > m_root;
     rapidjson::Value& m_value;
 
-    // REMARKS: m_value depends on m_document.
+    // REMARKS: m_value depends on m_root.
 
     std::string m_tag;  // For debugging information,
                         // usually is the path of this value.
