@@ -40,11 +40,14 @@ public:
 
     /// Children Accessors ///
 
+    Uint Size() const;
+
     Bool HasMember( const Char* name ) const;
 
     std::shared_ptr< JsonValueImpl > GetValue( const Char* name );
 
     const rapidjson::Value& At( const Char* name ) const;
+    rapidjson::Value& At( const Char* name );
 
 
 private:

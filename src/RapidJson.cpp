@@ -25,6 +25,7 @@ namespace RapidJson
 // Contents
 //
 //   JsonValue
+//   JsonArray
 //   JsonReader
 //   JsonErrorLocator
 //
@@ -261,7 +262,7 @@ JsonValue JsonValue::operator[]( const std::string& name ) const
 }
 
 
-Bool JsonValue::GetBoolValue( const std::string& name, Bool& value ) const
+Bool JsonValue::GetBool( const std::string& name, Bool& value ) const
 {
     if ( ! m_impl->HasMember( name.c_str() )) { return false; }
 
@@ -272,7 +273,7 @@ Bool JsonValue::GetBoolValue( const std::string& name, Bool& value ) const
 }
 
 
-Bool JsonValue::GetIntValue( const std::string& name, Int& value ) const
+Bool JsonValue::GetInt( const std::string& name, Int& value ) const
 {
     if ( ! m_impl->HasMember( name.c_str() )) { return false; }
 
@@ -283,7 +284,7 @@ Bool JsonValue::GetIntValue( const std::string& name, Int& value ) const
 }
 
 
-Bool JsonValue::GetUintValue( const std::string& name, Uint& value ) const
+Bool JsonValue::GetUint( const std::string& name, Uint& value ) const
 {
     if ( ! m_impl->HasMember( name.c_str() )) { return false; }
 
@@ -294,7 +295,7 @@ Bool JsonValue::GetUintValue( const std::string& name, Uint& value ) const
 }
 
 
-Bool JsonValue::GetFloatValue( const std::string& name, Float& value ) const
+Bool JsonValue::GetFloat( const std::string& name, Float& value ) const
 {
     if ( ! m_impl->HasMember( name.c_str() )) { return false; }
 
@@ -305,7 +306,7 @@ Bool JsonValue::GetFloatValue( const std::string& name, Float& value ) const
 }
 
 
-Bool JsonValue::GetDoubleValue( const std::string& name, Double& value ) const
+Bool JsonValue::GetDouble( const std::string& name, Double& value ) const
 {
     if ( ! m_impl->HasMember( name.c_str() )) { return false; }
 
@@ -316,7 +317,7 @@ Bool JsonValue::GetDoubleValue( const std::string& name, Double& value ) const
 }
 
 
-Bool JsonValue::GetStringValue( const std::string& name, std::string& value ) const
+Bool JsonValue::GetString( const std::string& name, std::string& value ) const
 {
     if ( ! m_impl->HasMember( name.c_str() )) { return false; }
 
@@ -324,6 +325,47 @@ Bool JsonValue::GetStringValue( const std::string& name, std::string& value ) co
 
     value = jvalue.GetString();
     return true;
+}
+
+
+Bool JsonValue::GetArray( const std::string& name, JsonArray& value ) const
+{
+    if ( ! m_impl->HasMember( name.c_str() )) { return false; }
+
+    auto& jvalue = m_impl->At( name.c_str() );
+
+    value = JsonArray( std::make_shared< JsonValueImpl >( m_impl->m_document, jvalue ));
+    return true;
+}
+
+
+boost::optional< std::string > JsonValue::GetString( const std::string& name ) const
+{
+    std::string value;
+    if ( this->GetString( name, value ))
+    {
+        return boost::optional< std::string >( value );
+    }
+    else
+    {
+        return boost::optional< std::string >();
+    }
+}
+
+
+//
+// Tag Management
+//
+
+void JsonValue::SetTag( const std::string& tag )
+{
+    CARAMEL_NOT_IMPLEMENTED();
+}
+
+
+std::string JsonValue::GetTag() const
+{
+    CARAMEL_NOT_IMPLEMENTED();
 }
 
 
@@ -356,6 +398,12 @@ JsonValueImpl::JsonValueImpl( std::shared_ptr< rapidjson::Document > doc, rapidj
 // Children Accessors
 //
 
+Uint JsonValueImpl::Size() const
+{
+    return static_cast< Uint >( m_value.Size() );
+}
+
+
 Bool JsonValueImpl::HasMember( const Char* name ) const
 {
     return m_value.HasMember( name );
@@ -371,6 +419,51 @@ std::shared_ptr< JsonValueImpl > JsonValueImpl::GetValue( const Char* name )
 const rapidjson::Value& JsonValueImpl::At( const Char* name ) const
 {
     return m_value[ name ];
+}
+
+
+rapidjson::Value& JsonValueImpl::At( const Char* name )
+{
+    return m_value[ name ];
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// JSON Array
+//
+
+JsonArray::JsonArray()
+{
+}
+
+
+JsonArray::JsonArray( std::shared_ptr< JsonValueImpl > impl )
+    : JsonValue( impl )
+{
+    CARAMEL_ASSERT( this->IsArray() );
+}
+
+
+JsonArray JsonArray::FromString( const std::string& text )
+{
+    CARAMEL_NOT_IMPLEMENTED();
+}
+
+
+//
+// Array Element Accessors
+//
+
+Uint JsonArray::Size() const
+{
+    return m_impl->Size();
+}
+
+
+const JsonValue& JsonArray::operator[]( Uint index ) const
+{
+    CARAMEL_NOT_IMPLEMENTED();
 }
 
 

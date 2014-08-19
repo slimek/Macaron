@@ -3,10 +3,6 @@
 #include "MacaronTestPch.h"
 
 #include <Macaron/RapidJson/JsonValue.h>
-#include <Macaron/JsonCpp/JsonValue.h>
-#include <Caramel/Chrono/TickClock.h>
-#include <Caramel/Io/InputFileStream.h>
-#include <Caramel/Io/TextStreamReader.h>
 
 
 namespace Macaron
@@ -74,13 +70,13 @@ TEST( RapidJsonNumberTest )
     CHECK( 0 == zero.AsDouble() );
     CHECK( "0" == zero.ToString() );
 
-    CHECK( true == json.GetIntValue( "zero", ivalue ));
+    CHECK( true == json.GetInt( "zero", ivalue ));
     CHECK( 0 == ivalue );
-    CHECK( true == json.GetUintValue( "zero", uvalue ));
+    CHECK( true == json.GetUint( "zero", uvalue ));
     CHECK( 0 == uvalue );
-    CHECK( true == json.GetFloatValue( "zero", fvalue ));
+    CHECK( true == json.GetFloat( "zero", fvalue ));
     CHECK( 0.0f == fvalue );
-    CHECK( true == json.GetDoubleValue( "zero", dvalue ));
+    CHECK( true == json.GetDouble( "zero", dvalue ));
     CHECK( 0.0 == dvalue );
 
 
@@ -97,13 +93,13 @@ TEST( RapidJsonNumberTest )
     CHECK( INT32_MAX == int32Max.AsDouble() );
     CHECK( "2147483647" == int32Max.ToString() );
 
-    CHECK( true == json.GetIntValue( "int32Max", ivalue ));
+    CHECK( true == json.GetInt( "int32Max", ivalue ));
     CHECK( 2147483647 == ivalue );
-    CHECK( true == json.GetUintValue( "int32Max", uvalue ));
+    CHECK( true == json.GetUint( "int32Max", uvalue ));
     CHECK( 2147483647 == uvalue );
-    CHECK( true == json.GetFloatValue( "int32Max", fvalue ));
+    CHECK( true == json.GetFloat( "int32Max", fvalue ));
     CHECK( 2147483647 == fvalue );
-    CHECK( true == json.GetDoubleValue( "int32Max", dvalue ));
+    CHECK( true == json.GetDouble( "int32Max", dvalue ));
     CHECK( 2147483647 == dvalue );
 
 
@@ -159,47 +155,20 @@ TEST( RapidJsonGetValueTest )
     CHECK( 1 == id.AsInt() );
 
     Int ivalue = 0;
-    CHECK( true == obj.GetIntValue( "Id", ivalue ));
+    CHECK( true == obj.GetInt( "Id", ivalue ));
     CHECK( 1 == ivalue );
 
     Uint uvalue = 0;
-    CHECK( true == obj.GetUintValue( "Id", uvalue ));
+    CHECK( true == obj.GetUint( "Id", uvalue ));
     CHECK( 1 == uvalue );
 }
 
 
-TEST( RapidJsonPerformanceTest )
+TEST( RapidJsonArrayTest )
 {
-    const std::string fileName = "RapidJson\\enemy-models.json";
-    TickWatch watch;
-
-    /// From File ///
-
-    auto fromFile = JsonValue::FromFile( fileName );
-
-    cout << "RapidJson FromFile : " << watch.Slice() << endl;
-
-
-    /// From String ///
-
-    InputFileStream file( fileName );
-    TextStreamReader reader( file );
-    const std::string jsonStr = reader.ReadAll();
-
-    cout << "(Read String) : " << watch.Slice() << endl;
-
-    auto fromString = JsonValue::FromString( jsonStr );
-
-    cout << "RapidJson FromString : " << watch.Slice() << endl;
-
-
-    /// Compare to JsonCpp ///
-
-    auto compare = JsonCpp::JsonValue::FromFile( fileName );
-
-    cout << "JsonCpp : " << watch.Slice() << endl;
-
+    //auto ary1 = JsonArray::FromString( "[ 0, 1, 2 ]" );
 }
+
 
 } // SUITE RapidJsonValueSuite
 

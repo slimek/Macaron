@@ -6,6 +6,7 @@
 
 #include <Macaron/Setup/MacaronDefs.h>
 #include <Caramel/String/Utf8String.h>
+#include <boost/optional.hpp>
 
 
 namespace Macaron
@@ -75,16 +76,31 @@ public:
     // - Returns false if the value doesn't exist.
     //   Throws if the value can't be converted to the type.
 
-    Bool GetBoolValue  ( const std::string& name, Bool&   value ) const;
-    Bool GetIntValue   ( const std::string& name, Int&    value ) const;
-    Bool GetUintValue  ( const std::string& name, Uint&   value ) const;
-    Bool GetFloatValue ( const std::string& name, Float&  value ) const;
-    Bool GetDoubleValue( const std::string& name, Double& value ) const;
+    Bool GetBool  ( const std::string& name, Bool&   value ) const;
+    Bool GetInt   ( const std::string& name, Int&    value ) const;
+    Bool GetUint  ( const std::string& name, Uint&   value ) const;
+    Bool GetFloat ( const std::string& name, Float&  value ) const;
+    Bool GetDouble( const std::string& name, Double& value ) const;
+    
+    Bool GetString( const std::string& name, std::string& value ) const;
 
-    Bool GetStringValue( const std::string& name, std::string& value ) const;
+    Bool GetValue( const std::string& name, JsonValue& value ) const;
+    Bool GetArray( const std::string& name, JsonArray& value ) const;
 
 
-private:
+    // Get Functions - Return optionals
+
+    boost::optional< std::string > GetString( const std::string& name ) const;
+
+
+    // Tag
+    // - For tracing and error messages.
+
+    void SetTag( const std::string& tag );
+    std::string GetTag() const;
+
+
+protected:
 
     explicit JsonValue( std::shared_ptr< JsonValueImpl > impl );
 
@@ -99,6 +115,26 @@ private:
 
 class JsonArray : public JsonValue
 {
+    friend class JsonValue;
+
+public:
+
+    JsonArray();
+
+    // Throws if 'text' is not a JSON array, even if it is a valid JSON.
+    static JsonArray FromString( const std::string& text );
+
+
+    /// Array Elemenet Accessors ///
+
+    Uint Size() const;
+
+    const JsonValue& operator[]( Uint index ) const;
+
+
+private:
+
+    explicit JsonArray( std::shared_ptr< JsonValueImpl > impl );
 };
 
 

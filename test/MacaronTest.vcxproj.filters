@@ -60,6 +60,9 @@
     <ClCompile Include="Sandbox\SandboxSuite.cpp">
       <Filter>2. Tests\Sandbox</Filter>
     </ClCompile>
+    <ClCompile Include="RapidJson\RapidJsonPerformanceSuite.cpp">
+      <Filter>2. Tests\RapidJson</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MacaronTestPch.h">
