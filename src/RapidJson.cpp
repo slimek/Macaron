@@ -87,18 +87,15 @@ JsonValue JsonValue::FromFile( const Utf8String& fileName )
 
 JsonValue JsonValue::FromString( const std::string& text )
 {
-    rapidjson::StringStream stream( text.c_str() );
+    JsonReader reader;
+    JsonValue value;
 
-    auto doc = std::make_shared< rapidjson::Document >();
-    doc->ParseStream( stream );
-
-    if ( doc->HasParseError() )
+    if ( ! reader.Parse( text, value ))
     {
-        const auto error = doc->GetParseError();
-        CARAMEL_THROW( "Parse JSON string failed: %d", error );
+        CARAMEL_THROW( "Parse JSON string failed: %s", reader.GetErrorMessage() );
     }
 
-    return JsonValue( std::make_shared< JsonValueImpl >( std::move( doc )));
+    return value;
 }
 
 
@@ -478,16 +475,17 @@ Bool JsonReader::Parse( const std::string& text, JsonValue& value )
 {
     rapidjson::StringStream stream( text.c_str() );
 
-    rapidjson::Document doc;
-    doc.ParseStream( stream );
+    auto doc = std::make_shared< rapidjson::Document >();
+    doc->ParseStream( stream );
 
-    if ( doc.HasParseError() )
+    if ( doc->HasParseError() )
     {
-        auto errorCode = doc.GetParseError();
+        auto errorCode = doc->GetParseError();
         m_errorMessage = TranslateParseErrorCode( errorCode );
         return false;
     }
 
+    value.m_impl.reset( new JsonValueImpl( std::move( doc )));
     return true;
 }
 

@@ -102,6 +102,8 @@ public:
 
 protected:
 
+    friend class JsonReader;
+
     explicit JsonValue( std::shared_ptr< JsonValueImpl > impl );
 
     std::shared_ptr< JsonValueImpl > m_impl;
