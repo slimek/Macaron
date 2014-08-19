@@ -259,6 +259,12 @@ JsonValue JsonValue::operator[]( const std::string& name ) const
 }
 
 
+JsonValue JsonValue::operator[]( const Char* name ) const
+{
+    return JsonValue( m_impl->GetValue( name ));
+}
+
+
 Bool JsonValue::GetBool( const std::string& name, Bool& value ) const
 {
     if ( ! m_impl->HasMember( name.c_str() )) { return false; }

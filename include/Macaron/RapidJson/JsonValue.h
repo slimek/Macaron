@@ -70,6 +70,7 @@ public:
     Bool HasValue( const Char* name ) const;
 
     JsonValue operator[] ( const std::string& name ) const;
+    JsonValue operator[] ( const Char* name ) const;
 
 
     // Get Functions
