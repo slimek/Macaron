@@ -28,6 +28,9 @@
     <Filter Include="2. Tests\CppRest">
       <UniqueIdentifier>{c1b62d4d-7985-4efd-8bee-4c692b120418}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Tests\Sandbox">
+      <UniqueIdentifier>{11b9fab4-f0ef-41c3-9ca2-8bc0a2173040}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RunTest.cpp">
@@ -53,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="RapidJson\RapidJsonValueSuite.cpp">
       <Filter>2. Tests\RapidJson</Filter>
+    </ClCompile>
+    <ClCompile Include="Sandbox\SandboxSuite.cpp">
+      <Filter>2. Tests\Sandbox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

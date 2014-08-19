@@ -98,6 +98,7 @@
     <ClCompile Include="RapidJson\RapidJsonValueSuite.cpp" />
     <ClCompile Include="RapidJson\RapidJsonErrorLocatorSuite.cpp" />
     <ClCompile Include="RunTest.cpp" />
+    <ClCompile Include="Sandbox\SandboxSuite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MacaronTestPch.h" />
