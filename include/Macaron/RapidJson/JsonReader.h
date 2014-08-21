@@ -24,6 +24,8 @@ class JsonReader
 public:
 
     Bool Parse( const std::string& text, JsonValue& value );
+    Bool ParseFromFile( const std::string& text, JsonValue& value );
+
 
     // If you are sure it is an array
     Bool Parse( const std::string& text, JsonArray& value );

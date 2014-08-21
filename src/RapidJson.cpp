@@ -53,35 +53,15 @@ JsonValue::JsonValue( std::shared_ptr< JsonValueImpl > impl )
 
 JsonValue JsonValue::FromFile( const std::string& fileName )
 {
-    CARAMEL_CHECK_UTF8_ARGUMENT( u8FileName, fileName );
-    
-    return FromFile( u8FileName );
-}
+    JsonReader reader;
+    JsonValue value;
 
-
-JsonValue JsonValue::FromFile( const Utf8String& fileName )
-{
-    if ( ! FileInfo( fileName ).Exists() )
+    if ( ! reader.ParseFromFile( fileName, value ))
     {
-        CARAMEL_THROW( "File not found: %s", fileName );
+        CARAMEL_THROW( "Parse JSON file %s failed: %s", fileName, reader.GetErrorMessage() );
     }
 
-    const Uint BUFFER_SIZE = 1024;
-    Char buffer[ BUFFER_SIZE ] = { 0 };
-
-    InputFileStream file( fileName );
-    rapidjson::FileReadStream stream( file.GetFilePointer(), &buffer[0], BUFFER_SIZE );
-
-    auto doc = std::make_shared< rapidjson::Document >();
-    doc->ParseStream( stream );
-
-    if ( doc->HasParseError() )
-    {
-        const auto error = doc->GetParseError();
-        CARAMEL_THROW( "Parse JSON file %s failed: %d", fileName, error );
-    }
-
-    return JsonValue( std::make_shared< JsonValueImpl >( std::move( doc )));
+    return value;
 }
 
 
@@ -362,13 +342,13 @@ boost::optional< std::string > JsonValue::GetString( const std::string& name ) c
 
 void JsonValue::SetTag( const std::string& tag )
 {
-    CARAMEL_NOT_IMPLEMENTED();
+    m_impl->m_tag = tag;
 }
 
 
 std::string JsonValue::GetTag() const
 {
-    CARAMEL_NOT_IMPLEMENTED();
+    return m_impl->m_tag;
 }
 
 
@@ -489,6 +469,33 @@ Bool JsonReader::Parse( const std::string& text, JsonValue& value )
         auto errorCode = doc->GetParseError();
         m_errorMessage = TranslateParseErrorCode( errorCode );
         return false;
+    }
+
+    value.m_impl.reset( new JsonValueImpl( std::move( doc )));
+    return true;
+}
+
+
+Bool JsonReader::ParseFromFile( const std::string& fileName, JsonValue& value )
+{
+    if ( ! FileInfo( fileName ).Exists() )
+    {
+        CARAMEL_THROW( "File not found: %s", fileName );
+    }
+
+    const Uint BUFFER_SIZE = 1024;
+    Char buffer[ BUFFER_SIZE ] = { 0 };
+
+    InputFileStream file( fileName );
+    rapidjson::FileReadStream stream( file.GetFilePointer(), &buffer[0], BUFFER_SIZE );
+
+    auto doc = std::make_shared< rapidjson::Document >();
+    doc->ParseStream( stream );
+
+    if ( doc->HasParseError() )
+    {
+        const auto error = doc->GetParseError();
+        CARAMEL_THROW( "Parse JSON file %s failed: %d", fileName, error );
     }
 
     value.m_impl.reset( new JsonValueImpl( std::move( doc )));
