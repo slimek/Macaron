@@ -57,6 +57,8 @@ public:
 
     std::string AsString() const;
 
+    JsonArray AsArray() const;
+
 
     /// Serialize to a string representing the JSON ///
 
@@ -93,6 +95,8 @@ public:
     boost::optional< std::string > GetString( const std::string& name ) const;
 
 
+    /// Extention Properties ///
+
     // Tag
     // - For tracing and error messages.
 
@@ -103,6 +107,7 @@ public:
 protected:
 
     friend class JsonReader;
+    friend class JsonArray;
 
     explicit JsonValue( std::shared_ptr< JsonValueImpl > impl );
 
@@ -131,7 +136,7 @@ public:
 
     Uint Size() const;
 
-    const JsonValue& operator[]( Uint index ) const;
+    JsonValue operator[]( Uint index ) const;
 
 
 private:

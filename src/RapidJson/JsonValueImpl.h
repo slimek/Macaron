@@ -25,6 +25,7 @@ typedef rapidjson::Type ValueType;
 class JsonValueImpl
 {
     friend class JsonValue;
+    friend class JsonArray;
 
 public:
 
@@ -38,16 +39,21 @@ public:
     rapidjson::Type GetType() const;
 
 
-    /// Children Accessors ///
-
-    Uint Size() const;
+    /// Object Children Accessors ///
 
     Bool HasMember( const Char* name ) const;
 
-    std::shared_ptr< JsonValueImpl > GetValue( const Char* name );
+    std::shared_ptr< JsonValueImpl > GetValue( const Char* name ) const;
 
     const rapidjson::Value& At( const Char* name ) const;
     rapidjson::Value& At( const Char* name );
+
+
+    /// Array Elements Accessors ///
+
+    Uint Size() const;
+
+    std::shared_ptr< JsonValueImpl > GetValueByIndex( Uint index ) const;
 
 
 private:

@@ -168,6 +168,14 @@ std::string JsonValue::AsString() const
     return m_impl->m_value.GetString();
 }
 
+JsonArray JsonValue::AsArray() const
+{
+    CARAMEL_CHECK_MSG( this->IsArray(),
+        "JsonValue %s can't convert to Array", m_impl->m_tag );
+
+    return JsonArray( m_impl );
+}
+
 
 //
 // Serialization
@@ -393,21 +401,33 @@ Bool JsonValueImpl::HasMember( const Char* name ) const
 }
 
 
-std::shared_ptr< JsonValueImpl > JsonValueImpl::GetValue( const Char* name )
+std::shared_ptr< JsonValueImpl > JsonValueImpl::GetValue( const Char* name ) const
 {
+    CARAMEL_ASSERT( m_value.IsObject() );
     return std::make_shared< JsonValueImpl >( m_root, m_value[ name ] );
 }
 
 
 const rapidjson::Value& JsonValueImpl::At( const Char* name ) const
 {
+    CARAMEL_ASSERT( name != nullptr );
+    CARAMEL_ASSERT( m_value.IsObject() );
     return m_value[ name ];
 }
 
 
 rapidjson::Value& JsonValueImpl::At( const Char* name )
 {
+    CARAMEL_ASSERT( name != nullptr );
+    CARAMEL_ASSERT( m_value.IsObject() );
     return m_value[ name ];
+}
+
+
+std::shared_ptr< JsonValueImpl > JsonValueImpl::GetValueByIndex( Uint index ) const
+{
+    CARAMEL_ASSERT( m_value.IsArray() );
+    return std::make_shared< JsonValueImpl >( m_root, m_value[ index ] );
 }
 
 
@@ -430,7 +450,9 @@ JsonArray::JsonArray( std::shared_ptr< JsonValueImpl > impl )
 
 JsonArray JsonArray::FromString( const std::string& text )
 {
-    CARAMEL_NOT_IMPLEMENTED();
+    auto value = JsonValue::FromString( text );
+    CARAMEL_ASSERT( value.IsArray() );
+    return value.AsArray();
 }
 
 
@@ -444,9 +466,10 @@ Uint JsonArray::Size() const
 }
 
 
-const JsonValue& JsonArray::operator[]( Uint index ) const
+JsonValue JsonArray::operator[]( Uint index ) const
 {
-    CARAMEL_NOT_IMPLEMENTED();
+    CARAMEL_ASSERT( m_impl->Size() > index );
+    return JsonValue( m_impl->GetValueByIndex( index ));
 }
 
 

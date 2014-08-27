@@ -25,6 +25,8 @@ TEST( RapidJsonFromFileTest )
     CHECK( true == normalObject.IsObject() );
 
     auto emptyArray = JsonValue::FromFile( "Data\\empty-array.json" );
+
+    CHECK( true == emptyArray.IsArray() );
 }
 
 
@@ -166,7 +168,12 @@ TEST( RapidJsonGetValueTest )
 
 TEST( RapidJsonArrayTest )
 {
-    //auto ary1 = JsonArray::FromString( "[ 0, 1, 2 ]" );
+    auto ary1 = JsonArray::FromString( "[ 0, 1, 2 ]" );
+
+    CHECK( 3 == ary1.Size() );
+    CHECK( 0 == ary1[0].AsInt() );
+    CHECK( 1 == ary1[1].AsUint() );
+    CHECK( 2 == ary1[2].AsDouble() );
 }
 
 
