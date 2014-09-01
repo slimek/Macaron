@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\CppRest.cpp" />
     <ClCompile Include="..\src\JsonCpp.cpp" />
     <ClCompile Include="..\src\LibCurl.cpp" />
     <ClCompile Include="..\src\MacaronPch.cpp">
@@ -21,6 +22,8 @@
     <ClCompile Include="..\src\TinyXml2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Macaron\CppRest\HttpRequest.h" />
+    <ClInclude Include="..\include\Macaron\CppRest\HttpResponse.h" />
     <ClInclude Include="..\include\Macaron\JsonCpp\JsonValue.h" />
     <ClInclude Include="..\include\Macaron\LibCurl\HttpClient.h" />
     <ClInclude Include="..\include\Macaron\LibCurl\HttpResponse.h" />
@@ -30,6 +33,8 @@
     <ClInclude Include="..\include\Macaron\Setup\MacaronDefs.h" />
     <ClInclude Include="..\include\Macaron\TinyXml2\XmlDocument.h" />
     <ClInclude Include="..\include\Macaron\TinyXml2\XmlElement.h" />
+    <ClInclude Include="..\src\CppRest\HttpResponseImpl.h" />
+    <ClInclude Include="..\src\CppRest\Utility.h" />
     <ClInclude Include="..\src\JsonCpp\JsonValueImpl.h" />
     <ClInclude Include="..\src\LibCurl\HttpClientImpl.h" />
     <ClInclude Include="..\src\LibCurl\HttpResponseImpl.h" />

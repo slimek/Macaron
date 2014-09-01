@@ -87,7 +87,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CppRest\CppRestHttpClientSuite.cpp" />
+    <ClCompile Include="CppRest\CppRestHttpRequestSuite.cpp" />
     <ClCompile Include="JsonCpp\JsonCppSuite.cpp" />
     <ClCompile Include="LibCurl\LibCurlSuite.cpp" />
     <ClCompile Include="MacaronTestPchCreator.cpp">
