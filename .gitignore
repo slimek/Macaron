@@ -1,8 +1,18 @@
+# Common Generated Files
 obj/
 lib/
+
+# Visual Studio Generated Files
+ipch/
+[Dd]ebug*/
+[Rr]elease*/
+*.opensdf
 *.sdf
 *.suo
-bin/
 *.user
-ipch/
-*.opensdf
+
+# Eclipse + NDK Generated Files
+bin/
+gen/
+libs/
+.settings/
