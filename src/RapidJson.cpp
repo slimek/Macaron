@@ -319,6 +319,15 @@ Bool JsonValue::GetString( const std::string& name, std::string& value ) const
 }
 
 
+Bool JsonValue::GetValue( const std::string& name, JsonValue& value ) const
+{
+    if ( ! m_impl->HasMember( name.c_str() )) { return false; }
+
+    value = JsonValue( m_impl->GetValue( name.c_str() ));
+    return true;
+}
+
+
 Bool JsonValue::GetArray( const std::string& name, JsonArray& value ) const
 {
     if ( ! m_impl->HasMember( name.c_str() )) { return false; }

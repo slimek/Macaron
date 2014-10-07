@@ -163,6 +163,15 @@ TEST( RapidJsonGetValueTest )
     Uint uvalue = 0;
     CHECK( true == obj.GetUint( "Id", uvalue ));
     CHECK( 1 == uvalue );
+
+    JsonValue jvalue;
+    CHECK( true == obj.GetValue( "Id", jvalue ));
+    CHECK( jvalue.IsInt() );
+    CHECK( 1 == jvalue.AsInt() );
+
+    CHECK( true == obj.GetValue( "Name", jvalue ));
+    CHECK( jvalue.IsString() );
+    CHECK( "Alice" == jvalue.AsString() );
 }
 
 
