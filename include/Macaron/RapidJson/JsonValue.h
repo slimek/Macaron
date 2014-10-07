@@ -30,9 +30,12 @@ public:
 
     JsonValue();
 
-    static JsonValue FromFile( const std::string& fileName );
+    /// Parsing ///
 
+    static JsonValue FromFile  ( const std::string& filePath );
     static JsonValue FromString( const std::string& text );
+
+    // NOTES: If you need to return false when parsing failed, use JsonReader class.
 
 
     /// Properties ///
