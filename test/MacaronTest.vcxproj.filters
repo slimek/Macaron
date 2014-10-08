@@ -97,5 +97,8 @@
     <None Include="Data\empty-array.json">
       <Filter>2. Tests\Data</Filter>
     </None>
+    <None Include="RapidJson\normal-array.json">
+      <Filter>2. Tests\RapidJson</Filter>
+    </None>
   </ItemGroup>
 </Project>

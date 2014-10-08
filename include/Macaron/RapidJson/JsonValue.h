@@ -6,7 +6,9 @@
 
 #include <Macaron/Setup/MacaronDefs.h>
 #include <Caramel/String/Utf8String.h>
+#include <boost/operators.hpp>
 #include <boost/optional.hpp>
+#include <iterator>
 
 
 namespace Macaron
@@ -29,6 +31,7 @@ class JsonValue
 public:
 
     JsonValue();
+    explicit JsonValue( std::shared_ptr< JsonValueImpl > impl );
 
     /// Parsing ///
 
@@ -112,8 +115,6 @@ protected:
     friend class JsonReader;
     friend class JsonArray;
 
-    explicit JsonValue( std::shared_ptr< JsonValueImpl > impl );
-
     std::shared_ptr< JsonValueImpl > m_impl;
 };
 
@@ -123,6 +124,8 @@ protected:
 // JSON Array
 //
 
+class JsonArrayConstIterator;
+
 class JsonArray : public JsonValue
 {
     friend class JsonValue;
@@ -130,6 +133,9 @@ class JsonArray : public JsonValue
 public:
 
     JsonArray();
+
+    // Throws if the file is not a JSON array, even if it is a valid JSON.
+    static JsonArray FromFile( const std::string& filePath );
 
     // Throws if 'text' is not a JSON array, even if it is a valid JSON.
     static JsonArray FromString( const std::string& text );
@@ -142,10 +148,99 @@ public:
     JsonValue operator[]( Uint index ) const;
 
 
+    /// Array Iterator Accessors ///
+
+    JsonArrayConstIterator Begin() const;
+    JsonArrayConstIterator End()   const;
+
+    
+    /// STL Compatible ///
+
+    typedef JsonArrayConstIterator const_iterator;
+
+    const_iterator begin() const;
+    const_iterator end()   const;
+
+
 private:
 
     explicit JsonArray( std::shared_ptr< JsonValueImpl > impl );
 };
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// JSON Array Const Iterator
+//
+
+class JsonArrayConstIterator
+    : public std::iterator< std::forward_iterator_tag, JsonValue >
+    , public boost::equality_comparable< JsonArrayConstIterator >
+{
+    friend class JsonArray;
+    class Impl;
+
+public:
+
+    /// Operators ///
+
+    JsonArrayConstIterator& operator++();
+
+    Bool operator==( const JsonArrayConstIterator& other ) const;
+
+    std::unique_ptr< const JsonValue > operator->() const;
+    JsonValue operator*() const;
+
+
+    /// Fetchers ///
+
+    Bool  TakeBool();
+    Int   TakeInt();
+    Uint  TakeUint();
+    Float TakeFloat();
+
+    std::string TakeString();
+
+
+private:
+
+    explicit JsonArrayConstIterator( std::shared_ptr< Impl > impl );
+
+    std::shared_ptr< Impl > m_impl;
+};
+
+
+//class JsonArrayFetcher
+//{
+//public:
+//
+//    explicit JsonArrayFetcher( const JsonArray& jarray );
+//
+//
+//    /// Properties ///
+//
+//    Bool IsEmpty() const;
+//
+//
+//    /// Implicit Fetchings ///
+//
+//    operator Bool()  { return this->TakeBool(); }
+//    operator Int()   { return this->TakeInt(); }
+//    operator Uint()  { return this->TakeUint(); }
+//    operator Float() { return this->TakeFloat(); }
+//
+//    operator std::string() { return this->TakeString(); }
+//
+//
+//    /// Explicit Fetchings ///
+//
+//    Bool  TakeBool();
+//    Int   TakeInt();
+//    Uint  TakeUint();
+//    Float TakeFloat();
+//
+//    std::string TakeString();
+//};
 
 
 ///////////////////////////////////////////////////////////////////////////////

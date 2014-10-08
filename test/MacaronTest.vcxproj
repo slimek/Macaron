@@ -113,6 +113,7 @@
     <None Include="JsonCpp\test3.json" />
     <None Include="JsonCpp\test4.json" />
     <None Include="RapidJson\enemy-models.json" />
+    <None Include="RapidJson\normal-array.json" />
     <None Include="RapidJson\normal-object.json" />
   </ItemGroup>
   <ItemGroup>

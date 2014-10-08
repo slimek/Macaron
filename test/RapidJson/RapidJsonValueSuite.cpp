@@ -183,6 +183,34 @@ TEST( RapidJsonArrayTest )
     CHECK( 0 == ary1[0].AsInt() );
     CHECK( 1 == ary1[1].AsUint() );
     CHECK( 2 == ary1[2].AsDouble() );
+
+    Int sum = 0;
+    auto iter1 = ary1.Begin();
+    for ( ; iter1 != ary1.End(); ++ iter1 )
+    {
+        sum += iter1->AsInt();
+    }
+    CHECK( 3 == sum );
+
+    
+    /// C++11 Ranged For ///
+
+    sum = 0;
+    for ( auto jvalue : ary1 )
+    {
+        sum += jvalue.AsInt();
+    }
+    CHECK( 3 == sum );
+
+
+    auto ary2 = JsonArray::FromFile( "RapidJson\\normal-array.json" );
+    auto iter2 = ary2.Begin();
+
+    CHECK( "position" == iter2.TakeString() );
+    CHECK( 42 == iter2.TakeInt() );
+    CHECK( 51 == iter2.TakeUint() );
+    CHECK( "scale" == iter2.TakeString() );
+    CHECK( 0.5f == iter2.TakeFloat() );
 }
 
 

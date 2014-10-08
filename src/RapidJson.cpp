@@ -7,6 +7,7 @@
 #include <Macaron/RapidJson/JsonErrorLocator.h>
 #include <Caramel/FileSystem/FileInfo.h>
 #include <Caramel/Io/InputFileStream.h>
+#include <Caramel/Memory/UniquePtrUtils.h>
 #include <Caramel/String/Algorithm.h>
 #include <Caramel/String/Format.h>
 #include <Caramel/String/ToString.h>
@@ -26,6 +27,7 @@ namespace RapidJson
 //
 //   JsonValue
 //   JsonArray
+//   JsonArrayConstIterator
 //   JsonReader
 //   JsonErrorLocator
 //
@@ -440,6 +442,18 @@ std::shared_ptr< JsonValueImpl > JsonValueImpl::GetValueByIndex( Uint index ) co
 }
 
 
+rapidjson::Value::ValueIterator JsonValueImpl::Begin() const
+{
+    return m_value.Begin();
+}
+
+
+rapidjson::Value::ValueIterator JsonValueImpl::End() const
+{
+    return m_value.End();
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // JSON Array
@@ -457,10 +471,24 @@ JsonArray::JsonArray( std::shared_ptr< JsonValueImpl > impl )
 }
 
 
+JsonArray JsonArray::FromFile( const std::string& filePath )
+{
+    auto value = JsonValue::FromFile( filePath );
+    if ( ! value.IsArray() )
+    {
+        CARAMEL_THROW( "The file \"%s\" is not a JSON array", filePath );
+    }
+    return value.AsArray();
+}
+
+
 JsonArray JsonArray::FromString( const std::string& text )
 {
     auto value = JsonValue::FromString( text );
-    CARAMEL_ASSERT( value.IsArray() );
+    if ( ! value.IsArray() )
+    {
+        CARAMEL_THROW( "The text is not a JSON array" );
+    }
     return value.AsArray();
 }
 
@@ -479,6 +507,116 @@ JsonValue JsonArray::operator[]( Uint index ) const
 {
     CARAMEL_ASSERT( m_impl->Size() > index );
     return JsonValue( m_impl->GetValueByIndex( index ));
+}
+
+
+//
+// Iterator Accessors
+//
+
+JsonArrayConstIterator JsonArray::Begin() const
+{
+    return JsonArrayConstIterator(
+        std::make_shared< JsonArrayConstIterator::Impl >( m_impl->m_root, m_impl->Begin() ));
+}
+
+
+JsonArrayConstIterator JsonArray::End() const
+{
+    return JsonArrayConstIterator(
+        std::make_shared< JsonArrayConstIterator::Impl >( m_impl->m_root, m_impl->End() ));
+}
+
+
+JsonArrayConstIterator JsonArray::begin() const { return this->Begin(); }
+JsonArrayConstIterator JsonArray::end()   const { return this->End(); }
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// JSON Array Const Iterator
+//
+
+JsonArrayConstIterator::JsonArrayConstIterator( std::shared_ptr< Impl > impl )
+    : m_impl( impl )
+{
+}
+
+
+//
+// Operators
+//
+
+JsonArrayConstIterator& JsonArrayConstIterator::operator++()
+{
+    ++ m_impl->m_iter;
+    return *this;
+}
+
+
+Bool JsonArrayConstIterator::operator==( const JsonArrayConstIterator& other ) const
+{
+    return m_impl->m_iter == other.m_impl->m_iter;
+}
+
+
+std::unique_ptr< const JsonValue > JsonArrayConstIterator::operator->() const
+{
+    return MakeUnique< JsonValue >( std::make_shared< JsonValueImpl >( m_impl->m_root, *m_impl->m_iter ));
+}
+
+
+JsonValue JsonArrayConstIterator::operator*() const
+{
+    return JsonValue( std::make_shared< JsonValueImpl >( m_impl->m_root, *m_impl->m_iter ));
+}
+
+
+//
+// Fetchers
+//
+
+Int JsonArrayConstIterator::TakeInt()
+{
+    const Int value = m_impl->m_iter->GetInt();
+    ++ m_impl->m_iter;
+    return value;
+}
+
+
+Uint JsonArrayConstIterator::TakeUint()
+{
+    const Uint value = m_impl->m_iter->GetUint();
+    ++ m_impl->m_iter;
+    return value;
+}
+
+
+Float JsonArrayConstIterator::TakeFloat()
+{
+    const Float value = static_cast< Float >( m_impl->m_iter->GetDouble() );
+    ++ m_impl->m_iter;
+    return value;
+}
+
+
+std::string JsonArrayConstIterator::TakeString()
+{
+    const std::string value = m_impl->m_iter->GetString();
+    ++ m_impl->m_iter;
+    return value;
+}
+
+
+//
+// Implementation
+//
+
+JsonArrayConstIterator::Impl::Impl(
+    std::shared_ptr< rapidjson::Value > root, rapidjson::Value::ValueIterator iter )
+    : m_root( root )
+    , m_iter( iter )
+{
 }
 
 

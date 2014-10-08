@@ -55,6 +55,9 @@ public:
 
     std::shared_ptr< JsonValueImpl > GetValueByIndex( Uint index ) const;
 
+    rapidjson::Value::ValueIterator Begin() const;
+    rapidjson::Value::ValueIterator End()   const;
+
 
 private:
 
@@ -65,6 +68,26 @@ private:
 
     std::string m_tag;  // For debugging information,
                         // usually is the path of this value.
+};
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// JSON Array Const Iterator
+//
+
+class JsonArrayConstIterator::Impl
+{
+    friend class JsonArrayConstIterator;
+
+public:
+
+    Impl( std::shared_ptr< rapidjson::Value > root, rapidjson::Value::ValueIterator iter );
+
+private:
+
+    std::shared_ptr< rapidjson::Value > m_root;
+    rapidjson::Value::ValueIterator m_iter { nullptr };
 };
 
 
