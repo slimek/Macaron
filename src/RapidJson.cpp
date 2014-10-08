@@ -576,6 +576,14 @@ JsonValue JsonArrayConstIterator::operator*() const
 // Fetchers
 //
 
+Bool JsonArrayConstIterator::TakeBool()
+{
+    const Bool value = m_impl->m_iter->GetBool();
+    ++ m_impl->m_iter;
+    return value;
+}
+
+
 Int JsonArrayConstIterator::TakeInt()
 {
     const Int value = m_impl->m_iter->GetInt();

@@ -210,39 +210,6 @@ private:
 };
 
 
-//class JsonArrayFetcher
-//{
-//public:
-//
-//    explicit JsonArrayFetcher( const JsonArray& jarray );
-//
-//
-//    /// Properties ///
-//
-//    Bool IsEmpty() const;
-//
-//
-//    /// Implicit Fetchings ///
-//
-//    operator Bool()  { return this->TakeBool(); }
-//    operator Int()   { return this->TakeInt(); }
-//    operator Uint()  { return this->TakeUint(); }
-//    operator Float() { return this->TakeFloat(); }
-//
-//    operator std::string() { return this->TakeString(); }
-//
-//
-//    /// Explicit Fetchings ///
-//
-//    Bool  TakeBool();
-//    Int   TakeInt();
-//    Uint  TakeUint();
-//    Float TakeFloat();
-//
-//    std::string TakeString();
-//};
-
-
 ///////////////////////////////////////////////////////////////////////////////
 
 } // namespace RapidJson

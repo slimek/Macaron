@@ -211,6 +211,7 @@ TEST( RapidJsonArrayTest )
     CHECK( 51 == iter2.TakeUint() );
     CHECK( "scale" == iter2.TakeString() );
     CHECK( 0.5f == iter2.TakeFloat() );
+    CHECK( true == iter2.TakeBool() );
 }
 
 
