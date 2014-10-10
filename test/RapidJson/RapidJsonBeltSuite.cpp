@@ -51,7 +51,6 @@ TEST( RapidJsonBeltTest )
         CHECK( true == jb2.Take< Bool >() );
     }
 
-
     /// Tuple Fetchers - 1 Elements ///
     {
         JsonBelt jb3( jarray );
@@ -89,6 +88,18 @@ TEST( RapidJsonBeltTest )
         CHECK( "scale" == svalue );
         CHECK( 0.5f == fvalue );
         CHECK( true == bvalue );
+    }
+
+    /// Conversion Fetchers ///
+    {
+        JsonBelt jb5( jarray );
+
+        CHECK( "position" == (std::string)jb5 );
+        CHECK( 42 == (Int)jb5 );
+        CHECK( 51 == (Uint)jb5 );
+        CHECK( "scale" == (std::string)jb5 );
+        CHECK( 0.5f == (Float)jb5 );
+        CHECK( true == (Bool)jb5 );
     }
 }
 

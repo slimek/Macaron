@@ -62,7 +62,17 @@ public:
     template<> std::string Take< std::string >() { return this->TakeString(); }
 
 
-    /// Multiple Fetchers ///
+    /// Conversion Fetchers ///
+
+    explicit operator Bool () { return this->TakeBool(); }
+    explicit operator Int  () { return this->TakeInt(); }
+    explicit operator Uint () { return this->TakeUint(); }
+    explicit operator Float() { return this->TakeFloat(); }
+
+    explicit operator std::string() { return this->TakeString(); }
+
+
+    /// Tuple Fetchers ///
 
     template< typename T, typename... Args >
     std::tuple< T, Args... > TakeTuple();
