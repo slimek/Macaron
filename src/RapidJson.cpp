@@ -65,6 +65,7 @@ JsonValue JsonValue::FromFile( const std::string& fileName )
         CARAMEL_THROW( "Parse JSON file %s failed: %s", fileName, reader.GetErrorMessage() );
     }
 
+    value.SetTag( fileName );
     return value;
 }
 

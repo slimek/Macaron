@@ -7,6 +7,7 @@
 #include <Macaron/Setup/MacaronDefs.h>
 #include <Macaron/RapidJson/JsonValue.h>
 #include <deque>
+#include <tuple>
 
 
 namespace Macaron
@@ -48,14 +49,78 @@ public:
     std::string TakeString();
 
 
+    /// Generic Fetchers ///
+
+    template< typename T >
+    T Take();
+
+    template<> Bool  Take< Bool >()  { return this->TakeBool(); }
+    template<> Int   Take< Int >()   { return this->TakeInt(); }
+    template<> Uint  Take< Uint >()  { return this->TakeUint(); }
+    template<> Float Take< Float >() { return this->TakeFloat(); }
+
+    template<> std::string Take< std::string >() { return this->TakeString(); }
+
+
+    /// Multiple Fetchers ///
+
+    template< typename T, typename... Args >
+    std::tuple< T, Args... > TakeTuple();
+
 private:
+    
+    template< typename T, typename... Args >
+    struct TupleTaker
+    {
+        static std::tuple< T, Args... > Apply( JsonBelt& host );
+    };
+
+    template< typename T >
+    struct TupleTaker< T >
+    {
+        static std::tuple< T > Apply( JsonBelt& host );
+    };
+
+
+    /// Members ///
 
     std::deque< JsonValue > m_values;
 };
 
 
 ///////////////////////////////////////////////////////////////////////////////
+//
+// Implementation
+//
 
+template< typename T, typename... Args >
+inline std::tuple< T, Args... > JsonBelt::TakeTuple()
+{
+    return TupleTaker< T, Args... >::Apply( *this );
+}
+
+
+template< typename T, typename... Args >
+inline std::tuple< T, Args... >
+JsonBelt::TupleTaker< T, Args... >::Apply( JsonBelt& host )
+{
+    // NOTES: Make sure the first value is taken first.
+    const T value = host.Take< T >();
+
+    return std::tuple_cat(
+        std::make_tuple( value ), JsonBelt::TupleTaker< Args... >::Apply( host ));
+}
+
+
+template< typename T >
+inline std::tuple< T >
+JsonBelt::TupleTaker< T >::Apply( JsonBelt& host )
+{
+    return std::make_tuple( host.Take< T >() );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
 
 } // namespace RapidJson
 
