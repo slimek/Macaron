@@ -153,8 +153,14 @@ TEST( RapidJsonGetValueTest )
     auto obj = JsonValue::FromFile( "RapidJson\\normal-object.json" );
 
     auto id = obj[ "Id" ];
-
     CHECK( 1 == id.AsInt() );
+
+    auto canFly = obj[ "CanFly" ];
+    CHECK( true == canFly.AsBool() );
+
+    Bool bvalue = false;
+    CHECK( true == obj.GetBool( "CanFly", bvalue ));
+    CHECK( true == bvalue );
 
     Int ivalue = 0;
     CHECK( true == obj.GetInt( "Id", ivalue ));

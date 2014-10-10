@@ -56,6 +56,7 @@ public:
     
     /// Converters ///
 
+    Bool   AsBool()   const;
     Int    AsInt()    const;
     Uint   AsUint()   const;
     Float  AsFloat()  const;

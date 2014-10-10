@@ -130,6 +130,14 @@ Bool JsonValue::IsUint() const
 // Converters
 //
 
+Bool JsonValue::AsBool() const
+{
+    CARAMEL_CHECK_MSG( this->IsBool(),
+        "JsonValue %s can't convert to Bool", m_impl->m_tag );
+
+    return m_impl->m_value.GetBool();
+}
+
 Int JsonValue::AsInt() const
 {
     CARAMEL_CHECK_MSG( this->IsInt(),
