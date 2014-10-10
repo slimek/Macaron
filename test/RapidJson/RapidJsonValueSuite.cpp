@@ -208,16 +208,6 @@ TEST( RapidJsonArrayTest )
     }
     CHECK( 3 == sum );
 
-
-    auto ary2 = JsonArray::FromFile( "RapidJson\\normal-array.json" );
-    auto iter2 = ary2.Begin();
-
-    CHECK( "position" == iter2.TakeString() );
-    CHECK( 42 == iter2.TakeInt() );
-    CHECK( 51 == iter2.TakeUint() );
-    CHECK( "scale" == iter2.TakeString() );
-    CHECK( 0.5f == iter2.TakeFloat() );
-    CHECK( true == iter2.TakeBool() );
 }
 
 

@@ -193,16 +193,6 @@ public:
     JsonValue operator*() const;
 
 
-    /// Fetchers ///
-
-    Bool  TakeBool();
-    Int   TakeInt();
-    Uint  TakeUint();
-    Float TakeFloat();
-
-    std::string TakeString();
-
-
 private:
 
     explicit JsonArrayConstIterator( std::shared_ptr< Impl > impl );

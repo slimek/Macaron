@@ -63,6 +63,9 @@
     <ClCompile Include="CppRest\CppRestHttpRequestSuite.cpp">
       <Filter>2. Tests\CppRest</Filter>
     </ClCompile>
+    <ClCompile Include="RapidJson\RapidJsonBeltSuite.cpp">
+      <Filter>2. Tests\RapidJson</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MacaronTestPch.h">
@@ -82,12 +85,6 @@
     <None Include="JsonCpp\test3.json">
       <Filter>2. Tests\JsonCpp</Filter>
     </None>
-    <None Include="RapidJson\normal-object.json">
-      <Filter>2. Tests\RapidJson</Filter>
-    </None>
-    <None Include="RapidJson\enemy-models.json">
-      <Filter>2. Tests\RapidJson</Filter>
-    </None>
     <None Include="Data\empty-object.json">
       <Filter>2. Tests\Data</Filter>
     </None>
@@ -97,8 +94,14 @@
     <None Include="Data\empty-array.json">
       <Filter>2. Tests\Data</Filter>
     </None>
-    <None Include="RapidJson\normal-array.json">
-      <Filter>2. Tests\RapidJson</Filter>
+    <None Include="Data\enemy-models.json">
+      <Filter>2. Tests\Data</Filter>
+    </None>
+    <None Include="Data\normal-array.json">
+      <Filter>2. Tests\Data</Filter>
+    </None>
+    <None Include="Data\normal-object.json">
+      <Filter>2. Tests\Data</Filter>
     </None>
   </ItemGroup>
 </Project>

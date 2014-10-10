@@ -127,5 +127,8 @@
     <ClInclude Include="..\src\CppRest\HttpResponseImpl.h">
       <Filter>2. Sources\CppRest</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Macaron\RapidJson\JsonBelt.h">
+      <Filter>1. Public Packages\RapidJson</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

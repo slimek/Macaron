@@ -3,6 +3,7 @@
 #include "MacaronPch.h"
 
 #include "RapidJson/JsonValueImpl.h"
+#include <Macaron/RapidJson/JsonBelt.h>
 #include <Macaron/RapidJson/JsonReader.h>
 #include <Macaron/RapidJson/JsonErrorLocator.h>
 #include <Caramel/FileSystem/FileInfo.h>
@@ -28,6 +29,7 @@ namespace RapidJson
 //   JsonValue
 //   JsonArray
 //   JsonArrayConstIterator
+//   JsonBelt
 //   JsonReader
 //   JsonErrorLocator
 //
@@ -581,50 +583,6 @@ JsonValue JsonArrayConstIterator::operator*() const
 
 
 //
-// Fetchers
-//
-
-Bool JsonArrayConstIterator::TakeBool()
-{
-    const Bool value = m_impl->m_iter->GetBool();
-    ++ m_impl->m_iter;
-    return value;
-}
-
-
-Int JsonArrayConstIterator::TakeInt()
-{
-    const Int value = m_impl->m_iter->GetInt();
-    ++ m_impl->m_iter;
-    return value;
-}
-
-
-Uint JsonArrayConstIterator::TakeUint()
-{
-    const Uint value = m_impl->m_iter->GetUint();
-    ++ m_impl->m_iter;
-    return value;
-}
-
-
-Float JsonArrayConstIterator::TakeFloat()
-{
-    const Float value = static_cast< Float >( m_impl->m_iter->GetDouble() );
-    ++ m_impl->m_iter;
-    return value;
-}
-
-
-std::string JsonArrayConstIterator::TakeString()
-{
-    const std::string value = m_impl->m_iter->GetString();
-    ++ m_impl->m_iter;
-    return value;
-}
-
-
-//
 // Implementation
 //
 
@@ -633,6 +591,71 @@ JsonArrayConstIterator::Impl::Impl(
     : m_root( root )
     , m_iter( iter )
 {
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// JSON Belt
+//
+
+JsonBelt::JsonBelt( const JsonArray& jarray )
+    : m_values( jarray.Begin(), jarray.End() )
+{
+}
+
+
+//
+// Single Fetchers
+//
+
+Bool JsonBelt::TakeBool()
+{
+    CARAMEL_CHECK( ! m_values.empty() );
+
+    const Bool value = m_values.front().AsBool();
+    m_values.pop_front();
+    return value;
+}
+
+
+Int JsonBelt::TakeInt()
+{
+    CARAMEL_CHECK( ! m_values.empty() );
+
+    const Int value = m_values.front().AsInt();
+    m_values.pop_front();
+    return value;
+}
+
+
+Uint JsonBelt::TakeUint()
+{
+    CARAMEL_CHECK( ! m_values.empty() );
+
+    const Uint value = m_values.front().AsUint();
+    m_values.pop_front();
+    return value;
+}
+
+
+Float JsonBelt::TakeFloat()
+{
+    CARAMEL_CHECK( ! m_values.empty() );
+
+    const Float value = m_values.front().AsFloat();
+    m_values.pop_front();
+    return value;
+}
+
+
+std::string JsonBelt::TakeString()
+{
+    CARAMEL_CHECK( ! m_values.empty() );
+
+    const std::string value = m_values.front().AsString();
+    m_values.pop_front();
+    return value;
 }
 
 

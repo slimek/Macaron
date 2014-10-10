@@ -27,6 +27,7 @@
     <ClInclude Include="..\include\Macaron\JsonCpp\JsonValue.h" />
     <ClInclude Include="..\include\Macaron\LibCurl\HttpClient.h" />
     <ClInclude Include="..\include\Macaron\LibCurl\HttpResponse.h" />
+    <ClInclude Include="..\include\Macaron\RapidJson\JsonBelt.h" />
     <ClInclude Include="..\include\Macaron\RapidJson\JsonReader.h" />
     <ClInclude Include="..\include\Macaron\RapidJson\JsonErrorLocator.h" />
     <ClInclude Include="..\include\Macaron\RapidJson\JsonValue.h" />
