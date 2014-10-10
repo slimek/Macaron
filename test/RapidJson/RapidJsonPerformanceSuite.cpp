@@ -20,7 +20,7 @@ SUITE( RapidJsonPerformanceSuite )
 
 TEST( RapidJsonPerformanceTest )
 {
-    const std::string fileName = "RapidJson\\enemy-models.json";
+    const std::string fileName = "Data\\enemy-models.json";
     TickWatch watch;
 
     /// From File ///

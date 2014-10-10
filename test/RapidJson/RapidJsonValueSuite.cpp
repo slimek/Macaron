@@ -20,7 +20,7 @@ TEST( RapidJsonFromFileTest )
 
     CHECK( true == emptyObject.IsObject() );
 
-    auto normalObject = JsonValue::FromFile( "RapidJson\\normal-object.json" );
+    auto normalObject = JsonValue::FromFile( "Data\\normal-object.json" );
 
     CHECK( true == normalObject.IsObject() );
 
@@ -150,7 +150,7 @@ TEST( RapidJsonNumberTest )
 
 TEST( RapidJsonGetValueTest )
 {
-    auto obj = JsonValue::FromFile( "RapidJson\\normal-object.json" );
+    auto obj = JsonValue::FromFile( "Data\\normal-object.json" );
 
     auto id = obj[ "Id" ];
     CHECK( 1 == id.AsInt() );
