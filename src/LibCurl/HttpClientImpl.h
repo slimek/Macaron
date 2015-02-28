@@ -51,7 +51,7 @@ private:
 
         if ( CURLE_OK != code )
         {
-            CARAMEL_THROW( "Set curl option %d failed, code: %d", option, code );
+            CARAMEL_THROW( "Set curl option {0} failed, code: {1}", option, code );
         }
     }
 

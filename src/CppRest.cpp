@@ -43,7 +43,7 @@ HttpResponse HttpRequest::Get( const std::string& url )
     }
     catch ( ... )
     {
-        CARAMEL_THROW( "client.request() failed, url: %s", url );
+        CARAMEL_THROW( "client.request() failed, url: \"{0}\"", url );
     }
 
     return HttpResponse( std::make_shared< HttpResponseImpl >( task.get() ));

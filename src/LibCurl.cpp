@@ -103,7 +103,7 @@ void HttpClientImpl::Perform( const std::string& pathQuery, HttpResponseImpl* re
 
     if ( CURLE_OK != code )
     {
-        CARAMEL_THROW( "Curl perform failed, code: %d, url: %s", code, url );
+        CARAMEL_THROW( "Curl perform failed, code: {0}, url: \"{1}\"", code, url );
     }
 
     CARAMEL_VERIFY( CURLE_OK == curl_easy_getinfo(

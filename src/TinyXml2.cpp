@@ -103,7 +103,7 @@ std::string XmlElement::GetAttribute( const std::string& name ) const
     const Char* value = m_impl->m_element->Attribute( name.c_str() );
     if ( ! value )
     {
-        CARAMEL_THROW( "Note %s attribute %s not found : ", this->GetName(), name );
+        CARAMEL_THROW( "Node \"{0}\" attribute \"{1}\" not found : ", this->GetName(), name );
     }
 
     return std::string( value );

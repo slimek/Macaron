@@ -54,7 +54,7 @@ JsonValue JsonValue::FromFile( const Utf8String& fileName )
 {
     if ( ! FileInfo( fileName ).Exists() )
     {
-        CARAMEL_THROW( "File not found: %s", fileName );
+        CARAMEL_THROW( "File not found: \"{0}\"", fileName );
     }
 
     InputFileStream file( fileName );
@@ -71,7 +71,7 @@ JsonValue JsonValue::FromString( const std::string& text )
     const Bool ok = reader.parse( text, value );
     if ( ! ok )
     {
-        CARAMEL_THROW( "Parse JSON failed : %s", reader.getFormatedErrorMessages() );
+        CARAMEL_THROW( "Parse JSON failed : {0}", reader.getFormatedErrorMessages() );
     }
     return JsonValue( std::make_shared< JsonValueImpl >( value ));
 }
@@ -169,7 +169,7 @@ Bool JsonValue::GetBoolValue( const std::string& name ) const
     Bool value = false;
     if ( ! this->QueryBoolValue( name, value ))
     {
-        CARAMEL_THROW( "Value %s not found", name );
+        CARAMEL_THROW( "Value \"{0}\" not found", name );
     }
     return value;
 }
@@ -180,7 +180,7 @@ Int JsonValue::GetIntValue( const std::string& name ) const
     Int value = 0;
     if ( ! this->QueryIntValue( name, value ))
     {
-        CARAMEL_THROW( "Value %s not found", name );
+        CARAMEL_THROW( "Value \"{0}\" not found", name );
     }
     return value;
 }
@@ -191,7 +191,7 @@ Uint JsonValue::GetUintValue( const std::string& name ) const
     Uint value = 0;
     if ( ! this->QueryUintValue( name, value ))
     {
-        CARAMEL_THROW( "Value %s not found", name );
+        CARAMEL_THROW( "Value \"{0}\" not found", name );
     }
     return value;
 }
@@ -202,7 +202,7 @@ Float JsonValue::GetFloatValue( const std::string& name ) const
     Float value = 0;
     if ( ! this->QueryFloatValue( name, value ))
     {
-        CARAMEL_THROW( "Value %s not found", name );
+        CARAMEL_THROW( "Value \"{0}\" not found", name );
     }
     return value;
 }
@@ -213,7 +213,7 @@ std::string JsonValue::GetStringValue( const std::string& name ) const
     std::string value;
     if ( ! this->QueryStringValue( name, value ))
     {
-        CARAMEL_THROW( "Value %s not found", name );
+        CARAMEL_THROW( "Value \"{0}\" not found", name );
     }
     return value;
 }
@@ -224,7 +224,7 @@ JsonValue JsonValue::GetValue( const std::string& name ) const
     JsonValue value;
     if ( ! this->QueryValue( name, value ))
     {
-        CARAMEL_THROW( "Value %s not found", name );
+        CARAMEL_THROW( "Value \"{0}\" not found", name );
     }
     return value;
 }
@@ -254,7 +254,7 @@ Bool JsonValue::QueryBoolValue( const std::string& name, Bool& value ) const
     const Json::Value& jvalue = m_impl->At( name );
 
     CARAMEL_CHECK_MSG(
-        jvalue.isConvertibleTo( Json::booleanValue ), "Can't convert value %s to boolean", name );
+        jvalue.isConvertibleTo( Json::booleanValue ), "Can't convert value \"{0}\" to boolean", name );
 
     value = jvalue.asBool();
     return true;
@@ -268,7 +268,7 @@ Bool JsonValue::QueryIntValue( const std::string& name, Int& value ) const
     const Json::Value& jvalue = m_impl->At( name );
 
     CARAMEL_CHECK_MSG( 
-        jvalue.isConvertibleTo( Json::intValue ), "Can't convert value %s to int", name );
+        jvalue.isConvertibleTo( Json::intValue ), "Can't convert value \"{0}\" to int", name );
 
     value = jvalue.asInt();
     return true;
@@ -282,7 +282,7 @@ Bool JsonValue::QueryUintValue( const std::string& name, Uint& value ) const
     const Json::Value& jvalue = m_impl->At( name );
 
     CARAMEL_CHECK_MSG( 
-        jvalue.isConvertibleTo( Json::uintValue ), "Can't convert value %s to uint", name );
+        jvalue.isConvertibleTo( Json::uintValue ), "Can't convert value \"{0}\" to uint", name );
 
     value = jvalue.asUInt();
     return true;
@@ -296,7 +296,7 @@ Bool JsonValue::QueryFloatValue( const std::string& name, Float& value ) const
     const Json::Value& jvalue = m_impl->At( name );
 
     CARAMEL_CHECK_MSG( 
-        jvalue.isConvertibleTo( Json::realValue ), "Can't convert value %s to float", name );
+        jvalue.isConvertibleTo( Json::realValue ), "Can't convert value \"{0}\" to float", name );
 
     value = static_cast< Float >( jvalue.asDouble() );
     return true;
@@ -310,7 +310,7 @@ Bool JsonValue::QueryStringValue( const std::string& name, std::string& value ) 
     const Json::Value& jvalue = m_impl->At( name );
 
     CARAMEL_CHECK_MSG( 
-        jvalue.isConvertibleTo( Json::stringValue ), "Can't convert value %s to string", name );
+        jvalue.isConvertibleTo( Json::stringValue ), "Can't convert value \"{0}\" to string", name );
 
     value = jvalue.asString();
     return true;

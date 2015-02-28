@@ -62,7 +62,7 @@ JsonValue JsonValue::FromFile( const std::string& fileName )
 
     if ( ! reader.ParseFromFile( fileName, value ))
     {
-        CARAMEL_THROW( "Parse JSON file %s failed: %s", fileName, reader.GetErrorMessage() );
+        CARAMEL_THROW( "Parse JSON file \"{0}\" failed: {1}", fileName, reader.GetErrorMessage() );
     }
 
     value.SetTag( fileName );
@@ -77,7 +77,7 @@ JsonValue JsonValue::FromString( const std::string& text )
 
     if ( ! reader.Parse( text, value ))
     {
-        CARAMEL_THROW( "Parse JSON string failed: %s", reader.GetErrorMessage() );
+        CARAMEL_THROW( "Parse JSON string failed: {0}", reader.GetErrorMessage() );
     }
 
     return value;
@@ -136,7 +136,7 @@ Bool JsonValue::IsUint() const
 Bool JsonValue::AsBool() const
 {
     CARAMEL_CHECK_MSG( this->IsBool(),
-        "JsonValue %s can't convert to Bool", m_impl->m_tag );
+        "JsonValue \"{0}\" can't convert to Bool", m_impl->m_tag );
 
     return m_impl->m_value.GetBool();
 }
@@ -144,7 +144,7 @@ Bool JsonValue::AsBool() const
 Int JsonValue::AsInt() const
 {
     CARAMEL_CHECK_MSG( this->IsInt(),
-        "JsonValue %s can't convert to Int", m_impl->m_tag );
+        "JsonValue \"{0}\" can't convert to Int", m_impl->m_tag );
 
     return m_impl->m_value.GetInt();
 }
@@ -152,7 +152,7 @@ Int JsonValue::AsInt() const
 Uint JsonValue::AsUint() const
 {
     CARAMEL_CHECK_MSG( this->IsUint(),
-        "JsonValue %s can't convert to Uint", m_impl->m_tag );
+        "JsonValue \"{0}\" can't convert to Uint", m_impl->m_tag );
 
     return m_impl->m_value.GetUint();
 }
@@ -160,7 +160,7 @@ Uint JsonValue::AsUint() const
 Float JsonValue::AsFloat() const
 {
     CARAMEL_CHECK_MSG( this->IsNumber(),
-        "JsonValue %s can't convert to Float", m_impl->m_tag );
+        "JsonValue \"{0}\" can't convert to Float", m_impl->m_tag );
     
     return static_cast< Float >( this->AsDouble() );
 }
@@ -168,7 +168,7 @@ Float JsonValue::AsFloat() const
 Double JsonValue::AsDouble() const
 {
     CARAMEL_CHECK_MSG( this->IsNumber(),
-        "JsonValue %s can't convert to Double", m_impl->m_tag );
+        "JsonValue \"{0}\" can't convert to Double", m_impl->m_tag );
     
     return m_impl->m_value.GetDouble();
 }
@@ -176,7 +176,7 @@ Double JsonValue::AsDouble() const
 std::string JsonValue::AsString() const
 {
     CARAMEL_CHECK_MSG( this->IsString(),
-        "JsonValue %s can't convert to String", m_impl->m_tag );
+        "JsonValue \"{0}\" can't convert to String", m_impl->m_tag );
 
     return m_impl->m_value.GetString();
 }
@@ -184,7 +184,7 @@ std::string JsonValue::AsString() const
 JsonArray JsonValue::AsArray() const
 {
     CARAMEL_CHECK_MSG( this->IsArray(),
-        "JsonValue %s can't convert to Array", m_impl->m_tag );
+        "JsonValue \"{0}\" can't convert to Array", m_impl->m_tag );
 
     return JsonArray( m_impl );
 }
@@ -487,7 +487,7 @@ JsonArray JsonArray::FromFile( const std::string& filePath )
     auto value = JsonValue::FromFile( filePath );
     if ( ! value.IsArray() )
     {
-        CARAMEL_THROW( "The file \"%s\" is not a JSON array", filePath );
+        CARAMEL_THROW( "The file \"{0}\" is not a JSON array", filePath );
     }
     return value.AsArray();
 }
@@ -690,7 +690,7 @@ Bool JsonReader::ParseFromFile( const std::string& fileName, JsonValue& value )
 {
     if ( ! FileInfo( fileName ).Exists() )
     {
-        CARAMEL_THROW( "File not found: %s", fileName );
+        CARAMEL_THROW( "File not found: \"{0}\"", fileName );
     }
 
     const Uint BUFFER_SIZE = 1024;
@@ -705,7 +705,7 @@ Bool JsonReader::ParseFromFile( const std::string& fileName, JsonValue& value )
     if ( doc->HasParseError() )
     {
         const auto error = doc->GetParseError();
-        CARAMEL_THROW( "Parse JSON file %s failed: %d", fileName, error );
+        CARAMEL_THROW( "Parse JSON file \"{0}\" failed: {1}", fileName, error );
     }
 
     value.m_impl.reset( new JsonValueImpl( std::move( doc )));
