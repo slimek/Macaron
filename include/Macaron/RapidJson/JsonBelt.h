@@ -49,19 +49,6 @@ public:
     std::string TakeString();
 
 
-    /// Generic Fetchers ///
-
-    template< typename T >
-    T Take();
-
-    template<> Bool  Take< Bool >()  { return this->TakeBool(); }
-    template<> Int   Take< Int >()   { return this->TakeInt(); }
-    template<> Uint  Take< Uint >()  { return this->TakeUint(); }
-    template<> Float Take< Float >() { return this->TakeFloat(); }
-
-    template<> std::string Take< std::string >() { return this->TakeString(); }
-
-
     /// Conversion Fetchers ///
 
     explicit operator Bool () { return this->TakeBool(); }
@@ -79,6 +66,17 @@ public:
 
 private:
     
+    /// Generic Fetchers ///
+
+    template< typename T >
+    struct Taker
+    {
+        static T Apply( JsonBelt& belt );
+    };
+
+
+    /// Tuple Fetchers ///
+
     template< typename T, typename... Args >
     struct TupleTaker
     {
@@ -103,6 +101,45 @@ private:
 // Implementation
 //
 
+//
+// Generic Fetchers
+//
+
+template<>
+struct JsonBelt::Taker< Bool >
+{
+    static Bool Apply( JsonBelt& belt ) { return belt.TakeBool(); }
+};
+
+template<>
+struct JsonBelt::Taker< Int >
+{
+    static Int Apply( JsonBelt& belt ) { return belt.TakeInt(); }
+};
+
+template<>
+struct JsonBelt::Taker< Uint >
+{
+    static Uint Apply( JsonBelt& belt ) { return belt.TakeUint(); }
+};
+
+template<>
+struct JsonBelt::Taker< Float >
+{
+    static Float Apply( JsonBelt& belt ) { return belt.TakeFloat(); }
+};
+
+template<>
+struct JsonBelt::Taker< std::string >
+{
+    static std::string Apply( JsonBelt& belt ) { return belt.TakeString(); };
+};
+
+
+//
+// Tuple Fetchers
+//
+
 template< typename T, typename... Args >
 inline std::tuple< T, Args... > JsonBelt::TakeTuple()
 {
@@ -115,7 +152,7 @@ inline std::tuple< T, Args... >
 JsonBelt::TupleTaker< T, Args... >::Apply( JsonBelt& host )
 {
     // NOTES: Make sure the first value is taken first.
-    const T value = host.Take< T >();
+    const T value = Taker< T >::Apply( host );
 
     return std::tuple_cat(
         std::make_tuple( value ), JsonBelt::TupleTaker< Args... >::Apply( host ));
@@ -126,7 +163,7 @@ template< typename T >
 inline std::tuple< T >
 JsonBelt::TupleTaker< T >::Apply( JsonBelt& host )
 {
-    return std::make_tuple( host.Take< T >() );
+    return std::make_tuple( Taker< T >::Apply( host ));
 }
 
 
