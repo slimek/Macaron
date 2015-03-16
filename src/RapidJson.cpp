@@ -528,14 +528,14 @@ JsonValue JsonArray::operator[]( Uint index ) const
 JsonArrayConstIterator JsonArray::Begin() const
 {
     return JsonArrayConstIterator(
-        std::make_shared< JsonArrayConstIterator::Impl >( m_impl->m_root, m_impl->Begin() ));
+        std::make_shared< JsonArrayConstIterator::Impl >( m_impl, 0 ));
 }
 
 
 JsonArrayConstIterator JsonArray::End() const
 {
     return JsonArrayConstIterator(
-        std::make_shared< JsonArrayConstIterator::Impl >( m_impl->m_root, m_impl->End() ));
+        std::make_shared< JsonArrayConstIterator::Impl >( m_impl, m_impl->Size() ));
 }
 
 
@@ -560,26 +560,36 @@ JsonArrayConstIterator::JsonArrayConstIterator( std::shared_ptr< Impl > impl )
 
 JsonArrayConstIterator& JsonArrayConstIterator::operator++()
 {
-    ++ m_impl->m_iter;
+    ++ m_impl->m_index;
     return *this;
 }
 
 
 Bool JsonArrayConstIterator::operator==( const JsonArrayConstIterator& other ) const
 {
-    return m_impl->m_iter == other.m_impl->m_iter;
+    return m_impl->m_index == other.m_impl->m_index;
 }
 
 
 std::unique_ptr< const JsonValue > JsonArrayConstIterator::operator->() const
 {
-    return MakeUnique< JsonValue >( std::make_shared< JsonValueImpl >( m_impl->m_root, *m_impl->m_iter ));
+    auto value = m_impl->m_value;
+    auto index = m_impl->m_index;
+
+    CARAMEL_ASSERT( value->Size() > index );
+
+    return MakeUnique< JsonValue >( value->GetValueByIndex( index ));
 }
 
 
 JsonValue JsonArrayConstIterator::operator*() const
 {
-    return JsonValue( std::make_shared< JsonValueImpl >( m_impl->m_root, *m_impl->m_iter ));
+    auto value = m_impl->m_value;
+    auto index = m_impl->m_index;
+
+    CARAMEL_ASSERT( value->Size() > index );
+
+    return JsonValue( value->GetValueByIndex( index ));
 }
 
 
@@ -587,10 +597,9 @@ JsonValue JsonArrayConstIterator::operator*() const
 // Implementation
 //
 
-JsonArrayConstIterator::Impl::Impl(
-    std::shared_ptr< rapidjson::Value > root, rapidjson::Value::ValueIterator iter )
-    : m_root( root )
-    , m_iter( iter )
+JsonArrayConstIterator::Impl::Impl( std::shared_ptr< JsonValueImpl > value, Usize index )
+    : m_value( value )
+    , m_index( index )
 {
 }
 
@@ -601,8 +610,12 @@ JsonArrayConstIterator::Impl::Impl(
 //
 
 JsonBelt::JsonBelt( const JsonArray& jarray )
-    : m_values( jarray.Begin(), jarray.End() )
+    //: m_values( jarray.Begin(), jarray.End() )
 {
+    for ( Usize i = 0; i < jarray.Size(); ++ i )
+    {
+        m_values.push_back( jarray[i] );
+    }
 }
 
 

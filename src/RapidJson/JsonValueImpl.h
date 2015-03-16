@@ -36,6 +36,7 @@ public:
 
     /// Properties ///
 
+    std::shared_ptr< rapidjson::Value > Root() const { return m_root; }
     rapidjson::Type GetType() const;
 
 
@@ -82,12 +83,12 @@ class JsonArrayConstIterator::Impl
 
 public:
 
-    Impl( std::shared_ptr< rapidjson::Value > root, rapidjson::Value::ValueIterator iter );
+    Impl( std::shared_ptr< JsonValueImpl > value, Usize index );
 
 private:
 
-    std::shared_ptr< rapidjson::Value > m_root;
-    rapidjson::Value::ValueIterator m_iter { nullptr };
+    std::shared_ptr< JsonValueImpl > m_value;  // It should be an array.
+    Usize m_index { 0 };
 };
 
 
