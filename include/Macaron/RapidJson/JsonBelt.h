@@ -59,6 +59,12 @@ public:
     explicit operator std::string() { return this->TakeString(); }
 
 
+    /// Generic Fetcher ///
+
+    template< typename T >
+    T Take();
+
+
     /// Tuple Fetchers ///
 
     template< typename T, typename... Args >
@@ -134,6 +140,17 @@ struct JsonBelt::Taker< std::string >
 {
     static std::string Apply( JsonBelt& belt ) { return belt.TakeString(); };
 };
+
+
+//
+// Generic Fetcher
+//
+
+template< typename T >
+inline T JsonBelt::Take()
+{
+    return Taker< T >::Apply( *this );
+}
 
 
 //
