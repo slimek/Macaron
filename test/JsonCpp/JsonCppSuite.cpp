@@ -106,12 +106,10 @@ TEST( JsonCppTest )
 
     CHECK( JSON_VALUE_INT == jtest2[ "Id" ].Type() );
     CHECK( JSON_VALUE_INT == jtest2[ "Alias" ].Type() );
+    CHECK( JSON_VALUE_UINT == jtest2[ "Limit" ].Type() );
     CHECK( JSON_VALUE_BOOL == jtest2[ "CanFly" ].Type() );
     CHECK( JSON_VALUE_DOUBLE == jtest2[ "Weight" ].Type() );
     CHECK( JSON_VALUE_STRING == jtest2[ "Name" ].Type() );
-
-    // A value greater than ( MAX_UINT / 10 ) would be treated as Double.
-    CHECK( JSON_VALUE_DOUBLE == jtest2[ "Limit" ].Type() );
 
 
     /// Load Object with Sub-Object ///

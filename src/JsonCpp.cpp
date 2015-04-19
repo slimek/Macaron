@@ -71,7 +71,7 @@ JsonValue JsonValue::FromString( const std::string& text )
     const Bool ok = reader.parse( text, value );
     if ( ! ok )
     {
-        CARAMEL_THROW( "Parse JSON failed : {0}", reader.getFormatedErrorMessages() );
+        CARAMEL_THROW( "Parse JSON failed : {0}", reader.getFormattedErrorMessages() );
     }
     return JsonValue( std::make_shared< JsonValueImpl >( value ));
 }
