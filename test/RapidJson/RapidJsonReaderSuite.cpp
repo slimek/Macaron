@@ -24,9 +24,6 @@ TEST( ReaderTest )
     CHECK( false == reader.Parse( "", value ));
     CHECK( "document empty" == reader.GetErrorMessage() );
 
-    CHECK( false == reader.Parse( "true", value ));
-    CHECK( "document root not object or array" == reader.GetErrorMessage() );
-
     CHECK( false == reader.Parse( "{}{}", value ));
     CHECK( "document root not singular" );
 

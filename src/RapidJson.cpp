@@ -737,9 +737,6 @@ std::string TranslateParseErrorCode( rapidjson::ParseErrorCode code )
     case kParseErrorDocumentEmpty:
         return "document empty";
 
-    case kParseErrorDocumentRootNotObjectOrArray:
-        return "document root not object or array";
-
     case kParseErrorDocumentRootNotSingular:
         return "document root not singular";
 
@@ -780,17 +777,25 @@ JsonErrorLocator::JsonErrorLocator( const std::string& text )
 }
 
 
-void JsonErrorLocator::String( const Char* chs, Size len, Caramel::Bool )
+bool JsonErrorLocator::Key( const Char* chs, Size len, Caramel::Bool )
+{
+    auto& node = m_nodeStack.back();
+
+    CARAMEL_ASSERT( node.state == NODE_OBJECT );
+
+    node.name = std::string( chs, len );
+    node.state = NODE_VALUE;
+
+    return true;
+}
+
+
+bool JsonErrorLocator::String( const Char* chs, Size len, Caramel::Bool )
 {
     auto& node = m_nodeStack.back();
 
     switch ( node.state )
     {
-    case NODE_OBJECT:
-        node.name = std::string( chs, len );
-        node.state = NODE_VALUE;
-        break;
-
     case NODE_VALUE:
         node.state = NODE_OBJECT;
         break;
@@ -802,34 +807,40 @@ void JsonErrorLocator::String( const Char* chs, Size len, Caramel::Bool )
     default:
         CARAMEL_NOT_REACHED();
     }
+
+    return true;
 }
 
 
-void JsonErrorLocator::StartObject()
+bool JsonErrorLocator::StartObject()
 {
     Node node;
     node.state = NODE_OBJECT;
     m_nodeStack.push_back( node );
+    return true;
 }
 
 
-void JsonErrorLocator::EndObject( Size )
+bool JsonErrorLocator::EndObject( Size )
 {
     m_nodeStack.pop_back();
+    return true;
 }
 
 
-void JsonErrorLocator::StartArray()
+bool JsonErrorLocator::StartArray()
 {
     Node node;
     node.state = NODE_ARRAY;
     m_nodeStack.push_back( node );
+    return true;
 }
 
 
-void JsonErrorLocator::EndArray( Size )
+bool JsonErrorLocator::EndArray( Size )
 {
     m_nodeStack.pop_back();
+    return true;
 }
 
 

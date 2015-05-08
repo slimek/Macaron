@@ -38,22 +38,23 @@ public:
     typedef rapidjson::SizeType Size;
 
     // The third parameter is ignored.
-    void String( const Char* chs, Size len, Caramel::Bool );
+    bool Key( const Char* chs, Size len, Caramel::Bool );
+    bool String( const Char* chs, Size len, Caramel::Bool );
 
-    void StartObject();
-    void EndObject( Size );
+    bool StartObject();
+    bool EndObject( Size );
 
-    void StartArray();
-    void EndArray( Size );
+    bool StartArray();
+    bool EndArray( Size );
 
     // Scalar value handlers
-    void Null() { this->ScalarValue(); }
-    void Bool( bool ) { this->ScalarValue(); }
-    void Int( int ) { this->ScalarValue(); }
-    void Uint( unsigned ) { this->ScalarValue(); }
-    void Int64( int64_t ) { this->ScalarValue(); }
-    void Uint64( uint64_t ) { this->ScalarValue(); }
-    void Double( double ) { this->ScalarValue(); }
+    bool Null() { this->ScalarValue(); return true;}
+    bool Bool( bool ) { this->ScalarValue(); return true; }
+    bool Int( int ) { this->ScalarValue(); return true; }
+    bool Uint( unsigned ) { this->ScalarValue(); return true; }
+    bool Int64( int64_t ) { this->ScalarValue(); return true; }
+    bool Uint64( uint64_t ) { this->ScalarValue(); return true; }
+    bool Double( double ) { this->ScalarValue(); return true; }
 
 
 private:
