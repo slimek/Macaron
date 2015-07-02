@@ -15,7 +15,7 @@ namespace RapidJson
 
 using namespace rapidjson;
 
-SUITE( RapidJsonErrorLocatorSuite )
+SUITE( RapidJsonErrorLocator )
 {
 
 #define CHECK_JSON_EL( code, text, path ) \
@@ -27,7 +27,7 @@ SUITE( RapidJsonErrorLocatorSuite )
     CHECK( path == locator.GetPath() )
 
 
-TEST( JsonErrorLocatorSuccessTest )
+TEST( JsonErrorLocatorSuccess )
 {
     #define CHECK_NONE( text ) \
         CHECK_JSON_EL( kParseErrorNone, text, "" )
@@ -58,7 +58,7 @@ TEST( JsonErrorLocatorSuccessTest )
 }
 
 
-TEST( JsonErrorLocatorDocumentEmptyTest )
+TEST( JsonErrorLocatorDocumentEmpty )
 {
     JsonErrorLocator locate( "" );
     CHECK( kParseErrorDocumentEmpty == locate.GetErrorCode() );
@@ -66,7 +66,7 @@ TEST( JsonErrorLocatorDocumentEmptyTest )
 }
 
 
-TEST( JsonErrorLocatorValueInvalidTest )
+TEST( JsonErrorLocatorValueInvalid )
 {
     #define CHECK_VALUE_INVALID( text, path ) \
         CHECK_JSON_EL( kParseErrorValueInvalid, text, path )
@@ -119,7 +119,7 @@ TEST( JsonErrorLocatorValueInvalidTest )
 }
 
 
-TEST( JsonErrorLocatorObjectMissNameTest )
+TEST( JsonErrorLocatorObjectMissName )
 {
     #define CHECK_OBJECT_MISS_NAME( text, path ) \
         CHECK_JSON_EL( kParseErrorObjectMissName, text, path )
@@ -147,7 +147,7 @@ TEST( JsonErrorLocatorObjectMissNameTest )
 }
 
 
-TEST( JsonErrorLocatorObjectMissColonTest )
+TEST( JsonErrorLocatorObjectMissColon )
 {
     #define CHECK_OBJECT_MISS_COLON( text, path ) \
         CHECK_JSON_EL( kParseErrorObjectMissColon, text, path )
@@ -164,7 +164,7 @@ TEST( JsonErrorLocatorObjectMissColonTest )
 }
 
 
-TEST( JsonErrorLocatorObjectMissCommaOrBraceTest )
+TEST( JsonErrorLocatorObjectMissCommaOrBrace )
 {
     #define CHECK_OBJECT_MISS_COMMA_OR_BRACE( text, path ) \
         CHECK_JSON_EL( kParseErrorObjectMissCommaOrCurlyBracket, text, path )
@@ -181,7 +181,7 @@ TEST( JsonErrorLocatorObjectMissCommaOrBraceTest )
 }
 
 
-TEST( JsonErrorLocatorObjectMissCommaOrBracketTest )
+TEST( JsonErrorLocatorObjectMissCommaOrBracket )
 {
     #define CHECK_ARRAY_MISS_COMMA_OR_BRACKET( text, path ) \
         CHECK_JSON_EL( kParseErrorArrayMissCommaOrSquareBracket, text, path )
@@ -197,7 +197,7 @@ TEST( JsonErrorLocatorObjectMissCommaOrBracketTest )
     );
 }
     
-} // SUITE RapidJsonErrorLocatorSuite
+} // SUITE RapidJsonErrorLocator
 
 } // namespace RapidJson
 

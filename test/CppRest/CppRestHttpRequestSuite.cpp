@@ -12,10 +12,10 @@ namespace Macaron
 
 using namespace CppRest;
 
-SUITE( CppRestHttpRequestSuite )
+SUITE( CppRestHttpRequest )
 {
 
-TEST( HttpRequestTest )
+TEST( HttpRequest )
 {
     HttpRequest request;
 
@@ -25,6 +25,6 @@ TEST( HttpRequestTest )
 }
 
 
-} // SUITe CppRestHttpClientSuite
+} // SUITE CppRestHttpRequest
 
 } // namespace Macaron

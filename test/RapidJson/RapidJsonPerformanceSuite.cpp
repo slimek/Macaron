@@ -15,10 +15,10 @@ namespace Macaron
 namespace RapidJson
 {
 
-SUITE( RapidJsonPerformanceSuite )
+SUITE( RapidJsonPerformance )
 {
 
-TEST( RapidJsonPerformanceTest )
+TEST( RapidJsonPerformance )
 {
     const std::string fileName = "Data\\enemy-models.json";
     TickWatch watch;
@@ -52,7 +52,7 @@ TEST( RapidJsonPerformanceTest )
 }
 
 
-} // SUITE RapidJsonPerformanceSuite
+} // SUITE RapidJsonPerformance
 
 } // namespace RapidJson
 

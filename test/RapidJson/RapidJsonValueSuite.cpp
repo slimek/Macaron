@@ -11,10 +11,10 @@ namespace Macaron
 namespace RapidJson
 {
 
-SUITE( RapidJsonValueSuite )
+SUITE( RapidJsonValue )
 {
 
-TEST( RapidJsonFromFileTest )
+TEST( RapidJsonFromFile )
 {
     auto emptyObject = JsonValue::FromFile( "Data\\empty-object.json" );
 
@@ -30,7 +30,7 @@ TEST( RapidJsonFromFileTest )
 }
 
 
-TEST( RapidJsonFromStringTest )
+TEST( RapidJsonFromString )
 {
     // The root of RapidJson must be an object or an array.
 
@@ -48,7 +48,7 @@ TEST( RapidJsonFromStringTest )
 }
 
 
-TEST( RapidJsonNumberTest )
+TEST( RapidJsonNumber )
 {
     const auto json = JsonValue::FromFile( "Data\\numbers.json" );
 
@@ -148,7 +148,7 @@ TEST( RapidJsonNumberTest )
 }
 
 
-TEST( RapidJsonGetValueTest )
+TEST( RapidJsonGetValue )
 {
     auto obj = JsonValue::FromFile( "Data\\normal-object.json" );
 
@@ -181,7 +181,7 @@ TEST( RapidJsonGetValueTest )
 }
 
 
-TEST( RapidJsonArrayTest )
+TEST( RapidJsonArray )
 {
     auto ary1 = JsonArray::FromString( "[ 0, 1, 2 ]" );
 
@@ -211,7 +211,7 @@ TEST( RapidJsonArrayTest )
 }
 
 
-} // SUITE RapidJsonValueSuite
+} // SUITE RapidJsonValue
 
 } // namespace RapidJson
 

@@ -11,10 +11,10 @@ namespace Macaron
 namespace RapidJson
 {
 
-SUITE( RapidJsonReaderSuite )
+SUITE( RapidJsonReader )
 {
 
-TEST( ReaderTest )
+TEST( Reader )
 {
     JsonReader reader;
     JsonValue value;
@@ -51,7 +51,7 @@ TEST( ReaderTest )
     CHECK( "value invalid" );
 }
 
-} // SUITE RapidJsonReaderSuite
+} // SUITE RapidJsonReader
 
 } // namespace RapidJson
 

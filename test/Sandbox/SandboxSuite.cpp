@@ -30,10 +30,10 @@ private:
     }
 };
 
-SUITE( SandboxSuite )
+SUITE( Sandbox )
 {
 
-TEST( SandboxTest )
+TEST( Sandbox )
 {
     Widget w( "hello" );
 }

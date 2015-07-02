@@ -11,10 +11,10 @@ namespace Macaron
 namespace RapidJson
 {
 
-SUITE( RapidJsonBeltSuite )
+SUITE( RapidJsonBelt )
 {
 
-TEST( RapidJsonBeltTest )
+TEST( RapidJsonBelt )
 {
     auto jarray = JsonArray::FromFile( "Data\\normal-array.json" );
 
@@ -103,7 +103,7 @@ TEST( RapidJsonBeltTest )
     }
 }
 
-} // SUITE RapidJsonBeltSuite
+} // SUITE RapidJsonBelt
 
 } // namespace RapidJson
 

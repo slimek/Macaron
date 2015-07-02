@@ -12,7 +12,7 @@ namespace Macaron
 using namespace std;
 using namespace LibCurl;
 
-SUITE( LibCurlSuite )
+SUITE( LibCurl )
 {
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -20,7 +20,7 @@ SUITE( LibCurlSuite )
 // libcurl Direct Test
 //
 
-TEST( LibCurlEasyTest )
+TEST( LibCurlEasy )
 {
     HttpClient client( "http://www.google.com" );
 
@@ -32,6 +32,6 @@ TEST( LibCurlEasyTest )
 
 ///////////////////////////////////////////////////////////////////////////////
 
-} // SUITE LibCurlSuite
+} // SUITE LibCurl
 
 } // namespace Macaron

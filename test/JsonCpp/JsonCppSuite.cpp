@@ -11,7 +11,7 @@ namespace Macaron
 namespace JsonCpp
 {
 
-SUITE( JsonCppSuite )
+SUITE( JsonCpp )
 {
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -19,7 +19,7 @@ SUITE( JsonCppSuite )
 // JSON Value Test
 //
 
-TEST( JsonCppTest )
+TEST( JsonCpp )
 {
     JsonValue jobj;
     CHECK( JSON_VALUE_NULL == jobj.Type() );
@@ -125,7 +125,7 @@ TEST( JsonCppTest )
 }
 
 
-TEST( JsonCppArrayTest )
+TEST( JsonCppArray )
 {
     JsonValue jtest4 = JsonValue::FromFile( "JsonCpp\\test4.json" );
 
@@ -151,7 +151,7 @@ TEST( JsonCppArrayTest )
 
 ///////////////////////////////////////////////////////////////////////////////
 
-} // SUITE JsonCppSuite
+} // SUITE JsonCpp
 
 } // namespace JsonCpp
 
